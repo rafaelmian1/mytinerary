@@ -1,7 +1,7 @@
 import React from "react";
 const CarouselButtons = () => {
   return (
-    <React.Fragment>
+    <>
       <button
         className="carousel-control-prev"
         type="button"
@@ -20,7 +20,7 @@ const CarouselButtons = () => {
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
-    </React.Fragment>
+    </>
   );
 };
 

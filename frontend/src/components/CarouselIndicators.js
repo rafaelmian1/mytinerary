@@ -1,6 +1,6 @@
 const CarouselIndicators = () => {
   return (
-    <div className="carousel-indicators">
+    <div className="carousel-indicators" key="tuki">
       <button
         type="button"
         data-bs-target="#carouselExampleDark"
