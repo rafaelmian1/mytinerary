@@ -5,7 +5,7 @@ const CarouselButtons = () => {
       <button
         className="carousel-control-prev"
         type="button"
-        data-bs-target="#carouselExampleDark"
+        data-bs-target="#carouselToggler"
         data-bs-slide="prev"
       >
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -14,7 +14,7 @@ const CarouselButtons = () => {
       <button
         className="carousel-control-next"
         type="button"
-        data-bs-target="#carouselExampleDark"
+        data-bs-target="#carouselToggler"
         data-bs-slide="next"
       >
         <span className="carousel-control-next-icon" aria-hidden="true"></span>

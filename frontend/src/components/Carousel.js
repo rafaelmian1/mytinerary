@@ -11,7 +11,7 @@ export default class Carousel extends React.Component {
   };
 
   componentDidMount() {
-    fetch("https://picsum.photos/v2/list?page=2&limit=16")
+    fetch("https://picsum.photos/v2/list?page=2&limit=12")
       .then((res) => res.json())
       .then((fotos) =>
         this.setState({
@@ -19,7 +19,6 @@ export default class Carousel extends React.Component {
             [...fotos].splice(0, 4),
             [...fotos].splice(4, 4),
             [...fotos].splice(8, 4),
-            [...fotos].splice(12, 4),
           ],
         })
       );
@@ -28,12 +27,15 @@ export default class Carousel extends React.Component {
   render() {
     return (
       <div
-        id="carouselExampleDark"
-        className="carousel carousel-dark slide flex-grow-1"
+        id="carouselToggler"
+        className="carousel slide d-flex flex-column justify-content-center align-items-center min-vh-100"
         data-bs-ride="carousel"
       >
+        <h3 className="text-light mt-2 over">
+          Popular my<b>tineraries</b>
+        </h3>
         <CarouselIndicators />
-        <div className="carousel-inner container pb-5" key="2">
+        <div className="carousel-inner container" key="2">
           {this.state.slides.map((slide, index) => (
             <Slide data={slide} index={index} key={index} />
           ))}
