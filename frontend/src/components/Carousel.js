@@ -33,7 +33,7 @@ export default class Carousel extends React.Component {
         data-bs-ride="carousel"
       >
         <CarouselIndicators />
-        <div className="carousel-inner container-sm pb-5">
+        <div className="carousel-inner container pb-5">
           {this.state.slides.map((slide, index) => (
             <Slide data={slide} index={index} />
           ))}
