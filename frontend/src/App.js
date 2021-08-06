@@ -5,15 +5,21 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import React from "react";
 import Cities from "./pages/Cities";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/cities" component={Cities} />
-        <Redirect to="/" />
-      </Switch>
+      <div className="d-flex flex-column min-vh-100 bg-dark">
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/cities" component={Cities} />
+          <Redirect to="/" />
+        </Switch>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 };

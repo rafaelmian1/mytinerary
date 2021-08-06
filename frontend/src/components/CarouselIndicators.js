@@ -1,6 +1,6 @@
 const CarouselIndicators = () => {
   return (
-    <div className="carousel-indicators" key="tuki">
+    <div className="carousel-indicators d-none d-lg-flex" key="tuki">
       <button
         type="button"
         data-bs-target="#carouselToggler"
