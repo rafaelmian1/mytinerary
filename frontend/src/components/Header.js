@@ -25,13 +25,13 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto ">
-              <li className="nav-item my-1">
+            <ul className="navbar-nav me-auto mt-2">
+              <li className="nav-item my-sm-1">
                 <NavLink exact to="/">
                   <span>Home</span>
                 </NavLink>
               </li>
-              <li className="nav-item my-1">
+              <li className="nav-item my-sm-1">
                 <NavLink className="mx-sm-4" to="/cities">
                   <span>Cities</span>
                 </NavLink>
@@ -41,7 +41,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink className="d-sm-none" to="/signin">
-                  <span>Sign in</span>
+                  <span>Sign up</span>
                 </NavLink>
               </li>
               <li className="nav-item">

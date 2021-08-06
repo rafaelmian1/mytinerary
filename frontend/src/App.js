@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column min-vh-100 bg-dark">
+      <div className="d-flex flex-column min-vh-100 app">
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />

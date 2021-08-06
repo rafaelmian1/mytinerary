@@ -25,7 +25,7 @@ const UserIcon = () => {
         aria-labelledby="dropdownMenuButton1"
       >
         <li>
-          <span className="dropdown-item">Sign in</span>
+          <span className="dropdown-item">Sign up</span>
         </li>
         <li>
           <span className="dropdown-item">Login</span>

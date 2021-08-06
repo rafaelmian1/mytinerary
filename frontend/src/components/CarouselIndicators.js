@@ -5,7 +5,7 @@ const CarouselIndicators = () => {
         type="button"
         data-bs-target="#carouselToggler"
         data-bs-slide-to="0"
-        className="active"
+        className="active filter-color"
         aria-current="true"
         aria-label="Slide 1"
       ></button>
@@ -14,8 +14,10 @@ const CarouselIndicators = () => {
         data-bs-target="#carouselToggler"
         data-bs-slide-to="1"
         aria-label="Slide 2"
+        className="filter-color"
       ></button>
       <button
+        className="filter-color"
         type="button"
         data-bs-target="#carouselToggler"
         data-bs-slide-to="2"

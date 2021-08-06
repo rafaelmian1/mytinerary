@@ -85,21 +85,24 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <div
-        id="carouselToggler"
-        className="carousel slide d-flex flex-column justify-content-center align-items-center vh90 mt-4"
-        data-bs-ride="carousel"
-      >
-        <h3 className="text-light mt-2 over">
-          Popular my<b>tineraries</b>
-        </h3>
-        <CarouselIndicators />
-        <div className="carousel-inner container flex-grow-1" key="2">
-          {this.fotos.slides.map((slide, index) => (
-            <Slide data={slide} index={index} key={index} />
-          ))}
+      <div className="contedor">
+        <div className="min-vh-100 car"></div>
+        <div
+          id="carouselToggler"
+          className="w-100 carousel slide d-flex flex-column justify-content-center align-items-center vh90"
+          data-bs-ride="carousel"
+        >
+          <h3 className="text-light mt-2 over">
+            Popular my<b>tineraries</b>
+          </h3>
+          <CarouselIndicators />
+          <div className="carousel-inner container flex-grow-1" key="2">
+            {this.fotos.slides.map((slide, index) => (
+              <Slide data={slide} index={index} key={index} />
+            ))}
+          </div>
+          <CarouselButtons />
         </div>
-        <CarouselButtons />
       </div>
     );
   }

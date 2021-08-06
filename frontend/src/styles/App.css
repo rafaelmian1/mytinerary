@@ -6,20 +6,24 @@
 }
 .vh90 {
   min-height: 95vh !important;
+  position: absolute;
+  top: 105%;
 }
 .fotito {
-  min-height: 35vh;
+  min-height: 37vh;
   min-width: 30vw;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
   border-radius: 1vh !important;
+  overflow: auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .fotito:hover {
   transform: scale(1.02);
   transition: 400ms;
+  cursor: pointer;
 }
 
 .video {
@@ -45,6 +49,20 @@
   padding: 10px;
 }
 
+.filter-color {
+  filter: invert(50%) sepia(79%) saturate(20000%) hue-rotate(11deg)
+    brightness(1500%) contrast(150%);
+}
+.app {
+  background-color: rgba(255, 127, 80, 0.671);
+}
+.car {
+  min-height: 100vh;
+  background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  background-size: cover;
+  filter: blur(3px);
+  z-index: -1;
+}
 .sub-content button:hover {
   background-color: #f1f1f1;
   color: #000000c0;
@@ -93,9 +111,14 @@ footer {
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  height: 4vh;
+  height: 3vh;
 }
 
+@media screen and (max-width: 992px) {
+  .car {
+    height: 180vh;
+  }
+}
 @media screen and (min-width: 768px) {
   .over {
     z-index: 3;

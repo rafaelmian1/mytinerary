@@ -22,8 +22,8 @@ const BackgroundVideo = () => {
             cities!
           </h5>
           <button type="button" className="px-4 gap-3 go">
-            <Link to="/cities">
-              <span className="link">Find mine!</span>
+            <Link to="./cities">
+              <span className="link">See more!</span>
             </Link>
           </button>
         </div>
