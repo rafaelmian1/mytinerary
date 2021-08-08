@@ -1,0 +1,156 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: "Ubuntu";
+}
+.papu {
+  height: 200vh;
+}
+.vh90 {
+  position: absolute;
+  min-height: 95vh !important;
+  top: 105%;
+}
+.fotito {
+  min-height: 37vh;
+  min-width: 30vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
+  border-radius: 1vh !important;
+  overflow: auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  object-fit: cover;
+}
+
+.fotito:hover {
+  transform: scale(1.02);
+  transition: 400ms;
+  cursor: pointer;
+}
+
+.video {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.car {
+  position: absolute;
+  top: 100vh;
+  width: 100%;
+  filter: blur(4px);
+}
+
+.carouselsinho {
+  background-color: coral;
+  width: 100%;
+}
+.content {
+  z-index: 1;
+  position: absolute;
+  top: 20vh;
+  color: #f1f1f1;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.sub-content {
+  text-align: center;
+  padding: 10px;
+}
+
+.color {
+  filter: invert(50%) sepia(79%) saturate(20000%) hue-rotate(11deg)
+    brightness(1500%) contrast(150%);
+}
+
+.sub-content button:hover {
+  background-color: #f1f1f1;
+  color: #000000c0;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #6c757d;
+}
+span.link,
+a:hover,
+a.active {
+  text-decoration: none !important;
+  color: #f8f9fa;
+}
+
+header {
+  z-index: 2;
+}
+header,
+.descripcion {
+  width: 100%;
+  background-color: #212529c0;
+}
+button {
+  color: #f8f9fa;
+  border: 2px solid #f8f9fa;
+  background-color: transparent;
+  border-radius: 50px;
+}
+
+button.go:hover {
+  background-color: #f8f9fa71;
+}
+
+.dropdown-menu {
+  text-align: center;
+  min-width: 5rem !important;
+  background-color: #212529c0 !important;
+}
+
+footer {
+  /* background-image: url(); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  height: 10vh;
+  position: absolute;
+  top: 210vh;
+}
+
+@media screen and (max-width: 992px) {
+  .car {
+    height: 180vh;
+  }
+}
+@media screen and (min-width: 768px) {
+  .over {
+    z-index: 3;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .navbar-nav {
+    width: 4.2rem;
+    position: absolute !important;
+    display: flex !important;
+    justify-content: center !important;
+    right: 2px;
+    top: 3.2rem;
+    background-color: #212529c0 !important;
+    padding: 0;
+    border-radius: 0.8rem;
+  }
+  .navbar-nav li {
+    margin: 0 0.5rem;
+  }
+  .navbar-nav li * {
+    font-size: 0.8rem;
+  }
+}

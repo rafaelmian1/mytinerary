@@ -83,24 +83,6 @@ const CarouselButtons = () => {
 };
 
 export default class Carousel extends React.Component {
-  // state = {
-  //   slides: [],
-  // };
-
-  // componentDidMount() {
-  //   fetch("https://picsum.photos/v2/list?page=2&limit=12")
-  //     .then((res) => res.json())
-  //     .then((fotos) =>
-  //       this.setState({
-  //         slides: [
-  //           [...fotos].splice(0, 4),
-  //           [...fotos].splice(4, 4),
-  //           [...fotos].splice(8, 4),
-  //         ],
-  //       })
-  //     );
-  // }
-
   fotos = {
     slides: [
       [
