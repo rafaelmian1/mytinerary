@@ -6,15 +6,12 @@ const Image = ({ image }) => {
   const interval = useRef(null);
   useEffect(() => {
     if (loop) {
-      interval.current = setTimeout(() => {
-        setIndex(index === 3 ? 0 : index + 1);
-        console.log("entre al loop");
-      }, 1200);
+      interval.current = setTimeout(
+        () => setIndex(index === 3 ? 0 : index + 1),
+        1200
+      );
     }
-    return () => {
-      clearTimeout(interval.current);
-      console.log("me desmonté");
-    };
+    return () => clearTimeout(interval.current);
   });
 
   return (

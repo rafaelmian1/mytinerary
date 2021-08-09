@@ -132,6 +132,8 @@ span.link {
 
 header {
   z-index: 2;
+  background-color: rgb(20, 28, 41);
+  box-shadow: 0 5px 4px rgb(20, 28, 41);
 }
 
 .dropdown-item {
@@ -143,10 +145,9 @@ header {
   cursor: pointer !important;
 }
 
-header,
 .descripcion {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.589);
+  background-color: rgba(0, 0, 0, 0.575);
 }
 
 button.go {
@@ -191,11 +192,6 @@ footer {
 @media screen and (max-width: 992px) {
   .car {
     height: 180vh;
-  }
-}
-@media screen and (min-width: 768px) {
-  .over {
-    z-index: 3;
   }
 }
 

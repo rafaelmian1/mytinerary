@@ -1,5 +1,5 @@
 const Redes = () => (
-  <span className="text-light">
+  <span className="text-dark">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
