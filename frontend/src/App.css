@@ -23,7 +23,7 @@ svg {
   cursor: pointer;
 }
 header * img {
-  width: 40px;
+  width: 10vmin;
 }
 header * h1 {
   font-size: 6vmin;
