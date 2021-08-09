@@ -26,10 +26,11 @@ header * img {
   width: 40px;
 }
 header * h1 {
+  font-size: 6vmin;
   color: coral;
 }
 .tinerary {
-  font-size: 3rem;
+  font-size: 8vmin;
   font-weight: bold;
 }
 .vh90 {
@@ -74,11 +75,11 @@ header * h1 {
 
 .content h1,
 .content h2 {
-  font-size: 3vmin;
+  font-size: 4vmin;
   color: coral;
 }
 .content h1 {
-  font-size: 6vmin;
+  font-size: 7vmin;
 }
 
 .content {
@@ -101,7 +102,8 @@ header * h1 {
   top: 20vh;
 }
 
-.color {
+.color,
+.navbar-toggler-icon {
   filter: invert(50%) sepia(79%) saturate(20000%) hue-rotate(11deg)
     brightness(1500%) contrast(150%);
 }
@@ -118,10 +120,14 @@ a.active {
   text-decoration: none !important;
   color: coral;
 }
-span.link,
+span.link {
+  color: rgb(25, 34, 46);
+  font-size: 5vmin !important;
+}
+
 .over {
   color: coral;
-  font-size: 4vmin !important;
+  font-size: 6vmin !important;
 }
 
 header {
@@ -143,15 +149,16 @@ header,
   background-color: rgba(0, 0, 0, 0.589);
 }
 
-button {
+button.go {
   margin: 0 1rem;
   border: 2px solid coral;
-  background-color: transparent;
+  background-color: rgb(255, 127, 80);
   border-radius: 50px;
 }
 
 button.go:hover {
-  background-color: rgba(255, 127, 80, 0.342);
+  background-color: rgba(255, 127, 80, 0.856);
+  color: rgb(25, 34, 46);
 }
 
 .go.scroll {
@@ -162,8 +169,8 @@ button.go:hover {
 }
 
 .scroll-btn {
-  color: coral;
-  font-size: 2vmin;
+  color: rgb(25, 34, 46);
+  font-size: 0.8rem;
 }
 
 .dropdown-menu {

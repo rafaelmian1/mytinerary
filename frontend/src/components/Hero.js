@@ -29,7 +29,7 @@ const Content = () => (
       </h2>
       <button type="button" className="px-4 gap-3 go">
         <Link to="./Cities">
-          <span className="link">Get me there!</span>
+          <span className="link">Take me there!</span>
         </Link>
       </button>
     </div>
