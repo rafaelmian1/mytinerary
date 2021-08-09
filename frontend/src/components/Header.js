@@ -9,9 +9,9 @@ const HeaderNavbar = () => {
   return (
     <header className="vw-100 position-fixed d-flex align-items-center justify-content-between text-light">
       <div className="d-flex align-items-center mx-4">
-        <h2>my</h2>
-        <h1>
-          <b>tinerary</b>
+        <img src="./assets/logo.png" />
+        <h1 className="mx-3">
+          my<span className="tinerary">tinerary</span>
         </h1>
       </div>
       <nav className="navbar navbar-expand-sm navbar-dark">
@@ -79,7 +79,7 @@ const UserIcon = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="32"
         height="32"
-        style={{ marginRight: "1rem" }}
+        style={{ marginRight: "1rem", color: "coral" }}
         fill="currentColor"
         className="bi bi-person-circle dropdown-toggle"
         viewBox="0 0 16 16"
@@ -91,14 +91,14 @@ const UserIcon = () => {
         />
       </svg>
       <ul
-        className="dropdown-menu dropdown-menu-dark dropdown-menu-end m-3"
+        className="dropdown-menu dropdown-menu-dark dropdown-menu-end m-4"
         aria-labelledby="button"
       >
         <li>
           <span className="dropdown-item">Sign up</span>
         </li>
         <li>
-          <span className="dropdown-item">Login</span>
+          <span className="dropdown-item">Log in</span>
         </li>
       </ul>
     </div>

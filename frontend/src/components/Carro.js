@@ -35,10 +35,10 @@ export default class Carro extends React.Component {
         {
           ciudad: "London",
           img: [
-            "./assets/slides/venice1.jpg",
-            "./assets/slides/venice2.jpg",
-            "./assets/slides/venice3.jpg",
-            "./assets/slides/venice4.jpg",
+            "./assets/slides/london1.jpg",
+            "./assets/slides/london2.jpeg",
+            "./assets/slides/london3.jpg",
+            "./assets/slides/london4.jpg",
           ],
         },
       ],
@@ -123,38 +123,31 @@ export default class Carro extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="carouselsinho">
-          <div
-            className="car"
-            style={{
-              backgroundImage: 'url("./assets/fondo.jpg")',
-            }}
-          ></div>
-          <div
-            className="container-fluid min-vh-100 car"
-            style={{
-              backgroundImage: 'url("./assets/fondo.jpg")',
-            }}
-          ></div>
-          <div
-            id="carouselToggler"
-            className="w-100 carousel slide d-flex flex-column justify-content-center align-items-center vh90"
-            data-bs-ride="carousel"
-          >
-            <h3 className="text-light my-2 over">
-              Popular my<b>tineraries</b>
-            </h3>
-            <CarouselIndicators />
-            <div className="carousel-inner container flex-grow-1" key="2">
-              {this.fotos.slides.map((slide, index) => (
-                <Slide data={slide} index={index} key={index} />
-              ))}
-            </div>
-            <CarouselButtons />
+      <div
+        id="car"
+        className="carouselsinho d-flex flex-column align-items-center justify-content-center"
+      >
+        <div
+          className="container-fluid min-vh-100 car"
+          style={{
+            backgroundImage: 'url("./assets/fondo.jpg")',
+          }}
+        ></div>
+        <div
+          id="carouselToggler"
+          className="carousel slide d-flex flex-column justify-content-center align-items-center vh90"
+          data-bs-ride="carousel"
+        >
+          <h3 className="my-2 over">Popular myTineraries</h3>
+          <CarouselIndicators />
+          <div className="carousel-inner flex-grow-1" key="2">
+            {this.fotos.slides.map((slide, index) => (
+              <Slide data={slide} index={index} key={index} />
+            ))}
           </div>
+          <CarouselButtons />
         </div>
-      </>
+      </div>
     );
   }
 }
@@ -191,6 +184,7 @@ const Foto = ({ foto }) => {
     <div
       className="d-flex align-items-end text-light justify-content-center fotito"
       id={foto.ciudad}
+      onMouseEnter={mouseHandler}
       onClick={mouseHandler}
       style={{
         backgroundImage: `url(${foto.img[pepe]})`,
