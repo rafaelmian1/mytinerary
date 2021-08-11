@@ -1,15 +1,16 @@
-import React from "react";
-import ListItems from "./ListItems";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const HeaderNavBar = ({ children }) => {
   return (
-    <header className="vw-100 position-fixed d-flex align-items-center justify-content-between text-light">
-      <div className="d-flex align-items-center mx-1">
-        <img src="./assets/logo.png" alt="logo" />
-        <h1 className="mx-2">
-          my<span className="tinerary">tinerary</span>
-        </h1>
-      </div>
+    <header className="w-100 position-absolute d-flex align-items-center justify-content-between text-light">
+      <Link exact to="./">
+        <div className="d-flex align-items-center mx-1">
+          <img src="./assets/logo.png" alt="logo" />
+          <h1 className="mx-2">
+            my<span className="tinerary">tinerary</span>
+          </h1>
+        </div>
+      </Link>
       <nav className="navbar navbar-expand-sm navbar-dark">
         <div className="container-fluid">
           <button
@@ -24,9 +25,7 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="content">
-            <ul className="navbar-nav me-auto mt-2 text-center">
-              <ListItems />
-            </ul>
+            <ul className="navbar-nav me-auto mt-2 text-center">{children}</ul>
           </div>
         </div>
       </nav>
@@ -34,4 +33,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderNavBar;

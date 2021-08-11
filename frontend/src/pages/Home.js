@@ -1,12 +1,11 @@
-// import Carousel from "../components/Carousel";
-import Carro from "../components/Carousel/Carousel";
-import Hero from "../components/Hero";
+import Carousel from "../components/Carousel.js";
+import Hero from "../components/Hero.js";
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <Carro />
+      <Carousel />
     </>
   );
 };
