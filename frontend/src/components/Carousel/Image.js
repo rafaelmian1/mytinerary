@@ -17,7 +17,7 @@ const Image = ({ image }) => {
   return (
     <div
       className={`d-flex align-items-end text-light justify-content-end hover foto ${
-        image.descripcion ? `card m-0 p-0 item` : "carru"
+        image.descripcion ? `card m-0 p-0` : "carru"
       }`}
       id={image.ciudad}
       onMouseEnter={() => setLoop(true)}

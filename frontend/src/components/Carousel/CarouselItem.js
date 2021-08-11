@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Image from "./Image";
 
 const CarouselItem = ({ slideContent, index }) => {
@@ -11,7 +12,9 @@ const CarouselItem = ({ slideContent, index }) => {
           {slideContent.map((image, index) => {
             return (
               <div className="col-12 col-lg-6 g-4" key={image.ciudad}>
-                <Image image={image} />
+                <Link to={`/city/${image.ciudad}`}>
+                  <Image image={image} />
+                </Link>
               </div>
             );
           })}

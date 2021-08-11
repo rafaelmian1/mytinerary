@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Cities from "./pages/Cities";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import City from "./components/City";
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/cities" component={Cities} />
+          <Route exact path="/cities" component={Cities} />
+          <Route path="/city/:id" component={City} />
           <Redirect to="/" />
         </Switch>
         <Footer />

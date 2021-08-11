@@ -126,7 +126,7 @@ const Carousel = () => {
   const [slides, setSlides] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/corousel/slides")
+      .get("http://localhost:4000/api/corousel/slides")
       .then((res) => setSlides(res.data.respond));
   }, []);
   return (
