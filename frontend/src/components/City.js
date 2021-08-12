@@ -19,7 +19,11 @@ const City = (props) => {
             <Banner
               img={city.img[Math.round(Math.random() * 3)]}
               text={`Welcome to ${city.ciudad}`}
+              light={true}
             />
+            <h1 className="fs-1 text-center text-light">
+              CITE UNDER CONSTRUCTION
+            </h1>
             <button type="button" className="px-4 mt-5 gap-3 go">
               <Link to="/cities" onClick={() => window.scrollTo(0, 0)}>
                 <span className="link">Back to Cities</span>
