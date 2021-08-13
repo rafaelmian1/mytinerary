@@ -16,7 +16,7 @@ const myTineraryControllers = {
 
   readCities: (req, res) => {
     City.find()
-      .then((cities) => res.json({ response: cities }))
+      .then((cities) => res.json({ success: true, response: cities }))
       .catch((err) => res.json({ success: false, error: err }));
   },
 
@@ -54,6 +54,7 @@ const myTineraryControllers = {
     City.findOne({ _id: req.params.id })
       .then((city) =>
         res.json({
+          success: true,
           response: city,
         })
       )

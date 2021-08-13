@@ -9,8 +9,16 @@ const City = (props) => {
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/city/${props.match.params.id}`)
-      .then((response) => setCity(response.data.response));
-  }, [props.match.params.id]);
+      .then((response) =>
+        response.data.success
+          ? setCity(response.data.response)
+          : props.history.push("/cities")
+      )
+      .catch((err) => {
+        console.log(err);
+        props.history.push("/cities");
+      });
+  }, [props.match.params.id, props.history]);
 
   return (
     <div className="contenedorCities min-vh-100">
