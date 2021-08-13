@@ -1,5 +1,5 @@
-import Carousel from "../components/Carousel.js";
-import Hero from "../components/Hero.js";
+import Carousel from "../components/Carousel/Carousel.js";
+import Hero from "../components/Hero/Hero.js";
 
 const Home = () => {
   return (

@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Cities from "./pages/Cities";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import City from "./components/City";
+import City from "./pages/City";
 
 const App = () => {
   return (

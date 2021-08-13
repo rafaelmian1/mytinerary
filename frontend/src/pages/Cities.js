@@ -9,7 +9,7 @@ const Cities = () => {
   const [city, setCity] = useState("");
   useEffect(() => {
     axios.get("http://localhost:4000/api/cities").then((res) => {
-      setCities(res.data.respond);
+      setCities(res.data.response);
     });
   }, []);
 
