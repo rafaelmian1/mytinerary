@@ -4,28 +4,42 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const City = (props) => {
-  const [city, setCity] = useState({ img: [] });
+  const [city, setCity] = useState({});
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/city/${props.match.params.id}`)
-      .then((response) =>
-        response.data.success
-          ? setCity(response.data.response)
-          : props.history.push("/cities")
-      )
+      .then((response) => {
+        if (response.data.success) {
+          setCity(response.data.response);
+        } else {
+          throw new Error(response.data.response);
+        }
+      })
       .catch((err) => {
-        console.log(err);
+        alert(
+          err.message.includes("Request") ? "Failed to fetch" : "City not found"
+        );
+        console.error(err);
         props.history.push("/cities");
-      });
-  }, [props.match.params.id, props.history]);
+      })
+      .finally(() => setReload(!reload));
+    // eslint-disable-next-line
+  }, []);
 
+  if (reload)
+    return (
+      <div className="cities bg-dark text-light fs-1">
+        <h1>Loading.....</h1>
+      </div>
+    );
   return (
     <div className="contenedorCities min-vh-100">
       <div className="cities">
         <Banner
           img={city.img[Math.round(Math.random() * 3)]}
-          text={`Welcome to ${city.ciudad}`}
+          text={`Welcome to ${city.city} - ${city.country}`}
           light={true}
         />
         <h1 className="fs-1 text-center text-light">CITE UNDER CONSTRUCTION</h1>

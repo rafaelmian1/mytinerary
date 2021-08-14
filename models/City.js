@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const citySchema = mongoose.Schema({
   city: { type: String, required: true },
-  country: { type: String },
+  country: { type: String, required: true },
   img: { type: [String], required: true },
-  descripcion: { type: String },
+  description: { type: String },
 });
 
 const City = mongoose.model("city", citySchema);

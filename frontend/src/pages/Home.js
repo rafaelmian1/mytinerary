@@ -1,11 +1,11 @@
 import Carousel from "../components/Carousel/Carousel.js";
 import Hero from "../components/Hero/Hero.js";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <>
       <Hero />
-      <Carousel />
+      <Carousel {...props} />
     </>
   );
 };

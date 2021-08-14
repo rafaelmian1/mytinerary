@@ -8,6 +8,7 @@ import Cities from "./pages/Cities";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import City from "./pages/City";
+import Error from "./pages/Error";
 
 const App = () => {
   return (
@@ -18,10 +19,11 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/cities" component={Cities} />
           <Route path="/city/:id" component={City} />
-          <Redirect to="/" />
+          <Route path="/error" component={Error} />
+          <Redirect to="/error" />
         </Switch>
-        <Footer />
       </div>
+      <Footer />
     </BrowserRouter>
   );
 };

@@ -7,13 +7,28 @@ import Image from "../Image";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Carousel = () => {
+const Carousel = (props) => {
   const [slides, setSlides] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/corousel/slides")
-      .then((res) => setSlides(res.data.response));
+      .get("http://localhost:4000/api/carousel")
+      .then((res) => {
+        if (res.data.success) {
+          setSlides(res.data.response);
+        } else {
+          throw new Error(res.data.response);
+        }
+      })
+      .catch((err) => {
+        alert(err.message.includes("error") ? err.message : "Failed to fetch");
+        console.error(err.message);
+        props.history.push("/error");
+      });
+    // eslint-disable-next-line
   }, []);
+  window.scrollTo(0, 0);
+
   return (
     <CarouselToggler>
       <CarouselIndicators />
@@ -22,11 +37,11 @@ const Carousel = () => {
           <CarouselItem index={index} key={index}>
             {slide.map((image) => {
               return (
-                <div className="col-12 col-lg-6 g-4" key={image.ciudad}>
+                <div className="col-12 col-lg-6 g-4" key={image.city}>
                   <Link to={`/city/${image._id}`}>
                     <Image image={image} card={false} carousel={true}>
-                      <div className="descripcion d-flex flex-column align-items-center">
-                        <h5 className="mx-3 fs-1">{image.ciudad}</h5>
+                      <div className="description">
+                        <h5 className="px-3 fs-1">{image.city}</h5>
                       </div>
                     </Image>
                   </Link>

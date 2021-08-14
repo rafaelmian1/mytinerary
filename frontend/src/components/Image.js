@@ -16,17 +16,29 @@ const Image = ({ image, card, carousel, children }) => {
 
   return (
     <div
-      className={`d-flex align-items-end text-light justify-content-end hover foto ${
+      className={`d-flex align-items-end justify-content-end text-light hover foto ${
         card ? `card m-0 p-0` : "carru"
       }`}
-      id={image.ciudad}
+      id={image.city}
       onMouseEnter={() => setLoop(true)}
       onMouseLeave={() => setLoop(false)}
       style={{
         backgroundImage: `url(${image.img[index]})`,
       }}
     >
-      {card && loop && children}
+      {card && (
+        <div className="description d-flex flex-column align-items-start">
+          <h5 className="px-3 fs-1">{image.city}</h5>
+          {loop && (
+            <span>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem,
+              quibusdam, officiis nostrum cum voluptas dolores tempore debitis
+              inventore ab non laborum laudantium, harum recusandae deserunt
+              doloremque quidem quaerat? Assumenda, debitis.
+            </span>
+          )}
+        </div>
+      )}
       {carousel && children}
     </div>
   );

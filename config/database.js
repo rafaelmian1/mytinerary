@@ -7,4 +7,4 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log("Database connected"))
-  .catch((error) => console.error(error));
+  .catch((error) => console.error("Database error \n" + error));

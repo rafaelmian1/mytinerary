@@ -5,14 +5,15 @@ const myTineraryControllers = require("../controllers/myTineraryControllers");
 router
   .route("/cities")
   .get(myTineraryControllers.readCities)
+  // .post(myTineraryControllers.createCities)
   .post(myTineraryControllers.createCity)
-  .put(myTineraryControllers.updateCities);
+  .put(myTineraryControllers.updateCities)
+  .delete(myTineraryControllers.deleteCities);
 router
   .route("/city/:id")
   .get(myTineraryControllers.readCity)
-  .post(myTineraryControllers.updateCity)
   .delete(myTineraryControllers.deleteCity)
   .put(myTineraryControllers.updateCity);
-router.route("/corousel/slides").get(myTineraryControllers.readCarouselSlides);
+router.route("/carousel").get(myTineraryControllers.readCarouselSlides);
 
 module.exports = router;

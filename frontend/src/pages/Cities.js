@@ -4,13 +4,27 @@ import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
 import CityCard from "../components/Cities/CityCard";
 
-const Cities = () => {
+const Cities = (props) => {
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState("");
+  const [reload, setReload] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:4000/api/cities").then((res) => {
-      setCities(res.data.response);
-    });
+    axios
+      .get("http://localhost:4000/api/cities")
+      .then((res) => {
+        if (res.data.success) {
+          setCities(res.data.response);
+        } else {
+          throw new Error(res.data.response);
+        }
+      })
+      .catch((err) => {
+        alert(err.message.includes("error") ? err.message : "Failed to fetch");
+        console.error(err.message);
+        props.history.push("/error");
+      })
+      .finally(() => setReload(!reload));
+    // eslint-disable-next-line
   }, []);
 
   const inputHandler = (e) => {
@@ -18,11 +32,14 @@ const Cities = () => {
   };
 
   const filter = () => {
-    return cities.filter((city2) =>
-      city2.ciudad.toLowerCase().startsWith(city)
-    );
+    return cities.filter((city2) => city2.city.toLowerCase().startsWith(city));
   };
-
+  if (reload)
+    return (
+      <div className="cities bg-dark text-light fs-1">
+        <h1>Loading.....</h1>
+      </div>
+    );
   return (
     <div className="contenedorCities">
       <div className="cities">
