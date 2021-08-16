@@ -22,7 +22,8 @@ header {
   z-index: 2;
   background-color: transparent;
 }
-header * img {
+header * img,
+footer * img {
   width: 10vmin;
 }
 header * h1 {
@@ -54,10 +55,20 @@ span.link {
 footer {
   background-color: coral;
   display: flex;
-  justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  height: 10vh;
+  height: 18vh;
+}
+
+footer * a {
+  color: #f8f9fa;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+footer * a:hover,
+footer * a.active {
+  color: #212529;
 }
 
 svg {
@@ -194,6 +205,11 @@ button.go:hover {
 }
 
 .contenedorCities {
+  background: linear-gradient(
+    rgb(33, 37, 41),
+    rgba(255, 127, 80, 0.411),
+    rgb(33, 37, 41)
+  );
   background-color: rgb(19, 22, 26);
 }
 
@@ -205,17 +221,34 @@ button.go:hover {
   align-items: center;
 }
 
-/* .banner {
-
-} */
+.welcome {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.808);
+  font-weight: bold;
+  font-size: 4vmin;
+  text-shadow: 1px 1px 1px #fff6ec, -1px -1px 1px #fff6ec, 1px -1px 1px #fff6ec,
+    -1px 1px 1px #fff6ec;
+  color: rgba(255, 127, 80, 0.719);
+  padding-left: 2vw;
+}
 
 input {
   text-align: center;
+  font-size: 2.5vmin;
   padding: 0.5rem 1rem;
   margin: 1vh 0 4vh;
   border-radius: 20px;
   min-width: 40vw;
+  background-color: rgba(0, 0, 0, 0.808);
   outline: none;
+  text-shadow: 1px 1px 1px #fff6ec, -1px -1px 1px #fff6ec, 1px -1px 1px #fff6ec,
+    -1px 1px 1px #fff6ec;
+  color: rgba(255, 127, 80, 0.719);
+}
+input::placeholder {
+  text-shadow: 1px 1px 1px #fff6ec, -1px -1px 1px #fff6ec, 1px -1px 1px #fff6ec,
+    -1px 1px 1px #fff6ec;
+  color: rgba(255, 127, 80, 0.719);
 }
 
 .grid {
@@ -234,7 +267,7 @@ input {
 }
 .itemFiltered {
   grid-column-start: span 4;
-  grid-row-start: span 1;
+  grid-row-start: span 2;
 }
 
 .item:nth-child(6n-5) {
@@ -255,7 +288,187 @@ input {
   grid-row-start: span 2;
   grid-column-start: span 2;
 }
+.Toastify__toast--error {
+  background-color: coral !important;
+  color: #212529;
+}
 
+#fountainG {
+  position: relative;
+  width: 216px;
+  height: 26px;
+  margin: auto;
+}
+
+.fountainG {
+  position: absolute;
+  top: 0;
+  background-color: rgb(255, 128, 82);
+  width: 26px;
+  height: 26px;
+  animation-name: bounce_fountainG;
+  -o-animation-name: bounce_fountainG;
+  -ms-animation-name: bounce_fountainG;
+  -webkit-animation-name: bounce_fountainG;
+  -moz-animation-name: bounce_fountainG;
+  animation-duration: 1.105s;
+  -o-animation-duration: 1.105s;
+  -ms-animation-duration: 1.105s;
+  -webkit-animation-duration: 1.105s;
+  -moz-animation-duration: 1.105s;
+  animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  transform: scale(0.3);
+  -o-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -webkit-transform: scale(0.3);
+  -moz-transform: scale(0.3);
+  border-radius: 17px;
+  -o-border-radius: 17px;
+  -ms-border-radius: 17px;
+  -webkit-border-radius: 17px;
+  -moz-border-radius: 17px;
+}
+
+#fountainG_1 {
+  left: 0;
+  animation-delay: 0.446s;
+  -o-animation-delay: 0.446s;
+  -ms-animation-delay: 0.446s;
+  -webkit-animation-delay: 0.446s;
+  -moz-animation-delay: 0.446s;
+}
+
+#fountainG_2 {
+  left: 27px;
+  animation-delay: 0.5525s;
+  -o-animation-delay: 0.5525s;
+  -ms-animation-delay: 0.5525s;
+  -webkit-animation-delay: 0.5525s;
+  -moz-animation-delay: 0.5525s;
+}
+
+#fountainG_3 {
+  left: 54px;
+  animation-delay: 0.659s;
+  -o-animation-delay: 0.659s;
+  -ms-animation-delay: 0.659s;
+  -webkit-animation-delay: 0.659s;
+  -moz-animation-delay: 0.659s;
+}
+
+#fountainG_4 {
+  left: 81px;
+  animation-delay: 0.7755s;
+  -o-animation-delay: 0.7755s;
+  -ms-animation-delay: 0.7755s;
+  -webkit-animation-delay: 0.7755s;
+  -moz-animation-delay: 0.7755s;
+}
+
+#fountainG_5 {
+  left: 108px;
+  animation-delay: 0.882s;
+  -o-animation-delay: 0.882s;
+  -ms-animation-delay: 0.882s;
+  -webkit-animation-delay: 0.882s;
+  -moz-animation-delay: 0.882s;
+}
+
+#fountainG_6 {
+  left: 135px;
+  animation-delay: 0.9985s;
+  -o-animation-delay: 0.9985s;
+  -ms-animation-delay: 0.9985s;
+  -webkit-animation-delay: 0.9985s;
+  -moz-animation-delay: 0.9985s;
+}
+
+#fountainG_7 {
+  left: 162px;
+  animation-delay: 1.105s;
+  -o-animation-delay: 1.105s;
+  -ms-animation-delay: 1.105s;
+  -webkit-animation-delay: 1.105s;
+  -moz-animation-delay: 1.105s;
+}
+
+#fountainG_8 {
+  left: 189px;
+  animation-delay: 1.2115s;
+  -o-animation-delay: 1.2115s;
+  -ms-animation-delay: 1.2115s;
+  -webkit-animation-delay: 1.2115s;
+  -moz-animation-delay: 1.2115s;
+}
+
+@keyframes bounce_fountainG {
+  0% {
+    transform: scale(1);
+    background-color: rgb(255, 128, 82);
+  }
+
+  100% {
+    transform: scale(0.3);
+    background-color: rgb(255, 128, 82);
+  }
+}
+
+@-o-keyframes bounce_fountainG {
+  0% {
+    -o-transform: scale(1);
+    background-color: rgb(255, 128, 82);
+  }
+
+  100% {
+    -o-transform: scale(0.3);
+    background-color: rgb(255, 128, 82);
+  }
+}
+
+@-ms-keyframes bounce_fountainG {
+  0% {
+    -ms-transform: scale(1);
+    background-color: rgb(255, 128, 82);
+  }
+
+  100% {
+    -ms-transform: scale(0.3);
+    background-color: rgb(255, 128, 82);
+  }
+}
+
+@-webkit-keyframes bounce_fountainG {
+  0% {
+    -webkit-transform: scale(1);
+    background-color: rgb(255, 128, 82);
+  }
+
+  100% {
+    -webkit-transform: scale(0.3);
+    background-color: rgb(255, 128, 82);
+  }
+}
+
+@-moz-keyframes bounce_fountainG {
+  0% {
+    -moz-transform: scale(1);
+    background-color: rgb(255, 128, 82);
+  }
+
+  100% {
+    -moz-transform: scale(0.3);
+    background-color: rgb(255, 128, 82);
+  }
+}
 @media screen and (max-width: 992px) {
   .car {
     height: 180vh;

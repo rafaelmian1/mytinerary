@@ -1,10 +1,10 @@
-const Banner = ({ img, text, light }) => {
+const Banner = ({ img, text }) => {
   return (
     <div
-      style={{ backgroundImage: `url(${img})`, height: "50vh" }}
+      style={{ backgroundImage: `url(${img})`, height: "70vh" }}
       className="d-flex align-items-end w-100 my-4 foto banner"
     >
-      <span className={`fs-1 text-dark m-5`}>{text}</span>
+      <span className="welcome">{text.toUpperCase()}</span>
     </div>
   );
 };

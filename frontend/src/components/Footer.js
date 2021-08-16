@@ -1,12 +1,33 @@
+import { Link, NavLink } from "react-router-dom";
 import Redes from "./Footer/Redes";
 
 const Footer = () => {
   return (
-    <footer className="w-100 d-flex justify-content-around">
-      <span className="text-dark fw-bold">
-        &copy; Copyright 2021 | All rights reserved
-      </span>
-      <Redes />
+    <footer className="w-100 d-flex flex-column">
+      <div className="w-100 pt-3 d-flex align-items-center justify-content-between">
+        <Link to="./">
+          <div className="d-flex align-items-center mx-1">
+            <img src="/assets/logo.png" alt="logo" />
+            <h1 className="text-dark">
+              my<span className="tinerary">tinerary</span>
+            </h1>
+          </div>
+        </Link>
+        <div>
+          <NavLink exact to="/">
+            <span>Home</span>
+          </NavLink>
+          <NavLink className="mx-sm-4" to="/cities">
+            <span>Cities</span>
+          </NavLink>
+        </div>
+      </div>
+      <div className="w-100 text-center">
+        <span className="text-dark fw-bold">
+          &copy; Copyright 2021 | All rights reserved
+        </span>
+        <Redes />
+      </div>
     </footer>
   );
 };

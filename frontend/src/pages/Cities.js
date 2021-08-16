@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
 import CityCard from "../components/Cities/CityCard";
+import { ToastContainer, toast } from "react-toastify";
+import Loader from "../components/Hero/Loader";
 
 const Cities = (props) => {
   const [cities, setCities] = useState([]);
-  const [city, setCity] = useState("");
+  const [imput, setImput] = useState("");
   const [reload, setReload] = useState(true);
   useEffect(() => {
     axios
@@ -14,44 +16,71 @@ const Cities = (props) => {
       .then((res) => {
         if (res.data.success) {
           setCities(res.data.response);
+          setReload(!reload);
         } else {
           throw new Error(res.data.response);
         }
       })
       .catch((err) => {
-        alert(err.message.includes("error") ? err.message : "Failed to fetch");
+        toast.error(
+          err.message.includes("error") ? err.message : "Failed to fetch",
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        );
         console.error(err.message);
         props.history.push("/error");
-      })
-      .finally(() => setReload(!reload));
+      });
     // eslint-disable-next-line
   }, []);
 
   const inputHandler = (e) => {
-    setCity(e.target.value.trim().toLowerCase());
+    setImput(e.target.value.trim().toLowerCase());
   };
 
   const filter = () => {
-    return cities.filter((city2) => city2.city.toLowerCase().startsWith(city));
+    return cities.filter((city) => city.city.toLowerCase().startsWith(imput));
   };
+
   if (reload)
     return (
       <div className="cities bg-dark text-light fs-1">
-        <h1>Loading.....</h1>
+        <Loader />
       </div>
     );
+  // window.scrollTo(0, 0);
   return (
     <div className="contenedorCities">
       <div className="cities">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <ToastContainer />
         <Banner
           img="https://cdnmundo1.img.sputniknews.com/img/07e4/09/08/1092688899_0:0:1921:1080_1920x0_80_0_0_25c347c24b99fccac0abd826512f91bd.jpg"
           text="Get on board! Look all our cities"
           light={false}
         />
 
-        <h3 className="text-light">Find what you're looking for</h3>
+        <div className="welcome bg-transparent text-center">
+          <h3>Find what you're looking for</h3>
+        </div>
         <input
-          className="input"
+          className="input mb-5"
           type="text"
           name="cities"
           placeholder="Search by cities"

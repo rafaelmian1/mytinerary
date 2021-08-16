@@ -1,7 +1,6 @@
 const City = require("../models/City");
 
 const myError = (res, err) => {
-  console.log("Database error \n" + err);
   res.json({ success: false, response: "Backend error \n" + err.message });
 };
 
@@ -16,7 +15,7 @@ const myTineraryControllers = {
     City.find()
       .then((cities) => {
         cities = cities.map((city) => {
-          return { city: city.city, img: city.img };
+          return { city: city.city, img: city.img, _id: city._id };
         });
         res.json({
           success: true,
@@ -49,21 +48,11 @@ const myTineraryControllers = {
       .catch((err) => myError(res, err));
   },
 
-  // createCities: (req, res) => {
-  //   console.log(req.body);
-  //   req.body.cities.forEach((city) => {
-  //     const newCity = new City({
-  //       city: capitalize(city.city),
-  //       country: capitalize(city.country),
-  //       img: city.img,
-  //       description: city.description,
-  //     });
-  //     newCity
-  //       .save()
-  //       .then(() => res.json({ success: true }))
-  //       .catch((err) => myError(res, err));
-  //   });
-  // },
+  createCities: (req, res) => {
+    City.insertMany(req.body.cities, { ordered: true })
+      .then(() => res.json({ success: true }))
+      .catch((err) => myError(res, err));
+  },
 
   deleteCities: (req, res) => {
     City.deleteMany({ __v: 0 })

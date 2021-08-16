@@ -1,9 +1,9 @@
 const Redes = () => (
-  <span className="text-dark">
+  <span className="text-dark mx-4">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       fill="currentColor"
       className="bi mx-2 bi-instagram"
       viewBox="0 0 16 16"
@@ -12,8 +12,8 @@ const Redes = () => (
     </svg>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       fill="currentColor"
       className="bi mx-2 bi-facebook"
       viewBox="0 0 16 16"
@@ -22,8 +22,8 @@ const Redes = () => (
     </svg>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       fill="currentColor"
       className="bi mx-2 bi-twitter"
       viewBox="0 0 16 16"
@@ -32,8 +32,8 @@ const Redes = () => (
     </svg>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       fill="currentColor"
       className="bi mx-2 bi-envelope"
       viewBox="0 0 16 16"
