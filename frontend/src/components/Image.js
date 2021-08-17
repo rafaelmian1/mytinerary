@@ -29,14 +29,7 @@ const Image = ({ image, card, carousel, children }) => {
       {card && (
         <div className="description d-flex flex-column align-items-start">
           <h5 className="px-3 fs-1">{image.city}</h5>
-          {loop && (
-            <span>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem,
-              quibusdam, officiis nostrum cum voluptas dolores tempore debitis
-              inventore ab non laborum laudantium, harum recusandae deserunt
-              doloremque quidem quaerat? Assumenda, debitis.
-            </span>
-          )}
+          {loop && <span>{image.description}</span>}
         </div>
       )}
       {carousel && children}
