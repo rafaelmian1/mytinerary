@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-const Error = () => {
+const Error = (props) => {
   return (
     <div className="contenedorCities min-vh-100">
       <div className="cities">
@@ -20,9 +20,13 @@ const Error = () => {
         <span style={{ color: "coral" }} className="fs-4">
           Sorry, the page you are looking for was not found.
         </span>
-        <button type="button" className="px-4 gap-3 mt-5 go">
-          <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-            <span className="link">Back to Home</span>
+        <button
+          type="button"
+          className="px-4 gap-3 mt-5 go"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <Link to="/">
+            <span className="link">Go Home</span>
           </Link>
         </button>
       </div>

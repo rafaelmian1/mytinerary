@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const HeaderNavBar = ({ children }) => {
   return (
     <header className="w-100 position-absolute d-flex align-items-center justify-content-between text-light">
-      <Link exact to="/">
+      <Link to="/">
         <div className="d-flex align-items-center mx-1">
           <img src="/assets/logo.png" alt="logo" />
           <h1 className="mx-2">

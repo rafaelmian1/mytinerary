@@ -76,10 +76,12 @@ const Cities = (props) => {
           light={false}
         />
 
-        <div className="welcome bg-transparent text-center">
-          <h3>Find what you're looking for</h3>
-        </div>
+        <label htmlFor="filter" className="text-light">
+          Find what you're looking for
+        </label>
+
         <input
+          id="filter"
           className="input mb-5"
           type="text"
           name="cities"

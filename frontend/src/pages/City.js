@@ -37,7 +37,7 @@ const City = (props) => {
           }
         );
         console.error(err);
-        props.history.push("/cities");
+        props.history.push("/error");
       });
     // eslint-disable-next-line
   }, []);
