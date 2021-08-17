@@ -79,7 +79,6 @@ const Cities = (props) => {
         <label htmlFor="filter" className="text-light">
           Find what you're looking for
         </label>
-
         <input
           id="filter"
           className="input mb-5"
@@ -88,7 +87,11 @@ const Cities = (props) => {
           placeholder="Search by cities"
           onChange={inputHandler}
         />
-
+        {filter().length === 0 && (
+          <div>
+            <h2 className="text-light">NO RESULTS FOR YOUR SEARCH</h2>
+          </div>
+        )}
         <div className="grid">
           <CityCard cities={filter()} all={cities} />
         </div>
