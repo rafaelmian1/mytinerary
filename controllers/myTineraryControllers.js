@@ -35,6 +35,18 @@ const myTineraryControllers = {
       .catch((err) => myError(res, err));
   },
 
+  readCity: (req, res) => {
+    City.findOne({ _id: req.params.id })
+      .then((city) => {
+        if (city) {
+          res.json({ success: true, response: city });
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((err) => myError(res, err));
+  },
+
   createCity: (req, res) => {
     const newCity = new City({
       city: capitalize(req.body.city),
@@ -67,20 +79,18 @@ const myTineraryControllers = {
   },
 
   updateCity: (req, res) => {
-    City.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
+    City.findOneAndUpdate(
+      { _id: req.params.id },
+      { ...req.body },
+      { new: true }
+    )
       .then((city) => res.json({ success: true, modified: city }))
       .catch((err) => myError(res, err));
   },
 
   updateCities: (req, res) => {
-    City.updateMany({}, { ...req.body })
+    City.updateMany({}, { ...req.body }, { new: true })
       .then((cities) => res.json({ success: true, modified: cities }))
-      .catch((err) => myError(res, err));
-  },
-
-  readCity: (req, res) => {
-    City.findOne({ _id: req.params.id })
-      .then((city) => res.json({ success: true, response: city }))
       .catch((err) => myError(res, err));
   },
 };
