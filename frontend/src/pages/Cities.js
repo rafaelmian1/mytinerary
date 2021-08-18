@@ -71,15 +71,16 @@ const Cities = (props) => {
         />
         <ToastContainer />
         <Banner
-          img="https://cdnmundo1.img.sputniknews.com/img/07e4/09/08/1092688899_0:0:1921:1080_1920x0_80_0_0_25c347c24b99fccac0abd826512f91bd.jpg"
-          text="Get on board! Look all our cities"
+          img="https://www.diabetes.co.uk/wp-content/uploads/2019/01/iStock-10019278401.jpg"
+          text=""
           light={false}
         />
 
-        <label htmlFor="filter" className="text-light">
-          Find what you're looking for
-        </label>
+        <label htmlFor="filter">Find what you're looking for</label>
         <input
+          style={{
+            backgroundImage: "url(/assets/search.jpg)",
+          }}
           id="filter"
           className="input mb-5"
           type="text"
@@ -89,7 +90,13 @@ const Cities = (props) => {
         />
         {filter().length === 0 && (
           <div>
-            <h2 className="text-light">NO RESULTS FOR YOUR SEARCH</h2>
+            {/* <h2 className="filter">NO RESULTS FOR YOUR SEARCH</h2>
+             */}
+            <img
+              src="/assets/oops.png"
+              alt="oops not found"
+              style={{ width: "20vw", marginTop: "5vh" }}
+            />
           </div>
         )}
         <div className="grid">

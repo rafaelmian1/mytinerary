@@ -1,6 +1,6 @@
 const Video = () => (
   <video autoPlay="autoplay" loop="loop" muted id="video-id" className="video">
-    <source src="./assets/video.mp4" type="video/mp4" />
+    <source src="./assets/video2.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 );

@@ -7,11 +7,11 @@ const UserIcon = () => {
         aria-expanded="false"
         type="button"
         xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        style={{ marginRight: "1rem", color: "coral" }}
+        width="50"
+        height="50"
+        style={{ marginRight: "1rem" }}
         fill="currentColor"
-        className="bi bi-person-circle dropdown-toggle"
+        className="bi bi-person-circle dropdown-toggle mt-2"
         viewBox="0 0 16 16"
       >
         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -21,7 +21,7 @@ const UserIcon = () => {
         />
       </svg>
       <ul
-        className="dropdown-menu dropdown-menu-dark dropdown-menu-end m-4"
+        className="dropdown-menu dropdown-menu-end m-4"
         aria-labelledby="button"
       >
         <li>

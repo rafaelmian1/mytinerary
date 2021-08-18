@@ -1,23 +1,12 @@
 const CarouselToggler = ({ children }) => {
   return (
     <div
-      id="car"
-      className="carouselsinho d-flex flex-column align-items-center justify-content-center"
+      id="carouselToggler"
+      className="carousel slide text-center"
+      data-bs-ride="carousel"
     >
-      <div
-        className="container-fluid min-vh-100 car"
-        style={{
-          backgroundImage: 'url("./assets/fondo.jpg")',
-        }}
-      ></div>
-      <div
-        id="carouselToggler"
-        className="carousel slide d-flex flex-column justify-content-center align-items-center vh90"
-        data-bs-ride="carousel"
-      >
-        <h3 className="over">Popular myTineraries</h3>
-        {children}
-      </div>
+      <h2 className="pop">Popular MyTineraries</h2>
+      {children}
     </div>
   );
 };

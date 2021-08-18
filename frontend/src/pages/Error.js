@@ -16,13 +16,15 @@ const Error = (props) => {
           pauseOnHover
         />
         <ToastContainer />
-        <h1 className="fs-1 mt-5 over">ERROR 404</h1>
-        <span style={{ color: "coral" }} className="fs-4">
+        <h1 style={{ color: "#885e44", fontSize: "5rem", marginTop: "10%" }}>
+          ERROR 404
+        </h1>
+        <span style={{ color: "#885e44" }} className="fs-4">
           Sorry, the page you are looking for was not found.
         </span>
         <button
           type="button"
-          className="px-4 gap-3 mt-5 go"
+          className="px-4 gap-3 mt-5 error"
           onClick={() => window.scrollTo(0, 0)}
         >
           <Link to="/">

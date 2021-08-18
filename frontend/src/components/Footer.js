@@ -4,16 +4,13 @@ import Redes from "./Footer/Redes";
 const Footer = () => {
   return (
     <footer className="w-100 d-flex flex-column justify-content-between">
-      <div className="w-100 pt-3 d-flex align-items-center justify-content-between">
-        <Link to="./">
-          <div className="d-flex align-items-center mx-1">
-            <img src="/assets/logo.png" alt="logo" />
-            <h1 className="text-dark">
-              my<span className="tinerary">tinerary</span>
-            </h1>
-          </div>
+      <div className="w-100 p-3 d-flex align-items-center justify-content-between">
+        <Link to="/">
+          <h1 className="pop">
+            my<span className="tinerary">tinerary</span>
+          </h1>
         </Link>
-        <div>
+        <div className="d-flex align-items-center">
           <NavLink className="mx-2 mx-sm-4" exact to="/">
             <span>Home</span>
           </NavLink>
@@ -22,10 +19,8 @@ const Footer = () => {
           </NavLink>
         </div>
       </div>
-      <div className="w-100 text-center d-flex justify-content-center pb-2">
-        <span className="text-dark fw-bold">
-          &copy; Copyright 2021 | All rights reserved
-        </span>
+      <div className="w-100 text-center d-flex justify-content-center align-items-center pb-2">
+        <span className="redes fs-5">&copy; MyTinerary Project 2021</span>
         <Redes />
       </div>
     </footer>
