@@ -1,43 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import CarouselToggler from "./CarouselToggler";
 import CarouselItem from "./CarouselItem";
 import CarouselIndicators from "./CarouselIndicators";
 import CarouselButtons from "./CarouselButtons";
 import Image from "../Image";
-
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import carouselActions from "../../redux/actions/carousel";
 
 const Carousel = (props) => {
-  const [slides, setSlides] = useState([]);
-
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/carousel")
-      .then((res) => {
-        if (res.data.success) {
-          setSlides(res.data.response);
-        } else {
-          throw new Error(res.data.response);
-        }
-      })
-      .catch((err) => {
-        toast.error(
-          err.message.includes("error") ? err.message : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.error(err.message);
-        props.history.push("/error");
-      });
+    props.getSlides();
     // eslint-disable-next-line
   }, []);
   window.scrollTo(0, 0);
@@ -46,12 +19,12 @@ const Carousel = (props) => {
     <CarouselToggler>
       <CarouselIndicators />
       <div className="carousel-inner flex-grow-1">
-        {slides.map((slide, index) => (
+        {props.slides.map((slide, index) => (
           <CarouselItem index={index} key={index}>
             {slide.map((city) => {
               return (
                 <div className="col-12 col-lg-6 g-4" key={city.city}>
-                  <Link to={`/city/${city._id}`}>
+                  <Link to={`/cities/${city._id}`}>
                     <Image image={city} card={false} carousel={true}>
                       <div className="description">
                         <h5 className="px-3 fs-1">{city.city}</h5>
@@ -69,4 +42,14 @@ const Carousel = (props) => {
   );
 };
 
-export default Carousel;
+const mapDispatchToProps = {
+  getSlides: carouselActions.getSlides,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    slides: state.carousel.slides,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carousel);

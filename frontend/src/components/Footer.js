@@ -12,10 +12,14 @@ const Footer = () => {
         </Link>
         <div className="d-flex align-items-center">
           <NavLink className="mx-2 mx-sm-4" exact to="/">
-            <span>Home</span>
+            <span>HOME</span>
           </NavLink>
-          <NavLink className="mx-2 mx-sm-4" to="/cities">
-            <span>Cities</span>
+          <NavLink
+            className="mx-2 mx-sm-4"
+            to="/cities"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            <span>CITIES</span>
           </NavLink>
         </div>
       </div>

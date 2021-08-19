@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Cities from "./pages/Cities";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import City from "./pages/City";
+import Itineraries from "./pages/Itineraries";
 import Error from "./pages/Error";
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/cities" component={Cities} />
-          <Route path="/city/:id" component={City} />
+          <Route path="/cities/:id" component={Itineraries} />
           <Route path="/error" component={Error} />
           <Redirect to="/error" />
         </Switch>

@@ -1,59 +1,29 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
-import CityCard from "../components/Cities/CityCard";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Loader from "../components/Hero/Loader";
+import citiesActions from "../redux/actions/cities";
+import CityCards from "../components/Cities/CityCards";
+import { connect } from "react-redux";
 
 const Cities = (props) => {
-  const [cities, setCities] = useState([]);
-  const [imput, setImput] = useState("");
-  const [reload, setReload] = useState(true);
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/cities")
-      .then((res) => {
-        if (res.data.success) {
-          setCities(res.data.response);
-          setReload(!reload);
-        } else {
-          throw new Error(res.data.response);
-        }
-      })
-      .catch((err) => {
-        toast.error(
-          err.message.includes("error") ? err.message : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.error(err.message);
-        props.history.push("/error");
-      });
+    props.getCities();
     // eslint-disable-next-line
   }, []);
 
   const inputHandler = (e) => {
-    setImput(e.target.value.trim().toLowerCase());
+    props.filterCities(e.target.value.trim().toLowerCase());
   };
 
-  const filter = () => {
-    return cities.filter((city) => city.city.toLowerCase().startsWith(imput));
-  };
-
-  if (reload)
+  if (props.cities.length === 0)
     return (
       <div className="cities bg-dark text-light fs-1">
         <Loader />
       </div>
     );
+
   // window.scrollTo(0, 0);
   return (
     <div className="contenedorCities">
@@ -88,7 +58,7 @@ const Cities = (props) => {
           placeholder="Search by cities"
           onChange={inputHandler}
         />
-        {filter().length === 0 && (
+        {props.filteredCities.length === 0 && (
           <div>
             {/* <h2 className="filter">NO RESULTS FOR YOUR SEARCH</h2>
              */}
@@ -100,7 +70,7 @@ const Cities = (props) => {
           </div>
         )}
         <div className="grid">
-          <CityCard cities={filter()} all={cities} />
+          <CityCards cities={props.filteredCities} all={props.cities} />
         </div>
         <button type="button" className="px-4 gap-3 mt-5 go">
           <Link to="/" onClick={() => window.scrollTo(0, 0)}>
@@ -111,4 +81,17 @@ const Cities = (props) => {
     </div>
   );
 };
-export default Cities;
+
+const mapDispatchToProps = {
+  getCities: citiesActions.getCities,
+  filterCities: citiesActions.filterCities,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities.cities,
+    filteredCities: state.cities.filteredCities,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);

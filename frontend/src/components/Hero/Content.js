@@ -6,7 +6,7 @@ const Content = () => (
       <h1 className="brand">
         My<span className="tinerary">Tinerary</span>
       </h1>
-      <h2 className="px-4 mb-5">
+      <h2 className="px-4 mb-5" style={{ fontStyle: "italic" }}>
         Find your perfect trip, designed by insiders who know and love their
         cities!
       </h2>
