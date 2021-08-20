@@ -5,12 +5,17 @@ const itinerariesReducer = (state = { itineraries: [] }, action) => {
         ...state,
         itineraries: action.payload,
       };
-    case "FILTER_ITINERARIES":
+    case "SORT_ITINERARIES":
       return {
         ...state,
         itineraries: state.itineraries.sort((a, b) => {
           return action.payload ? a.likes - b.likes : b.likes - a.likes;
         }),
+      };
+    case "RESET":
+      return {
+        ...state,
+        itineraries: [],
       };
     default:
       return state;

@@ -10,11 +10,10 @@ const itinerariesControllers = {
 
   readAllItineraies: (req, res) => {
     Itinerary.find()
+      .populate("city")
       .then((itineraries) => {
         if (itineraries) {
-          // City.populate(itineraries, { path: "city" }, () =>
           res.json({ success: true, response: itineraries });
-          // );
         } else {
           throw new Error();
         }
@@ -37,13 +36,11 @@ const itinerariesControllers = {
   },
 
   readItineraries: (req, res) => {
-    console.log("me pegaron");
     Itinerary.find({ city: req.params.id })
+      .populate({ path: "city", model: "city" }) //select: "city"
       .then((itineraries) => {
         if (itineraries) {
-          City.populate(itineraries, { path: "city" }, () =>
-            res.json({ success: true, response: itineraries })
-          );
+          res.json({ success: true, response: itineraries });
         } else {
           throw new Error();
         }
@@ -87,6 +84,7 @@ const itinerariesControllers = {
 
   readItinerary: (req, res) => {
     Itinerary.findOne({ _id: req.params.id })
+      .populate("city")
       .then((itinerary) => {
         if (itinerary) {
           res.json({ success: true, response: itinerary });

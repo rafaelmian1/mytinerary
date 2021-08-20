@@ -1,16 +1,40 @@
+import "react-toastify/dist/ReactToastify.css";
 import Banner from "../components/Banner";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { connect } from "react-redux";
 import Loader from "../components/Hero/Loader";
 import Itinerary from "../components/Itinerary/Itinerary";
-import { connect } from "react-redux";
-import itinerariesActions from "../redux/actions/itineraries";
+import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const Itineraries = (props) => {
   useEffect(() => {
-    props.getItineraries(props.match.params.id);
+    async function getItineraries() {
+      try {
+        await props.getItineraries(props.match.params.id);
+      } catch (err) {
+        toast.error(
+          err.message.includes("error")
+            ? "Backend / DataBase error"
+            : "Failed to fetch",
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+        console.error(err.message);
+        props.history.push("/error");
+      }
+    }
+    getItineraries();
+    window.scrollTo(0, 0);
+    return () => props.resetState();
     // eslint-disable-next-line
   }, []);
 
@@ -24,7 +48,7 @@ const Itineraries = (props) => {
     <div className="contenedorCities min-vh-100">
       <div className="cities">
         <Banner
-          img={props.itineraries[0].city.img[0]}
+          img={props.itineraries[0].city.img[Math.round(Math.random() * 3)]}
           text={`WELCOME TO ${props.itineraries[0].city.city}`}
           light={true}
         />
@@ -43,6 +67,7 @@ const Itineraries = (props) => {
 
 const mapDispatchToProps = {
   getItineraries: itinerariesActions.getItineraries,
+  resetState: itinerariesActions.resetState,
   // filterItineraries: itinerariesActions.filterItineraries,
 };
 

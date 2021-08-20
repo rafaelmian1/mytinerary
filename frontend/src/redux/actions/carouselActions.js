@@ -4,8 +4,10 @@ const carouselActions = {
   getSlides: () => {
     return async (dispatch) => {
       let response = await axios.get("http://localhost:4000/api/carousel");
-      let slides = response.data.response;
-      dispatch({ type: "GET_SLIDES", payload: slides });
+      if (!response.data.success) {
+        throw new Error(response.data.response);
+      }
+      dispatch({ type: "GET_SLIDES", payload: response.data.response });
     };
   },
 };

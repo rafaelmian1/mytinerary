@@ -6,11 +6,34 @@ import CarouselIndicators from "./CarouselIndicators";
 import CarouselButtons from "./CarouselButtons";
 import Image from "../Image";
 import { connect } from "react-redux";
-import carouselActions from "../../redux/actions/carousel";
+import carouselActions from "../../redux/actions/carouselActions";
+import { toast } from "react-toastify";
 
 const Carousel = (props) => {
   useEffect(() => {
-    props.getSlides();
+    async function getSlides() {
+      try {
+        await props.getSlides();
+      } catch (err) {
+        toast.error(
+          err.message.includes("error")
+            ? "Backend / DataBase error"
+            : "Failed to fetch",
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+        console.error(err.message);
+        props.history.push("/error");
+      }
+    }
+    getSlides();
     // eslint-disable-next-line
   }, []);
   window.scrollTo(0, 0);

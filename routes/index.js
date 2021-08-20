@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const citiesControllers = require("../controllers/cities");
-const itinerariesControllers = require("../controllers/itineraries");
+const citiesControllers = require("../controllers/citiesControllers");
+const itinerariesControllers = require("../controllers/itinerariesControllers");
 
 //CAROUSEL (POPULAR CITIES)
 

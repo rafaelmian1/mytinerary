@@ -1,15 +1,37 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import Loader from "../components/Hero/Loader";
-import citiesActions from "../redux/actions/cities";
+import citiesActions from "../redux/actions/citiesActions";
 import CityCards from "../components/Cities/CityCards";
 import { connect } from "react-redux";
 
 const Cities = (props) => {
   useEffect(() => {
-    props.getCities();
+    async function getCities() {
+      try {
+        await props.getCities();
+      } catch (err) {
+        toast.error(
+          err.message.includes("error")
+            ? "Backend / DataBase error"
+            : "Failed to fetch",
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+        console.error(err.message);
+        props.history.push("/error");
+      }
+    }
+    props.cities.length === 0 && getCities();
     // eslint-disable-next-line
   }, []);
 
@@ -82,16 +104,15 @@ const Cities = (props) => {
   );
 };
 
-const mapDispatchToProps = {
-  getCities: citiesActions.getCities,
-  filterCities: citiesActions.filterCities,
-};
-
 const mapStateToProps = (state) => {
   return {
     cities: state.cities.cities,
     filteredCities: state.cities.filteredCities,
   };
+};
+const mapDispatchToProps = {
+  getCities: citiesActions.getCities,
+  filterCities: citiesActions.filterCities,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);

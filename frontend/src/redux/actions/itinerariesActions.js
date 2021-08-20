@@ -6,13 +6,20 @@ const itinerariesActions = {
       let response = await axios.get(
         "http://localhost:4000/api/itineraries/" + id
       );
-      let itineraries = response.data.response;
-      dispatch({ type: "GET_ITINERARIES", payload: itineraries });
+      if (!response.data.success) {
+        throw new Error(response.data.response);
+      }
+      dispatch({ type: "GET_ITINERARIES", payload: response.data.response });
     };
   },
-  filterItineraries: (value) => {
+  sortItineraries: (value) => {
     return (dispatch) => {
-      dispatch({ type: "FILTER_ITINERARIES", payload: value });
+      dispatch({ type: "SORT_ITINERARIES", payload: value });
+    };
+  },
+  resetState: () => {
+    return (dispatch) => {
+      dispatch({ type: "RESET" });
     };
   },
 };
