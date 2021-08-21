@@ -54,6 +54,7 @@ const citiesControllers = {
   // CITY
 
   createCity: (req, res) => {
+    req.body.cities.forEach();
     const newCity = new City({
       city: capitalize(req.body.city),
       country: capitalize(req.body.country),

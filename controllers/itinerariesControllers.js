@@ -12,7 +12,7 @@ const itinerariesControllers = {
     Itinerary.find()
       .populate("city")
       .then((itineraries) => {
-        if (itineraries) {
+        if (itineraries.length !== 0) {
           res.json({ success: true, response: itineraries });
         } else {
           throw new Error();
@@ -39,7 +39,7 @@ const itinerariesControllers = {
     Itinerary.find({ city: req.params.id })
       .populate({ path: "city", model: "city" }) //select: "city"
       .then((itineraries) => {
-        if (itineraries) {
+        if (itineraries.length !== 0) {
           res.json({ success: true, response: itineraries });
         } else {
           throw new Error();

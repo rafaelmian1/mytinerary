@@ -35,10 +35,6 @@ const Cities = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  const inputHandler = (e) => {
-    props.filterCities(e.target.value.trim().toLowerCase());
-  };
-
   if (props.cities.length === 0)
     return (
       <div className="cities bg-dark text-light fs-1">
@@ -78,7 +74,9 @@ const Cities = (props) => {
           type="text"
           name="cities"
           placeholder="Search by cities"
-          onChange={inputHandler}
+          onChange={(e) =>
+            props.filterCities(e.target.value.trim().toLowerCase())
+          }
         />
         {props.filteredCities.length === 0 && (
           <div>
