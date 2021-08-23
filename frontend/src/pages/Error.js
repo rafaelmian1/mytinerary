@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 const Error = (props) => {
+  document.title = "myTinerary - Error 404";
   return (
     <div className="contenedorCities min-vh-100">
       <div className="cities">

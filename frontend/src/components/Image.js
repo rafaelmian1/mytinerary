@@ -23,7 +23,7 @@ const Image = ({ image, card, carousel, children }) => {
       onMouseEnter={() => setLoop(true)}
       onMouseLeave={() => setLoop(false)}
       style={{
-        backgroundImage: `url(${image.img[index]})`, //card ? image.img[0] :
+        backgroundImage: `url(${card ? image.img[0] : image.img[index]})`, //card ? image.img[0] :
       }}
     >
       {card && loop && (

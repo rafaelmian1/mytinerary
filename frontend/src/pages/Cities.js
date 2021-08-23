@@ -7,9 +7,12 @@ import CityCards from "../components/Cities/CityCards";
 import { connect } from "react-redux";
 
 const Cities = (props) => {
+  document.title = "myTinerary - Cities";
   useEffect(() => {
     props.cities.length === 0 && props.getCities(props);
     window.scrollTo(0, 0);
+
+    return () => props.resetFilteredCities();
     // eslint-disable-next-line
   }, []);
 
@@ -73,6 +76,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   getCities: citiesActions.getCities,
   filterCities: citiesActions.filterCities,
+  resetFilteredCities: citiesActions.resetFilteredCities,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);

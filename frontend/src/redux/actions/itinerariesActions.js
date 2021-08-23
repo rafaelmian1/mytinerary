@@ -15,7 +15,7 @@ const itinerariesActions = {
       } catch (err) {
         toast.error(
           err.message.includes("error")
-            ? "Backend / DataBase error"
+            ? "Itinerary not found"
             : "Failed to fetch",
           {
             position: "top-right",
