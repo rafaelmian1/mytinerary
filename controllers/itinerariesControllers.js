@@ -8,6 +8,12 @@ const myError = (res, err) => {
 const itinerariesControllers = {
   // TOTAL ITINERARIES
 
+  createAllItineraries: (req, res) => {
+    Itinerary.insertMany(req.body.itineraries, { ordered: true })
+      .then(() => res.json({ success: true }))
+      .catch((err) => myError(res, err));
+  },
+
   readAllItineraies: (req, res) => {
     Itinerary.find()
       .populate("city")
@@ -21,6 +27,12 @@ const itinerariesControllers = {
       .catch((err) => myError(res, err));
   },
 
+  updateAllItineraries: (req, res) => {
+    Itinerary.updateMany({}, { ...req.body }, { new: true })
+      .then((itineraries) => res.json({ success: true, modified: itineraries }))
+      .catch((err) => myError(res, err));
+  },
+
   deleteAllItineraries: (req, res) => {
     Itinerary.deleteMany({})
       .then(() => res.json({ success: true }))
@@ -30,7 +42,13 @@ const itinerariesControllers = {
   // ITINERARIES BY CITY
 
   createItineraries: (req, res) => {
-    Itinerary.insertMany(req.body.itineraries, { ordered: true })
+    let data = req.body.itineraries.map((itinerary) => {
+      return {
+        ...itinerary,
+        city: req.params.id,
+      };
+    });
+    Itinerary.insertMany(data, { ordered: true })
       .then(() => res.json({ success: true }))
       .catch((err) => myError(res, err));
   },
@@ -70,6 +88,7 @@ const itinerariesControllers = {
     const newItinerary = new Itinerary({
       img: req.body.img,
       user: req.body.user,
+      title: req.body.title,
       description: req.body.description,
       hashtags: req.body.hashtags,
       price: req.body.price,

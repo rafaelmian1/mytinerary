@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const itinerarySchema = new Schema({
   img: { type: String, required: true },
   user: { type: { name: String, avatar: String }, required: true },
+  title: { type: String },
   description: { type: String },
   likes: { type: Number, default: 0 },
   hashtags: { type: [String], required: true },

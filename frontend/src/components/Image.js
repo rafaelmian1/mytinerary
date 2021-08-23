@@ -8,7 +8,7 @@ const Image = ({ image, card, carousel, children }) => {
     if (loop) {
       interval.current = setTimeout(
         () => setIndex(index === 3 ? 0 : index + 1),
-        1200
+        2000
       );
     }
     return () => clearTimeout(interval.current);
@@ -23,7 +23,7 @@ const Image = ({ image, card, carousel, children }) => {
       onMouseEnter={() => setLoop(true)}
       onMouseLeave={() => setLoop(false)}
       style={{
-        backgroundImage: `url(${card ? image.img[0] : image.img[index]})`,
+        backgroundImage: `url(${image.img[index]})`, //card ? image.img[0] :
       }}
     >
       {card && loop && (

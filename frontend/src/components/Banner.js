@@ -6,11 +6,9 @@ const Banner = ({ img, text }) => {
           backgroundImage: `url(${img})`,
           height: "67vh",
         }}
-        className="d-flex align-items-end w-100 my-4 foto"
+        className="d-flex w-100 my-4 foto"
       ></div>
-      <h1 className={`${text.includes("discover") ? "citiesWelc" : "welcome"}`}>
-        {text.toUpperCase()}
-      </h1>
+      {text && <h1 className="welcome">{text.toUpperCase()}</h1>}
     </>
   );
 };

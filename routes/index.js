@@ -26,12 +26,15 @@ router
 
 router
   .route("/itineraries") //TOTAL ITINERARIES
-  .get(itinerariesControllers.readAllItineraies) //Read
+  .post(itinerariesControllers.createAllItineraries) //Create
+  .get(itinerariesControllers.readAllItineraies) //Update
+  .put(itinerariesControllers.updateAllItineraries) //Read
   .delete(itinerariesControllers.deleteAllItineraries); //Delete
 router
   .route("/itineraries/:id") //ITINERARIES BY CITY
   .post(itinerariesControllers.createItineraries) //Create
   .get(itinerariesControllers.readItineraries) //Read
+  .put(itinerariesControllers.updateItineraries) //Update
   .delete(itinerariesControllers.deleteItineraries); //Delete
 // .put(myTineraryControllers.updateItinerary)
 

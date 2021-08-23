@@ -8,7 +8,7 @@ const ListItems = () => {
         </NavLink>
       </li>
       <li className="nav-item my-sm-1">
-        <NavLink className="mx-sm-4" to="/cities">
+        <NavLink className="mx-sm-4" exact to="/cities">
           <span>CITIES</span>
         </NavLink>
       </li>

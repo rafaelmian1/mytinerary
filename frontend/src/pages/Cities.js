@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
-import { ToastContainer, toast } from "react-toastify";
 import Loader from "../components/Hero/Loader";
 import citiesActions from "../redux/actions/citiesActions";
 import CityCards from "../components/Cities/CityCards";
@@ -9,29 +8,8 @@ import { connect } from "react-redux";
 
 const Cities = (props) => {
   useEffect(() => {
-    async function getCities() {
-      try {
-        await props.getCities();
-      } catch (err) {
-        toast.error(
-          err.message.includes("error")
-            ? "Backend / DataBase error"
-            : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.error(err.message);
-        props.history.push("/error");
-      }
-    }
-    props.cities.length === 0 && getCities();
+    props.cities.length === 0 && props.getCities(props);
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, []);
 
@@ -42,28 +20,14 @@ const Cities = (props) => {
       </div>
     );
 
-  // window.scrollTo(0, 0);
   return (
     <div className="contenedorCities">
       <div className="cities">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <ToastContainer />
         <Banner
           img="https://www.diabetes.co.uk/wp-content/uploads/2019/01/iStock-10019278401.jpg"
           text=""
           light={false}
         />
-
         <label htmlFor="filter">Find what you're looking for</label>
         <input
           style={{
@@ -80,8 +44,6 @@ const Cities = (props) => {
         />
         {props.filteredCities.length === 0 && (
           <div>
-            {/* <h2 className="filter">NO RESULTS FOR YOUR SEARCH</h2>
-             */}
             <img
               src="/assets/oops.png"
               alt="oops not found"

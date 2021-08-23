@@ -2,43 +2,25 @@ import "react-toastify/dist/ReactToastify.css";
 import Banner from "../components/Banner";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import Loader from "../components/Hero/Loader";
 import Itinerary from "../components/Itinerary/Itinerary";
 import itinerariesActions from "../redux/actions/itinerariesActions";
+import citiesActions from "../redux/actions/citiesActions";
 
 const Itineraries = (props) => {
+  const selectedCity = props.cities.find(
+    (city) => city._id === props.match.params.id
+  );
   useEffect(() => {
-    async function getItineraries() {
-      try {
-        await props.getItineraries(props.match.params.id);
-      } catch (err) {
-        toast.error(
-          err.message.includes("error")
-            ? "Backend / DataBase error"
-            : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.error(err.message);
-        props.history.push("/error");
-      }
-    }
-    getItineraries();
+    props.cities.length === 0 && props.getCities(props);
+    props.getItineraries(props);
     window.scrollTo(0, 0);
     return () => props.resetState();
     // eslint-disable-next-line
   }, []);
 
-  if (props.itineraries.length === 0)
+  if (!selectedCity)
     return (
       <div className="cities bg-dark text-light fs-1">
         <Loader />
@@ -48,13 +30,17 @@ const Itineraries = (props) => {
     <div className="contenedorCities min-vh-100">
       <div className="cities">
         <Banner
-          img={props.itineraries[0].city.img[Math.round(Math.random() * 3)]}
-          text={`WELCOME TO ${props.itineraries[0].city.city}`}
+          img={selectedCity.img[selectedCity.img.length - 1]}
+          text={`WELCOME TO ${selectedCity.city}`}
           light={true}
         />
-        {props.itineraries.map((itinerary, index) => (
-          <Itinerary itinerary={itinerary} index={index} key={index} />
-        ))}
+        {props.itineraries.length === 0 ? (
+          <h1 className="text-dark">Nothing to show yet</h1>
+        ) : (
+          props.itineraries.map((itinerary, index) => (
+            <Itinerary itinerary={itinerary} index={index} key={index} />
+          ))
+        )}
         <button type="button" className="px-4 mt-5 gap-3 go">
           <Link to="/cities" onClick={() => window.scrollTo(0, 0)}>
             <span className="link">Back to Cities</span>
@@ -68,12 +54,14 @@ const Itineraries = (props) => {
 const mapDispatchToProps = {
   getItineraries: itinerariesActions.getItineraries,
   resetState: itinerariesActions.resetState,
+  getCities: citiesActions.getCities,
   // filterItineraries: itinerariesActions.filterItineraries,
 };
 
 const mapStateToProps = (state) => {
   return {
     itineraries: state.itineraries.itineraries,
+    cities: state.cities.cities,
   };
 };
 
