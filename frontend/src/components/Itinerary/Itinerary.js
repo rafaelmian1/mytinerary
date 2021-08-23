@@ -2,10 +2,10 @@ import { useState } from "react";
 
 const Itinerary = ({ itinerary, index }) => {
   const [click, setClick] = useState(true);
+
   const dollar = () => {
-    let price = [];
-    for (let i = 0; i < 5; i++) {
-      price.push(
+    return [...Array(5)].map((item, i) => {
+      return (
         <span
           key={`${i}${itinerary._id}`}
           className={`${i >= itinerary.price ? "dollarOff" : ""}`}
@@ -17,8 +17,7 @@ const Itinerary = ({ itinerary, index }) => {
           />
         </span>
       );
-    }
-    return price;
+    });
   };
 
   const handleClick = () => setClick(!click);
