@@ -1,4 +1,4 @@
-const itinerariesReducer = (state = { itineraries: [] }, action) => {
+const itinerariesReducer = (state = { itineraries: null }, action) => {
   switch (action.type) {
     case "GET_ITINERARIES":
       return {
@@ -15,7 +15,7 @@ const itinerariesReducer = (state = { itineraries: [] }, action) => {
     case "RESET":
       return {
         ...state,
-        itineraries: [],
+        itineraries: null,
       };
     default:
       return state;

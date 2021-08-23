@@ -9,14 +9,14 @@ import itinerariesActions from "../redux/actions/itinerariesActions";
 import citiesActions from "../redux/actions/citiesActions";
 
 const Itineraries = (props) => {
+  window.scrollTo(0, 0);
   document.title = "myTinerary - Itineraries";
   const selectedCity = props.cities.find(
     (city) => city._id === props.match.params.id
   );
   useEffect(() => {
-    props.cities.length === 0 && props.getCity(props);
     props.getItineraries(props);
-    window.scrollTo(0, 0);
+    props.cities.length === 0 && props.getCity(props);
     return () => {
       props.resetState();
       props.resetCity();
@@ -24,7 +24,7 @@ const Itineraries = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  if (!selectedCity && !props.city) {
+  if ((!selectedCity && !props.city) || !props.itineraries) {
     return (
       <div className="cities bg-dark text-light fs-1">
         <Loader />

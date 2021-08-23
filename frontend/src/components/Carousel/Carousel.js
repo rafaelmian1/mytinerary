@@ -7,6 +7,7 @@ import CarouselButtons from "./CarouselButtons";
 import Image from "../Image";
 import { connect } from "react-redux";
 import carouselActions from "../../redux/actions/carouselActions";
+import Loader from "../Hero/Loader";
 
 const Carousel = (props) => {
   useEffect(() => {
@@ -14,6 +15,14 @@ const Carousel = (props) => {
     // eslint-disable-next-line
   }, []);
   window.scrollTo(0, 0);
+
+  if (props.slides.length === 0) {
+    return (
+      <div className="cities bg-dark text-light fs-1">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <CarouselToggler>
