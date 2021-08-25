@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
+const usersControllers = require("../controllers/usersController");
 
 //CAROUSEL (POPULAR CITIES)
 
@@ -36,7 +37,6 @@ router
   .get(itinerariesControllers.readItineraries) //Read
   .put(itinerariesControllers.updateItineraries) //Update
   .delete(itinerariesControllers.deleteItineraries); //Delete
-// .put(myTineraryControllers.updateItinerary)
 
 router
   .route("/itinerary/:id") //SPECIFIC ITINERARY
@@ -44,5 +44,14 @@ router
   .get(itinerariesControllers.readItinerary) //Read
   .put(itinerariesControllers.updateItinerary) //Update
   .delete(itinerariesControllers.deleteItinerary); //Delete
+
+//USERS ROUTES
+router
+  .route("/users")
+  .get(usersControllers.getUsers)
+  .put(usersControllers.updateUser)
+  .delete(usersControllers.deleteUser);
+router.route("/user/signup").post(usersControllers.createUser);
+router.route("/user/login").post(usersControllers.logUser);
 
 module.exports = router;

@@ -29,9 +29,8 @@ header {
 
 .dropdown-menu {
   text-align: center;
-  min-width: 10rem !important;
+  width: 10rem !important;
   background-color: #885e44 !important;
-  transform: translate(-200px, 10px) !important;
 }
 
 a {
@@ -51,6 +50,12 @@ a.active {
 span.link {
   color: rgb(25, 34, 46);
   font-size: 5vmin !important;
+}
+span.but {
+  font-size: 5vmin !important;
+}
+span.but:hover {
+  color: #e6e1dd;
 }
 
 footer {
@@ -117,24 +122,9 @@ button.error:hover {
 
 button.error:hover {
   background-color: #885e44;
+  color: #e6e1dd;
 }
 
-.go.scroll {
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  padding: 0;
-}
-
-.scroll-btn {
-  color: rgb(25, 34, 46);
-  font-size: 0.8rem;
-}
-
-.why {
-  width: 100%;
-  height: 2px;
-}
 #carouselToggler {
   background: linear-gradient(
     #e6e1dd,
@@ -217,22 +207,22 @@ label {
   color: #885e44;
   font-size: 6vmin;
 }
-input {
+.input {
   text-align: center;
   font-size: 3vmin;
   padding: 0.5rem 1rem;
   margin: 1vh 0 4vh;
   border: none;
   border-radius: 20px;
-  min-width: 40vw;
-  background-color: #d3c6bd;
+  width: 40vw;
+  background-color: #885e44;
   outline: none;
-  color: #885e44;
+  color: #e6e1dd;
   background-repeat: no-repeat;
   background-size: contain;
 }
-input::placeholder {
-  color: #885e44;
+.input::placeholder {
+  color: #e6e1dd;
 }
 
 .grid {
@@ -272,7 +262,7 @@ input::placeholder {
   grid-column-start: span 2;
 }
 .Toastify__toast--error {
-  background-color: coral !important;
+  background-color: #885e44 !important;
   color: #212529;
 }
 .itinerariesContainer {
