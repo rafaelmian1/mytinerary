@@ -23,14 +23,8 @@ const App = (props) => {
           <Route exact path="/cities" component={Cities} />
           <Route path="/cities/:id" component={Itineraries} />
           <Route path="/error" component={Error} />
-          <Route
-            path="/signup"
-            component={!props.userLoggedIn ? SignUp : Error}
-          />
-          <Route
-            path="/login"
-            component={!props.userLoggedIn ? LogIn : Error}
-          />
+          <Route path="/signup" component={!props.user ? SignUp : Home} />
+          <Route path="/login" component={!props.user ? LogIn : Home} />
           <Redirect to="/error" />
         </Switch>
       </div>
@@ -41,7 +35,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userLoggedIn: state.users.userLoggedIn,
+    user: state.users.user,
   };
 };
 

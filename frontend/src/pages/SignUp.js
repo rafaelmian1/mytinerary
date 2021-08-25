@@ -24,10 +24,6 @@ const SignUp = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(user);
-  const handleSignUp = (e) => {
-    props.signUp(user, props);
-  };
 
   if (props.userLoggedIn) {
     return (
@@ -106,7 +102,7 @@ const SignUp = (props) => {
         <button
           type="button"
           className="px-4 gap-3 error"
-          onClick={handleSignUp}
+          onClick={() => props.signUp(user, props)}
         >
           <span className="but">Sign me up</span>
         </button>

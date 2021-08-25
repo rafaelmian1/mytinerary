@@ -25,5 +25,11 @@ const validator = {
     dot = email.slice(dot).includes(".");
     return at === 1 && dot;
   },
+  omitParenthesis: (string) => {
+    return string.includes("(")
+      ? string.slice(0, string.indexOf(" (")) +
+          string.slice(string.indexOf(")") + 1)
+      : string;
+  },
 };
 module.exports = validator;

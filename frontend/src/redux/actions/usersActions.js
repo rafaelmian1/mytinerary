@@ -16,7 +16,7 @@ const usersActions = {
   },
 
   signUp: (data, props) => {
-    return async () => {
+    return async (dispatch) => {
       try {
         let response = await axios.post(
           "http://localhost:4000/api/user/signup",
@@ -30,6 +30,7 @@ const usersActions = {
             showConfirmButton: false,
             timer: 1500,
           });
+          dispatch({ type: "LOGGED_IN", payload: response.data.user });
         } else {
           throw new Error(response.data.response);
         }
@@ -53,7 +54,6 @@ const usersActions = {
         );
         if (response.data.success) {
           localStorage.setItem("user", JSON.stringify(response.data.user));
-          props.history.push("/");
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -76,16 +76,31 @@ const usersActions = {
     };
   },
 
-  setUser: (user) => {
+  resetUser: () => {
     return (dispatch) => {
-      dispatch({ type: "SET_USER", payload: user });
+      console.log("hola");
+      localStorage.setItem("user", JSON.stringify(null));
+      dispatch({ type: "RESET_USER" });
     };
   },
 
-  resetUser: () => {
-    return (dispatch) => {
-      localStorage.setItem("user", JSON.stringify(null));
-      dispatch({ type: "RESET_USER" });
+  validateToken: () => {
+    return async (dispatch, getState) => {
+      const { id, token } = getState().users.user;
+      const headers = { token };
+      try {
+        let response = await axios.post(
+          "http://localhost:4000/api/user/token",
+          { id },
+          { headers }
+        );
+        if (!response.data.success) {
+          localStorage.setItem("user", JSON.stringify(null));
+          dispatch({ type: "RESET_USER" });
+        }
+      } catch (err) {
+        alert(err);
+      }
     };
   },
 };

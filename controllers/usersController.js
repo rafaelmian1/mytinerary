@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const validate = require("./validators");
+const jwt = require("jsonwebtoken");
+const { response } = require("express");
 
 const myError = (res, err) => {
   res.json({ success: false, response: err.message });
@@ -40,15 +42,20 @@ const usersControllers = {
       }
       const pw = encryptPassword(password);
       // console.log("pase el email");
-      await new User({
+      const newUser = new User({
         first_name,
         last_name,
         email,
         password: pw,
         img,
         country,
-      }).save();
-      res.json({ success: true });
+      });
+      await newUser.save();
+      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY);
+      res.json({
+        success: true,
+        user: { first_name: newUser.first_name, img: newUser.img, token },
+      });
     } catch (err) {
       myError(res, err);
     }
@@ -88,16 +95,41 @@ const usersControllers = {
   logUser: async (req, res) => {
     const { email, password } = req.body;
     try {
-      // let user = await User.exists({ email: email });
       let user = await User.findOne({ email: email });
       let match = user && bcrypt.compareSync(password, user.password);
       if (!user || !match) {
-        throw new Error("Incorrect");
+        throw new Error();
       }
-      res.json({ success: true, user: user });
+      const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
+      res.json({
+        success: true,
+        user: {
+          first_name: user.first_name,
+          img: user.img,
+          token,
+          id: user._id,
+        },
+      });
     } catch (err) {
       myError(res, err);
     }
+  },
+
+  verifyToken: async (req, res) => {
+    jwt.verify(req.headers.token, process.env.SECRETORKEY, (err, result) => {
+      if (err) {
+        res.json({ success: false, response: "invalid token" });
+      } else {
+        if (result._doc._id === req.body.id) {
+          res.json({ success: true });
+        } else {
+          res.json({
+            success: false,
+            response: "token and id doesn't match",
+          });
+        }
+      }
+    });
   },
 };
 

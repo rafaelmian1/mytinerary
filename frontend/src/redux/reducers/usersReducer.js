@@ -1,5 +1,8 @@
 const usersReducer = (
-  state = { countries: [], userLoggedIn: false, user: null },
+  state = {
+    countries: [],
+    user: JSON.parse(localStorage.getItem("user")),
+  },
   action
 ) => {
   switch (action.type) {
@@ -7,19 +10,15 @@ const usersReducer = (
       return {
         ...state,
         countries: action.payload
-          .map(
-            (country) => {
-              return {
-                name: country.name.includes("(")
-                  ? country.name.slice(0, country.name.indexOf(" (")) +
-                    country.name.slice(country.name.indexOf(")") + 1)
-                  : country.name,
-              };
-            }
-            // .filter((item) => !item.startsWith("("))
-            // .join(" ")
-          )
-          .filter((country) => country.name.length < 20),
+          .map((country) => {
+            return {
+              name: country.name.includes("(")
+                ? country.name.slice(0, country.name.indexOf(" (")) +
+                  country.name.slice(country.name.indexOf(")") + 1)
+                : country.name,
+            };
+          })
+          .filter((country) => country.name.length < 25),
       };
     case "LOGGED_IN":
       return {
@@ -28,17 +27,10 @@ const usersReducer = (
         user: action.payload,
       };
 
-    case "SET_USER":
-      return {
-        ...state,
-        userLoggedIn: Boolean(action.payload),
-        user: action.payload,
-      };
     case "RESET_USER":
       return {
         ...state,
-        userLoggedIn: false,
-        user: null,
+        user: JSON.parse(localStorage.getItem("user")),
       };
     default:
       return state;

@@ -53,5 +53,6 @@ router
   .delete(usersControllers.deleteUser);
 router.route("/user/signup").post(usersControllers.createUser);
 router.route("/user/login").post(usersControllers.logUser);
+router.route("/user/token").post(usersControllers.verifyToken);
 
 module.exports = router;

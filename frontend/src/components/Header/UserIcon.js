@@ -5,7 +5,7 @@ import usersActions from "../../redux/actions/usersActions";
 
 const UserIcon = (props) => {
   useEffect(() => {
-    props.setUser(JSON.parse(localStorage.getItem("user")));
+    JSON.parse(localStorage.getItem("user")) && props.validateToken();
     // eslint-disable-next-line
   }, []);
 
@@ -104,6 +104,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   resetUser: usersActions.resetUser,
-  setUser: usersActions.setUser,
+  validateToken: usersActions.validateToken,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(UserIcon);
