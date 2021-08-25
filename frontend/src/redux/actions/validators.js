@@ -25,11 +25,19 @@ const validator = {
     dot = email.slice(dot).includes(".");
     return at === 1 && dot;
   },
-  omitParenthesis: (string) => {
-    return string.includes("(")
-      ? string.slice(0, string.indexOf(" (")) +
-          string.slice(string.indexOf(")") + 1)
-      : string;
+  password: (password) => {
+    for (let i = 0; i < password.length; i++) {
+      if (!isNaN(password.charAt(i))) {
+        return password.length > 7;
+      }
+    }
+    return false;
+  },
+  img: (img) => {
+    return img.includes(".");
+  },
+  country: (country) => {
+    return country && country !== "choose";
   },
 };
-module.exports = validator;
+export default validator;

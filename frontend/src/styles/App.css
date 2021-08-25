@@ -224,7 +224,9 @@ label {
 .input::placeholder {
   color: #e6e1dd;
 }
-
+.blurred {
+  border: 2px solid red;
+}
 .grid {
   gap: 5px;
   width: 80%;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
+import validator from "../redux/actions/validators";
 
 const SignUp = (props) => {
   const [user, setUser] = useState({
@@ -40,6 +41,11 @@ const SignUp = (props) => {
           Please, complete the fields to sign up
         </h3>
         <input
+          onBlur={(e) => {
+            e.target.value && !validator.name(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input mb-2"
           type="text"
           name="first_name"
@@ -49,6 +55,11 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
+          onBlur={(e) => {
+            e.target.value && !validator.name(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input mb-2"
           type="text"
           name="last_name"
@@ -59,6 +70,11 @@ const SignUp = (props) => {
         />
 
         <input
+          onBlur={(e) => {
+            e.target.value && !validator.email(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input mb-2"
           type="email"
           name="email"
@@ -68,6 +84,11 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
+          onBlur={(e) => {
+            e.target.value && !validator.password(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input mb-2"
           type="password"
           name="password"
@@ -77,6 +98,11 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
+          onBlur={(e) => {
+            e.target.value && !validator.img(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input mb-2"
           type="text"
           name="img"
@@ -86,13 +112,18 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <select
+          onBlur={(e) => {
+            e.target.value && !validator.country(e.target.value)
+              ? e.target.classList.add("blurred")
+              : e.target.classList.remove("blurred");
+          }}
           className="input"
           name="country"
           id="countrySelect"
           value={user.country}
           onChange={handleInput}
         >
-          <option value="">Choose your country</option>
+          <option value="choose">Choose your country</option>
           {props.countries.map((country, index) => (
             <option className="text-center" key={index} value={country.name}>
               {country.name}
