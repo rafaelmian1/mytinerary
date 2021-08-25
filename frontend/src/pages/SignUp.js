@@ -1,19 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
 
 const SignUp = (props) => {
+  const [user, setUser] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    img: "",
+    country: "",
+  });
+
   useEffect(() => {
     props.getCountries();
     // eslint-disable-next-line
   }, []);
 
+  const handleInput = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+  console.log(user);
   const handleSignUp = (e) => {
-    let inputData = Array.from(e.target.parentNode.parentNode.children)
-      .filter((c) => c.className.includes("input"))
-      .map((i) => [i.name, i.value]);
-    props.signUp(Object.fromEntries(inputData), props);
+    props.signUp(user, props);
   };
 
   if (props.userLoggedIn) {
@@ -36,6 +49,8 @@ const SignUp = (props) => {
           name="first_name"
           placeholder="First Name"
           autoComplete="false"
+          value={user.first_name}
+          onChange={handleInput}
         />
         <input
           className="input mb-2"
@@ -43,6 +58,8 @@ const SignUp = (props) => {
           name="last_name"
           placeholder="Last Name"
           autoComplete="false"
+          value={user.last_name}
+          onChange={handleInput}
         />
 
         <input
@@ -51,22 +68,34 @@ const SignUp = (props) => {
           name="email"
           placeholder="Email"
           autoComplete="false"
+          value={user.email}
+          onChange={handleInput}
         />
         <input
           className="input mb-2"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Password (8 characters or more)"
           autoComplete="false"
+          value={user.password}
+          onChange={handleInput}
         />
         <input
           className="input mb-2"
           type="text"
           name="img"
-          placeholder="URL of profile photo"
+          placeholder="Profile picture URL"
           autoComplete="false"
+          value={user.img}
+          onChange={handleInput}
         />
-        <select className="input" name="country" id="countrySelect">
+        <select
+          className="input"
+          name="country"
+          id="countrySelect"
+          value={user.country}
+          onChange={handleInput}
+        >
           <option value="">Choose your country</option>
           {props.countries.map((country, index) => (
             <option className="text-center" key={index} value={country.name}>

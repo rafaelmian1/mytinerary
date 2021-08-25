@@ -3,25 +3,42 @@ const bcrypt = require("bcryptjs");
 const validate = require("./validators");
 
 const myError = (res, err) => {
-  res.json({ success: false, response: "Backend error. " + err.message });
+  res.json({ success: false, response: err.message });
 };
 
 const usersControllers = {
   createUser: async (req, res) => {
     const { first_name, last_name, email, password, img, country } = req.body;
-    const pw = bcrypt.hashSync(password);
-    const ok =
-      validate.name(first_name) &&
-      validate.name(last_name) &&
-      validate.email(email) &&
-      img.includes(".");
+    const encryptPassword = (password) => bcrypt.hashSync(password);
+    const nameOk = validate.name(first_name) && validate.name(last_name);
+    const emailOk = validate.email(email);
+    const imgOk = img.includes(".");
     try {
-      if (!ok) {
-        throw new Error("Complete all the fields");
+      if (!nameOk) {
+        throw new Error("Check the name fields. It shouldn't contain numbers");
+      }
+      if (!emailOk) {
+        throw new Error(
+          "Check the email field. Try this format: example@example.example"
+        );
+      }
+      if (password.length < 8) {
+        throw new Error(
+          "Password too short. It must have at least 8 characters"
+        );
+      }
+      if (!imgOk) {
+        throw new Error(
+          "Check the image field. It doesn't seem to have an extension"
+        );
+      }
+      if (!country) {
+        throw new Error("Please, select your country.");
       }
       if (await User.findOne({ email: email })) {
-        throw new Error("User already in use");
+        throw new Error("Email already in use, try another one");
       }
+      const pw = encryptPassword(password);
       // console.log("pase el email");
       await new User({
         first_name,

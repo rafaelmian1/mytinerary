@@ -31,11 +31,7 @@ const usersActions = {
             timer: 1500,
           });
         } else {
-          throw new Error(
-            response.data.response.includes("fields")
-              ? "Complete all the fields"
-              : "User already in use"
-          );
+          throw new Error(response.data.response);
         }
       } catch (err) {
         Swal.fire({
