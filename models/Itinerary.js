@@ -9,7 +9,12 @@ const itinerarySchema = new Schema({
   hashtags: { type: [String], required: true },
   price: { type: Number, required: true },
   duration: { type: Number, required: true },
-  comments: { type: [String], default: [] },
+  comments: [
+    {
+      author: { type: Schema.Types.ObjectId, ref: "user" },
+      comment: String,
+    },
+  ],
   city: { type: Schema.Types.ObjectId, ref: "city", required: true },
 });
 

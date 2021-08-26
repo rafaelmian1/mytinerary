@@ -26,7 +26,7 @@ const SignUp = (props) => {
     });
   };
 
-  if (props.userLoggedIn) {
+  if (props.user) {
     return (
       <div className="cities bg-dark text-light fs-1">
         <Loader />
@@ -149,7 +149,7 @@ const SignUp = (props) => {
 const mapStateToProps = (state) => {
   return {
     countries: state.users.countries,
-    userLoggedIn: state.users.userLoggedIn,
+    user: state.users.user,
   };
 };
 

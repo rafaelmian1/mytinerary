@@ -78,8 +78,7 @@ const usersActions = {
 
   resetUser: () => {
     return (dispatch) => {
-      console.log("hola");
-      localStorage.setItem("user", JSON.stringify(null));
+      localStorage.removeItem("user");
       dispatch({ type: "RESET_USER" });
     };
   },
@@ -95,7 +94,7 @@ const usersActions = {
           { headers }
         );
         if (!response.data.success) {
-          localStorage.setItem("user", JSON.stringify(null));
+          localStorage.removeItem("user");
           dispatch({ type: "RESET_USER" });
         }
       } catch (err) {

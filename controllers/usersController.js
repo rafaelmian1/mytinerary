@@ -25,7 +25,9 @@ const usersControllers = {
         country,
       });
       await newUser.save();
-      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY);
+      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY, {
+        expiresIn: "1h",
+      });
       res.json({
         success: true,
         user: { first_name: newUser.first_name, img: newUser.img, token },
@@ -74,14 +76,15 @@ const usersControllers = {
       if (!user || !match) {
         throw new Error();
       }
-      const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
+      const token = jwt.sign({ ...user }, process.env.SECRETORKEY, {
+        expiresIn: "1h",
+      });
       res.json({
         success: true,
         user: {
           first_name: user.first_name,
           img: user.img,
           token,
-          id: user._id,
         },
       });
     } catch (err) {
@@ -94,7 +97,7 @@ const usersControllers = {
       if (err) {
         res.json({ success: false, response: "invalid token" });
       } else {
-        if (result._doc._id === req.body.id) {
+        if (User.findOne({ _id: result._doc._id })) {
           res.json({ success: true });
         } else {
           res.json({

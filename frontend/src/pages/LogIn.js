@@ -10,7 +10,7 @@ const LogIn = (props) => {
     props.logIn(Object.fromEntries(inputData), props);
   };
 
-  if (props.userLoggedIn) {
+  if (props.user) {
     return (
       <div className="cities bg-dark text-light fs-1">
         <Loader />

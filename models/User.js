@@ -8,7 +8,7 @@ const userSchema = new Schema({
   img: { type: String, required: true },
   country: { type: String, required: true },
   admin: { type: Boolean, default: false },
-  liked: { type: [Schema.Types.ObjectId] },
+  liked: [{ type: Schema.Types.ObjectId, ref: "itinerary" }],
 });
 
 module.exports = mongoose.model("user", userSchema);
