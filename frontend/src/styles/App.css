@@ -218,11 +218,13 @@ label {
   background-color: #885e44;
   outline: none;
   color: #e6e1dd;
+  font-weight: bold;
   background-repeat: no-repeat;
   background-size: contain;
 }
 .input::placeholder {
   color: #e6e1dd;
+  font-weight: normal;
 }
 .blurred {
   border: 2px solid red;
@@ -264,8 +266,9 @@ label {
   grid-column-start: span 2;
 }
 .Toastify__toast--error {
-  background-color: #885e44 !important;
+  background-color: #d3c6bd !important;
   color: #212529;
+  font-weight: bold;
 }
 .itinerariesContainer {
   display: flex;

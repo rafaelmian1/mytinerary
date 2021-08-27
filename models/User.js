@@ -8,6 +8,7 @@ const userSchema = new Schema({
   img: { type: String, required: true },
   country: { type: String, required: true },
   admin: { type: Boolean, default: false },
+  google: { type: Boolean, default: false },
   liked: [{ type: Schema.Types.ObjectId, ref: "itinerary" }],
 });
 

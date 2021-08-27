@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
 import validator from "../redux/actions/validators";
+import GoogleLogin from "react-google-login";
 
 const SignUp = (props) => {
   const [user, setUser] = useState({
@@ -24,6 +26,18 @@ const SignUp = (props) => {
       ...user,
       [e.target.name]: e.target.value,
     });
+  };
+  const responseGoogle = async (response) => {
+    let googleUser = {
+      first_name: response.profileObj.givenName,
+      last_name: response.profileObj.familyName,
+      email: response.profileObj.email,
+      password: response.profileObj.googleId,
+      img: response.profileObj.imageUrl,
+      country: "Argentina",
+      google: true,
+    };
+    await props.signUp(googleUser);
   };
 
   if (props.user) {
@@ -68,7 +82,6 @@ const SignUp = (props) => {
           value={user.last_name}
           onChange={handleInput}
         />
-
         <input
           onBlur={(e) => {
             e.target.value && !validator.email(e.target.value)
@@ -137,11 +150,25 @@ const SignUp = (props) => {
         >
           <span className="but">Sign me up</span>
         </button>
-        {/* <p>or</p>
-        <button type="button" className="px-4 gap-3 error">
-          <span className="but">Sign up with Google</span>
-        </button> */}
+        <GoogleLogin
+          clientId="68870784500-lgkji922jlfn0n3rjvfjfo0lu51jbbq5.apps.googleusercontent.com"
+          buttonText="Sign up with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

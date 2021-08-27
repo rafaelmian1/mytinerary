@@ -9,7 +9,8 @@ const myError = (res, err) => {
 
 const usersControllers = {
   createUser: async (req, res) => {
-    const { first_name, last_name, email, password, img, country } = req.body;
+    const { first_name, last_name, email, password, img, country, google } =
+      req.body;
     const encryptPassword = (password) => bcrypt.hashSync(password);
     try {
       if (await User.findOne({ email: email })) {
@@ -23,6 +24,7 @@ const usersControllers = {
         password: pw,
         img,
         country,
+        google,
       });
       await newUser.save();
       const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY, {
@@ -74,13 +76,12 @@ const usersControllers = {
   },
 
   logUser: async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, google } = req.body;
     try {
       let user = await User.findOne({ email: email });
+      if (user.google && !google) throw new Error();
       let match = user && bcrypt.compareSync(password, user.password);
-      if (!user || !match) {
-        throw new Error();
-      }
+      if (!user || !match) throw new Error();
       const token = jwt.sign({ ...user }, process.env.SECRETORKEY, {
         expiresIn: 3600,
       });

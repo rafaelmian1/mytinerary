@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const usersActions = {
@@ -36,11 +37,14 @@ const usersActions = {
           throw new Error(response.data.response);
         }
       } catch (err) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: err.message,
-          footer: '<a href="">Why do I have this issue?</a>',
+        toast.error("Check invalid fields", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
         });
       }
     };
@@ -57,7 +61,7 @@ const usersActions = {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Logged in successfully",
+            title: "Welcome " + response.data.user.first_name,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -92,11 +96,14 @@ const usersActions = {
         dispatch({ type: "LOGGED_IN", payload: response.data.user });
         return { success: true };
       } catch (err) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Session timed out",
-          footer: '<a href="">Why do I have this issue?</a>',
+        toast.error("You must log in to like an itinerary dumbass", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
         });
         localStorage.removeItem("user");
         dispatch({ type: "RESET_USER" });

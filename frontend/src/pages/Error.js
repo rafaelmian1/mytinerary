@@ -16,7 +16,6 @@ const Error = (props) => {
           draggable
           pauseOnHover
         />
-        <ToastContainer />
         <h1 style={{ color: "#885e44", fontSize: "5rem", marginTop: "10%" }}>
           ERROR 404
         </h1>
