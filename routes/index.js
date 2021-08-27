@@ -3,7 +3,7 @@ const router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
 const usersControllers = require("../controllers/usersController");
-
+const passport = require("passport");
 //CAROUSEL (POPULAR CITIES)
 
 router.route("/carousel").get(citiesControllers.readCarouselSlides); //Read
@@ -53,6 +53,17 @@ router
   .delete(usersControllers.deleteUser);
 router.route("/user/signup").post(usersControllers.createUser);
 router.route("/user/login").post(usersControllers.logUser);
-router.route("/user/token").post(usersControllers.verifyToken);
+router
+  .route("/user/token")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    usersControllers.verifyToken
+  );
+router
+  .route("/user/liked/:id")
+  .put(
+    passport.authenticate("jwt", { session: false }),
+    usersControllers.itineraryLiked
+  );
 
 module.exports = router;

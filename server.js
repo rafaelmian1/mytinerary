@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const router = require("./routes/index");
 require("dotenv").config();
+require("./config/passport");
 require("./config/database");
+
+const router = require("./routes/index");
 
 const app = express();
 //Middelwares

@@ -5,7 +5,7 @@ import MainContent from "./MainContent";
 import PriceAndDuration from "./PriceAndDuration";
 import ItineraryContainer from "./ItineraryContainer";
 
-const Itinerary = ({ itinerary, index }) => {
+const Itinerary = ({ itinerary, index, ...props }) => {
   return (
     <ItineraryContainer>
       <div className="col-12 col-md-5">
@@ -22,7 +22,7 @@ const Itinerary = ({ itinerary, index }) => {
         <div className="row">
           <div className="d-flex align-items-center justify-content-between col-12">
             <Avatar itinerary={itinerary} />
-            <LikesAndComments itinerary={itinerary} />
+            <LikesAndComments itinerary={itinerary} {...props} />
           </div>
           <MainContent itinerary={itinerary} />
           <PriceAndDuration itinerary={itinerary} />

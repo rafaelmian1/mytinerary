@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Itinerary = require("../models/Itinerary");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -15,7 +16,6 @@ const usersControllers = {
         throw new Error("Email already in use, try another one");
       }
       const pw = encryptPassword(password);
-      // console.log("pase el email");
       const newUser = new User({
         first_name,
         last_name,
@@ -30,7 +30,12 @@ const usersControllers = {
       });
       res.json({
         success: true,
-        user: { first_name: newUser.first_name, img: newUser.img, token },
+        user: {
+          first_name: newUser.first_name,
+          img: newUser.img,
+          liked: newUser.liked,
+          token,
+        },
       });
     } catch (err) {
       myError(res, err);
@@ -77,13 +82,14 @@ const usersControllers = {
         throw new Error();
       }
       const token = jwt.sign({ ...user }, process.env.SECRETORKEY, {
-        expiresIn: "1h",
+        expiresIn: 3600,
       });
       res.json({
         success: true,
         user: {
           first_name: user.first_name,
           img: user.img,
+          liked: user.liked,
           token,
         },
       });
@@ -93,20 +99,35 @@ const usersControllers = {
   },
 
   verifyToken: async (req, res) => {
-    jwt.verify(req.headers.token, process.env.SECRETORKEY, (err, result) => {
-      if (err) {
-        res.json({ success: false, response: "invalid token" });
-      } else {
-        if (User.findOne({ _id: result._doc._id })) {
-          res.json({ success: true });
-        } else {
-          res.json({
-            success: false,
-            response: "token and id doesn't match",
-          });
-        }
-      }
-    });
+    res.json({ success: true });
+  },
+
+  itineraryLiked: async (req, res) => {
+    const { bool, id, token } = req.body;
+    try {
+      await Itinerary.findOneAndUpdate(
+        { _id: id },
+        bool ? { $inc: { likes: 1 } } : { $inc: { likes: -1 } },
+        { new: true }
+      );
+      let user = await User.findOneAndUpdate(
+        { _id: req.user._id },
+        bool ? { $push: { liked: id } } : { $pull: { liked: id } },
+        { new: true }
+      );
+
+      res.json({
+        success: true,
+        user: {
+          first_name: user.first_name,
+          img: user.img,
+          liked: user.liked,
+          token,
+        },
+      });
+    } catch (err) {
+      myError(res, err);
+    }
   },
 };
 

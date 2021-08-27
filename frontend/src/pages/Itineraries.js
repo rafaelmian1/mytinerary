@@ -9,7 +9,7 @@ import itinerariesActions from "../redux/actions/itinerariesActions";
 import citiesActions from "../redux/actions/citiesActions";
 
 const Itineraries = (props) => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
   document.title = "myTinerary - Itineraries";
   const selectedCity = props.cities.find(
     (city) => city._id === props.match.params.id
@@ -45,7 +45,12 @@ const Itineraries = (props) => {
           <h1 className="text-dark">Nothing to show yet</h1>
         ) : (
           props.itineraries.map((itinerary, index) => (
-            <Itinerary itinerary={itinerary} index={index} key={index} />
+            <Itinerary
+              itinerary={itinerary}
+              {...props}
+              index={index}
+              key={index}
+            />
           ))
         )}
         <button type="button" className="px-4 mt-5 gap-3 go">
