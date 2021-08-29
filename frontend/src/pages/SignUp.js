@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
-import validator from "../redux/actions/validators";
 import GoogleLogin from "react-google-login";
 
 const SignUp = (props) => {
@@ -15,7 +14,9 @@ const SignUp = (props) => {
     img: "",
     country: "",
   });
-
+  const onBlurHandler = (e) => {
+    props.signUp(user);
+  };
   useEffect(() => {
     props.getCountries();
     // eslint-disable-next-line
@@ -55,11 +56,7 @@ const SignUp = (props) => {
           Please, complete the fields to sign up
         </h3>
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.name(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input mb-2"
           type="text"
           name="first_name"
@@ -69,11 +66,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.name(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input mb-2"
           type="text"
           name="last_name"
@@ -83,11 +76,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.email(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input mb-2"
           type="email"
           name="email"
@@ -97,11 +86,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.password(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input mb-2"
           type="password"
           name="password"
@@ -111,11 +96,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.img(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input mb-2"
           type="text"
           name="img"
@@ -125,11 +106,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <select
-          onBlur={(e) => {
-            e.target.value && !validator.country(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onBlur={onBlurHandler}
           className="input"
           name="country"
           id="countrySelect"

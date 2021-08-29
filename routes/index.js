@@ -4,6 +4,7 @@ const citiesControllers = require("../controllers/citiesControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
 const usersControllers = require("../controllers/usersController");
 const passport = require("passport");
+const validator = require("../controllers/validator");
 //CAROUSEL (POPULAR CITIES)
 
 router.route("/carousel").get(citiesControllers.readCarouselSlides); //Read
@@ -51,7 +52,7 @@ router
   .get(usersControllers.getUsers)
   .put(usersControllers.updateUser)
   .delete(usersControllers.deleteUser);
-router.route("/user/signup").post(usersControllers.createUser);
+router.route("/user/signup").post(validator, usersControllers.createUser);
 router.route("/user/login").post(usersControllers.logUser);
 router
   .route("/user/token")
