@@ -1,16 +1,17 @@
 import { connect } from "react-redux";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
-import validator from "../redux/actions/validators";
 import GoogleLogin from "react-google-login";
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const LogIn = (props) => {
-  const handleLogIn = (e) => {
-    let inputData = Array.from(e.target.parentNode.parentNode.children)
-      .filter((c) => c.className.includes("input"))
-      .map((i) => [i.name, i.value]);
-    props.logIn(Object.fromEntries(inputData));
-  };
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    google: false,
+  });
   const responseGoogle = async (response) => {
     let googleUser = {
       email: response.profileObj.email,
@@ -18,6 +19,12 @@ const LogIn = (props) => {
       google: true,
     };
     await props.logIn(googleUser);
+  };
+  const handleInput = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
   };
 
   if (props.user) {
@@ -35,22 +42,14 @@ const LogIn = (props) => {
           Please, complete the fields to log in and see all we've got for you
         </h3>
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.email(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onChange={handleInput}
           className="input mb-2"
           type="text"
           name="email"
           placeholder="Email"
         />
         <input
-          onBlur={(e) => {
-            e.target.value && !validator.password(e.target.value)
-              ? e.target.classList.add("blurred")
-              : e.target.classList.remove("blurred");
-          }}
+          onChange={handleInput}
           className="input mb-2"
           type="password"
           name="password"
@@ -58,11 +57,12 @@ const LogIn = (props) => {
         />
         <button
           type="button"
-          className="px-4 my-5 gap-3 error"
-          onClick={handleLogIn}
+          className="px-4 mt-4 gap-3 error"
+          onClick={() => props.logIn(user)}
         >
           <span className="but">Log in</span>
         </button>
+        <p className="my-4">or</p>
         <GoogleLogin
           clientId="68870784500-lgkji922jlfn0n3rjvfjfo0lu51jbbq5.apps.googleusercontent.com"
           buttonText="Log in with Google"
@@ -70,7 +70,24 @@ const LogIn = (props) => {
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
         />
+        <h4 className="mt-4">
+          Not registered yet?
+          <Link to="/signup">
+            <span> Sign up here!</span>
+          </Link>
+        </h4>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

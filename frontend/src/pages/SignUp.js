@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import Loader from "../components/Hero/Loader";
 import usersActions from "../redux/actions/usersActions";
 import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 
 const SignUp = (props) => {
   const [user, setUser] = useState({
@@ -13,9 +14,10 @@ const SignUp = (props) => {
     password: "",
     img: "",
     country: "",
+    google: false,
   });
   const onBlurHandler = (e) => {
-    props.signUp(user);
+    // props.signUp(user);
   };
   useEffect(() => {
     props.getCountries();
@@ -29,6 +31,7 @@ const SignUp = (props) => {
     });
   };
   const responseGoogle = async (response) => {
+    console.log(response.profileObj.googleId);
     let googleUser = {
       first_name: response.profileObj.givenName,
       last_name: response.profileObj.familyName,
@@ -113,7 +116,9 @@ const SignUp = (props) => {
           value={user.country}
           onChange={handleInput}
         >
-          <option value="choose">Choose your country</option>
+          <option value="choose" defaultChecked>
+            Choose your country
+          </option>
           {props.countries.map((country, index) => (
             <option className="text-center" key={index} value={country.name}>
               {country.name}
@@ -123,10 +128,11 @@ const SignUp = (props) => {
         <button
           type="button"
           className="px-4 gap-3 error"
-          onClick={() => props.signUp(user, props)}
+          onClick={() => props.signUp(user)}
         >
           <span className="but">Sign me up</span>
         </button>
+        <p className="my-4">or</p>
         <GoogleLogin
           clientId="68870784500-lgkji922jlfn0n3rjvfjfo0lu51jbbq5.apps.googleusercontent.com"
           buttonText="Sign up with Google"
@@ -134,6 +140,12 @@ const SignUp = (props) => {
           onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
         />
+        <h4 className="mt-4">
+          Already have an account?
+          <Link to="/login">
+            <span> Log in here!</span>
+          </Link>
+        </h4>
       </div>
       <ToastContainer
         position="top-right"

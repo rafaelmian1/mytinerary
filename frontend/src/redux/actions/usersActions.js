@@ -11,7 +11,16 @@ const usersActions = {
         );
         dispatch({ type: "GET_COUNTRIES", payload: response.data });
       } catch (err) {
-        alert(err);
+        console.error(err);
+        toast.error("We're doing some maintenance, please try later!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       }
     };
   },
@@ -28,18 +37,29 @@ const usersActions = {
             position: "top-end",
             icon: "success",
             title: "Signed up successfully",
-            showConfirmButton: false,
-            timer: 1500,
+            showConfirmButton: true,
+            timer: 1000,
           });
           localStorage.setItem("user", JSON.stringify(response.data.user));
           dispatch({ type: "LOGGED_IN", payload: response.data.user });
         } else {
-          throw new Error(response.data.response);
+          response.data.error.forEach((err) => {
+            toast.error(err.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          });
         }
       } catch (err) {
-        toast.error("Check invalid fields", {
+        console.error(err);
+        toast.error("We're doing some maintenance, please try later!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -68,15 +88,32 @@ const usersActions = {
           localStorage.setItem("user", JSON.stringify(response.data.user));
           dispatch({ type: "LOGGED_IN", payload: response.data.user });
         } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email and/or password incorrect",
-            footer: '<a href="">Why do I have this issue?</a>',
-          });
+          toast.error(
+            response.data.response.includes("Google")
+              ? response.data.response
+              : "Email and/or password incorrect",
+            {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+            }
+          );
         }
       } catch (err) {
-        alert(err);
+        console.error(err);
+        toast.error("We're doing some maintenance, please try later!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
       }
     };
   },

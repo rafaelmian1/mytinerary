@@ -11,7 +11,7 @@ const Content = () => (
         cities!
       </h2>
       <button type="button" className="px-4 gap-3 go">
-        <Link to="./Cities">
+        <Link to="/cities">
           <span className="link">Explore!</span>
         </Link>
       </button>

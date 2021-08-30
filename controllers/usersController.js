@@ -79,7 +79,9 @@ const usersControllers = {
     const { email, password, google } = req.body;
     try {
       let user = await User.findOne({ email: email });
-      if (user.google && !google) throw new Error();
+      console.log(user);
+      if (user.google && !google)
+        throw new Error("You must log in with Google");
       let match = user && bcrypt.compareSync(password, user.password);
       if (!user || !match) throw new Error();
       const token = jwt.sign({ ...user }, process.env.SECRETORKEY, {
