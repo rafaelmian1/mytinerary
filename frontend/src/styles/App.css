@@ -514,7 +514,10 @@ label {
     align-items: center;
     width: 100%;
   }
-
+  .input {
+    width: 90%;
+    font-size: 5vmin;
+  }
   .navbar-nav {
     z-index: -2;
     width: 100vw;

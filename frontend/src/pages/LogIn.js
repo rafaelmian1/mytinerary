@@ -64,6 +64,7 @@ const LogIn = (props) => {
         </button>
         <p className="my-4">or</p>
         <GoogleLogin
+          className="error"
           clientId="68870784500-lgkji922jlfn0n3rjvfjfo0lu51jbbq5.apps.googleusercontent.com"
           buttonText="Log in with Google"
           onSuccess={responseGoogle}

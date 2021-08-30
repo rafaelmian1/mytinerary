@@ -54,6 +54,7 @@ const usersActions = {
               progress: undefined,
             });
           });
+          return response.data.error;
         }
       } catch (err) {
         console.error(err);

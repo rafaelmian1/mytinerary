@@ -7,6 +7,7 @@ import GoogleLogin from "react-google-login";
 import { Link } from "react-router-dom";
 
 const SignUp = (props) => {
+  const [errors, setErrors] = useState([]);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -16,9 +17,11 @@ const SignUp = (props) => {
     country: "",
     google: false,
   });
-  const onBlurHandler = (e) => {
-    // props.signUp(user);
+  const signUpHandler = async (e) => {
+    let errors = await props.signUp(user);
+    setErrors(errors.map((err) => err.field));
   };
+
   useEffect(() => {
     props.getCountries();
     // eslint-disable-next-line
@@ -59,8 +62,7 @@ const SignUp = (props) => {
           Please, complete the fields to sign up
         </h3>
         <input
-          onBlur={onBlurHandler}
-          className="input mb-2"
+          className={`${errors.includes("first_name") && "blurred"} input mb-2`}
           type="text"
           name="first_name"
           placeholder="First Name"
@@ -69,8 +71,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={onBlurHandler}
-          className="input mb-2"
+          className={`${errors.includes("last_name") && "blurred"} input mb-2`}
           type="text"
           name="last_name"
           placeholder="Last Name"
@@ -79,8 +80,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={onBlurHandler}
-          className="input mb-2"
+          className={`${errors.includes("email") && "blurred"} input mb-2`}
           type="email"
           name="email"
           placeholder="Email"
@@ -89,8 +89,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={onBlurHandler}
-          className="input mb-2"
+          className={`${errors.includes("password") && "blurred"} input mb-2`}
           type="password"
           name="password"
           placeholder="Password (8 characters or more)"
@@ -99,8 +98,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <input
-          onBlur={onBlurHandler}
-          className="input mb-2"
+          className={`${errors.includes("img") && "blurred"} input mb-2`}
           type="text"
           name="img"
           placeholder="Profile picture URL"
@@ -109,8 +107,7 @@ const SignUp = (props) => {
           onChange={handleInput}
         />
         <select
-          onBlur={onBlurHandler}
-          className="input"
+          className={`${errors.includes("country") && "blurred"} input`}
           name="country"
           id="countrySelect"
           value={user.country}
@@ -128,7 +125,7 @@ const SignUp = (props) => {
         <button
           type="button"
           className="px-4 gap-3 error"
-          onClick={() => props.signUp(user)}
+          onClick={signUpHandler}
         >
           <span className="but">Sign me up</span>
         </button>

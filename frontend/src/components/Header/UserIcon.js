@@ -9,10 +9,6 @@ const UserIcon = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  const handleLogOut = () => {
-    props.resetUser();
-  };
-
   return (
     <div className="dropdown d-none d-sm-block mx-5">
       {!props.user ? (
@@ -85,7 +81,7 @@ const UserIcon = (props) => {
             aria-labelledby="button"
           >
             <li>
-              <Link to="/" onClick={handleLogOut}>
+              <Link to="/" onClick={() => props.resetUser()}>
                 <span className="dropdown-item">Log out</span>
               </Link>
             </li>
