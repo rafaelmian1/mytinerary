@@ -25,11 +25,14 @@ const Carousel = (props) => {
   }
 
   return (
-    <CarouselToggler>
-      <CarouselIndicators />
+    <CarouselToggler
+      classList={"text-center carouselToggler"}
+      title={"Popular MyTineraries"}
+    >
+      <CarouselIndicators number={3} />
       <div className="carousel-inner flex-grow-1">
         {props.slides.map((slide, index) => (
-          <CarouselItem index={index} key={index}>
+          <CarouselItem home={true} index={index} key={index}>
             {slide.map((city) => {
               return (
                 <div className="col-12 col-lg-6 g-4" key={city.city}>

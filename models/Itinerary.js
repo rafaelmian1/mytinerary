@@ -5,13 +5,16 @@ const itinerarySchema = new Schema({
   user: { type: { name: String, avatar: String }, required: true },
   title: { type: String },
   description: { type: String },
-  likes: { type: Number, default: 0 },
   hashtags: { type: [String], required: true },
   price: { type: Number, required: true },
   duration: { type: Number, required: true },
+  likes: {
+    likes: { type: Number, default: 0 },
+    users: [{ type: Schema.Types.ObjectId, ref: "user" }],
+  },
   comments: [
     {
-      author: { type: Schema.Types.ObjectId, ref: "user" },
+      user: { type: Schema.Types.ObjectId, ref: "user" },
       comment: String,
     },
   ],

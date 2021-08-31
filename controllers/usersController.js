@@ -11,12 +11,11 @@ const usersControllers = {
   createUser: async (req, res) => {
     const { first_name, last_name, email, password, img, country, google } =
       req.body;
-    const encryptPassword = (password) => bcrypt.hashSync(password);
+    const pw = bcrypt.hashSync(password);
     try {
       if (await User.findOne({ email: email })) {
         throw new Error("Email already in use, try another one");
       }
-      const pw = encryptPassword(password);
       const newUser = new User({
         first_name,
         last_name,
@@ -35,7 +34,7 @@ const usersControllers = {
         user: {
           first_name: newUser.first_name,
           img: newUser.img,
-          liked: newUser.liked,
+          id: newUser._id,
           token,
         },
       });
@@ -46,8 +45,8 @@ const usersControllers = {
 
   getUsers: async (req, res) => {
     try {
-      let response = await User.find();
-      res.json({ success: true, response: response });
+      let users = await User.find();
+      res.json({ success: true, response: users });
     } catch (err) {
       myError(res, err);
     }
@@ -79,7 +78,6 @@ const usersControllers = {
     const { email, password, google } = req.body;
     try {
       let user = await User.findOne({ email: email });
-      console.log(user);
       if (user.google && !google)
         throw new Error("You must log in with Google");
       let match = user && bcrypt.compareSync(password, user.password);
@@ -92,7 +90,7 @@ const usersControllers = {
         user: {
           first_name: user.first_name,
           img: user.img,
-          liked: user.liked,
+          id: user._id,
           token,
         },
       });
@@ -102,31 +100,45 @@ const usersControllers = {
   },
 
   verifyToken: async (req, res) => {
-    res.json({ success: true });
+    res.json({ success: true, user: req.user });
   },
 
-  itineraryLiked: async (req, res) => {
-    const { bool, id, token } = req.body;
+  like: async (req, res) => {
+    const { bool, id } = req.body;
     try {
       await Itinerary.findOneAndUpdate(
         { _id: id },
-        bool ? { $inc: { likes: 1 } } : { $inc: { likes: -1 } },
+        bool
+          ? {
+              $inc: { "likes.likes": 1 },
+              $push: { "likes.users": req.user._id },
+            }
+          : {
+              $inc: { "likes.likes": -1 },
+              $pull: { "likes.users": req.user._id },
+            },
         { new: true }
       );
-      let user = await User.findOneAndUpdate(
-        { _id: req.user._id },
-        bool ? { $push: { liked: id } } : { $pull: { liked: id } },
-        { new: true }
-      );
-
       res.json({
         success: true,
-        user: {
-          first_name: user.first_name,
-          img: user.img,
-          liked: user.liked,
-          token,
+      });
+    } catch (err) {
+      myError(res, err);
+    }
+  },
+
+  comment: async (req, res) => {
+    const { comment, id } = req.body;
+    try {
+      await Itinerary.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: { comments: { user: req.user._id, comment: comment } },
         },
+        { new: true }
+      );
+      res.json({
+        success: true,
       });
     } catch (err) {
       myError(res, err);

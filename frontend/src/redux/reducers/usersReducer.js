@@ -23,7 +23,6 @@ const usersReducer = (
     case "LOGGED_IN":
       return {
         ...state,
-        userLoggedIn: true,
         user: action.payload,
       };
 

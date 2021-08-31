@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers");
 const itinerariesControllers = require("../controllers/itinerariesControllers");
+const activitiesControllers = require("../controllers/activitiesControllers");
 const usersControllers = require("../controllers/usersController");
 const passport = require("passport");
 const validator = require("../controllers/validator");
-//CAROUSEL (POPULAR CITIES)
+
+// CAROUSEL (POPULAR CITIES)
 
 router.route("/carousel").get(citiesControllers.readCarouselSlides); //Read
 
-//CITIES ROUTES
+// CITIES ROUTES
 
 router
   .route("/cities") //ALL CITIES
@@ -24,7 +26,7 @@ router
   .put(citiesControllers.updateCity) //Update
   .delete(citiesControllers.deleteCity); //Delete
 
-//ITINERARIES ROUTES
+// ITINERARIES ROUTES
 
 router
   .route("/itineraries") //TOTAL ITINERARIES
@@ -46,25 +48,59 @@ router
   .put(itinerariesControllers.updateItinerary) //Update
   .delete(itinerariesControllers.deleteItinerary); //Delete
 
-//USERS ROUTES
+// ACTIVITIES ROUTES
+
 router
-  .route("/users")
-  .get(usersControllers.getUsers)
-  .put(usersControllers.updateUser)
-  .delete(usersControllers.deleteUser);
+  .route("/activities") //TOTAL ACTIVITIES
+  .post(activitiesControllers.createAllActivities) //Create
+  .get(activitiesControllers.readAllActivities) //Update
+  .put(activitiesControllers.updateAllActivities) //Read
+  .delete(activitiesControllers.deleteAllActivities); //Delete
+router
+  .route("/activities/:id") //ACTIVITIES BY ITINERARY
+  .post(activitiesControllers.createActivities) //Create
+  .get(activitiesControllers.readActivities) //Read
+  .put(activitiesControllers.updateActivities) //Update
+  .delete(activitiesControllers.deleteActivities); //Delete
+
+router
+  .route("/activity/:id") //SPECIFIC ACTIVITY
+  .post(activitiesControllers.createActivity) //Create
+  .get(activitiesControllers.readActivity) //Read
+  .put(activitiesControllers.updateActivity) //Update
+  .delete(activitiesControllers.deleteActivity); //Delete
+
+// USERS ROUTES
+
+router
+  .route("/users") //ALL USERS
+  .get(usersControllers.getUsers) //Read
+  .put(usersControllers.updateUser) //Update
+  .delete(usersControllers.deleteUser); //Delete
+
+// POST: SIGN UP AND LOGIN
+
 router.route("/user/signup").post(validator, usersControllers.createUser);
 router.route("/user/login").post(usersControllers.logUser);
+
+// VERIFY TOKEN
 router
   .route("/user/token")
   .get(
     passport.authenticate("jwt", { session: false }),
     usersControllers.verifyToken
   );
+// LIKE
 router
-  .route("/user/liked/:id")
+  .route("/user/like")
+  .put(passport.authenticate("jwt", { session: false }), usersControllers.like);
+
+// COMMENT
+router
+  .route("/user/comment")
   .put(
     passport.authenticate("jwt", { session: false }),
-    usersControllers.itineraryLiked
+    usersControllers.comment
   );
 
 module.exports = router;

@@ -15,26 +15,19 @@ const SignUp = (props) => {
     password: "",
     img: "",
     country: "",
-    google: false,
   });
-  const signUpHandler = async (e) => {
-    let errors = await props.signUp(user);
-    setErrors(errors.map((err) => err.field));
-  };
 
   useEffect(() => {
     props.getCountries();
     // eslint-disable-next-line
   }, []);
 
-  const handleInput = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
+  const signUpHandler = async (e) => {
+    let errors = await props.signUp(user);
+    errors && setErrors(errors.map((err) => err.field));
   };
+
   const responseGoogle = async (response) => {
-    console.log(response.profileObj.googleId);
     let googleUser = {
       first_name: response.profileObj.givenName,
       last_name: response.profileObj.familyName,
@@ -45,6 +38,13 @@ const SignUp = (props) => {
       google: true,
     };
     await props.signUp(googleUser);
+  };
+
+  const handleInput = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
   };
 
   if (props.user) {

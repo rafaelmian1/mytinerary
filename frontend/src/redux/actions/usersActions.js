@@ -119,33 +119,52 @@ const usersActions = {
     };
   },
 
-  itineraryLiked: (bool, id) => {
+  like: (bool, id) => {
     return async (dispatch, getState) => {
       const { token } = getState().users.user;
       try {
-        let response = await axios.put(
-          "http://localhost:4000/api/user/liked/" + id,
-          { bool, id, token },
+        await axios.put(
+          "http://localhost:4000/api/user/like/",
+          { bool, id },
           {
             headers: { Authorization: "Bearer " + token },
           }
         );
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        dispatch({ type: "LOGGED_IN", payload: response.data.user });
         return { success: true };
       } catch (err) {
-        toast.error("You must log in to like an itinerary dumbass", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Session timed out",
+          footer: '<a href="">Why do I have this issue?</a>',
         });
         localStorage.removeItem("user");
         dispatch({ type: "RESET_USER" });
-        return { success: false };
+      }
+    };
+  },
+
+  comment: (comment, id) => {
+    return async (dispatch, getState) => {
+      const { token } = getState().users.user;
+      try {
+        await axios.put(
+          "http://localhost:4000/api/user/comment/",
+          { comment, id },
+          {
+            headers: { Authorization: "Bearer " + token },
+          }
+        );
+        return { success: true };
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Session timed out",
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+        localStorage.removeItem("user");
+        dispatch({ type: "RESET_USER" });
       }
     };
   },

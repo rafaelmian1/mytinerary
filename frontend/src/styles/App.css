@@ -125,7 +125,7 @@ button.error:hover {
   color: #e6e1dd;
 }
 
-#carouselToggler {
+.carouselToggler {
   background: linear-gradient(
     #e6e1dd,
     #e6e1dd,
@@ -514,10 +514,7 @@ label {
     align-items: center;
     width: 100%;
   }
-  .input {
-    width: 90%;
-    font-size: 5vmin;
-  }
+
   .navbar-nav {
     z-index: -2;
     width: 100vw;

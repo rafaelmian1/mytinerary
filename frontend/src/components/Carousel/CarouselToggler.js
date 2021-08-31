@@ -1,11 +1,11 @@
-const CarouselToggler = ({ children }) => {
+const CarouselToggler = ({ children, classList, title }) => {
   return (
     <div
       id="carouselToggler"
-      className="carousel slide text-center"
+      className={"carousel slide " + classList}
       data-bs-ride="carousel"
     >
-      <h2 className="pop">Popular MyTineraries</h2>
+      {title && <h2 className="pop">{title}</h2>}
       {children}
     </div>
   );

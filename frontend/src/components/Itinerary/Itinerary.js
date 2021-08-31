@@ -4,6 +4,8 @@ import LikesAndComments from "./LikesAndComments";
 import MainContent from "./MainContent";
 import PriceAndDuration from "./PriceAndDuration";
 import ItineraryContainer from "./ItineraryContainer";
+import Activities from "./Activities";
+import Comments from "./Comments";
 
 const Itinerary = ({ itinerary, index, ...props }) => {
   return (
@@ -21,14 +23,17 @@ const Itinerary = ({ itinerary, index, ...props }) => {
       <div className="col-12 col-md-7 mt-4 mt-md-0">
         <div className="row">
           <div className="d-flex align-items-center justify-content-between col-12">
-            <Avatar itinerary={itinerary} />
+            <Avatar user={itinerary.user} />
             <LikesAndComments itinerary={itinerary} {...props} />
           </div>
           <MainContent itinerary={itinerary} />
           <PriceAndDuration itinerary={itinerary} />
         </div>
       </div>
-      <Collapse index={index} />
+      <Collapse index={index} itinerary={itinerary} {...props}>
+        <Comments itinerary={itinerary} {...props} />
+        <Activities id={itinerary._id} />
+      </Collapse>
     </ItineraryContainer>
   );
 };

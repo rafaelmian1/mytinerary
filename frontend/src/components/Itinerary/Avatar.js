@@ -1,12 +1,12 @@
-const Avatar = ({ itinerary }) => (
+const Avatar = ({ user }) => (
   <div className="avatar d-flex">
     <div
       className="avatarImg"
       style={{
-        backgroundImage: `url(${itinerary.user.avatar})`,
+        backgroundImage: `url(${user.avatar})`,
       }}
     ></div>
-    <span className="px-2 fs-2 fw-bold">{itinerary.user.name}</span>
+    <span className="px-2 fs-2 fw-bold">{user.name}</span>
   </div>
 );
 
