@@ -40,7 +40,7 @@ const usersActions = {
             showConfirmButton: true,
             timer: 1000,
           });
-          localStorage.setItem("user", JSON.stringify(response.data.user));
+          localStorage.setItem("token", JSON.stringify(response.data.token));
           dispatch({ type: "LOGGED_IN", payload: response.data.user });
         } else {
           response.data.error.forEach((err) => {
@@ -54,7 +54,6 @@ const usersActions = {
               progress: undefined,
             });
           });
-          return response.data.error;
         }
       } catch (err) {
         console.error(err);
@@ -86,7 +85,7 @@ const usersActions = {
             showConfirmButton: false,
             timer: 1500,
           });
-          localStorage.setItem("user", JSON.stringify(response.data.user));
+          localStorage.setItem("token", JSON.stringify(response.data.token));
           dispatch({ type: "LOGGED_IN", payload: response.data.user });
         } else {
           toast.error(
@@ -121,13 +120,15 @@ const usersActions = {
 
   like: (bool, id) => {
     return async (dispatch, getState) => {
-      const { token } = getState().users.user;
       try {
         await axios.put(
           "http://localhost:4000/api/user/like/",
           { bool, id },
           {
-            headers: { Authorization: "Bearer " + token },
+            headers: {
+              Authorization:
+                "Bearer " + JSON.parse(localStorage.getItem("token")),
+            },
           }
         );
         return { success: true };
@@ -138,21 +139,23 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
         dispatch({ type: "RESET_USER" });
       }
     };
   },
 
-  comment: (comment, id) => {
-    return async (dispatch, getState) => {
-      const { token } = getState().users.user;
+  comment: (id, action, comment, newComment) => {
+    return async (dispatch) => {
       try {
         await axios.put(
           "http://localhost:4000/api/user/comment/",
-          { comment, id },
+          { comment, id, action, newComment },
           {
-            headers: { Authorization: "Bearer " + token },
+            headers: {
+              Authorization:
+                "Bearer " + JSON.parse(localStorage.getItem("token")),
+            },
           }
         );
         return { success: true };
@@ -163,7 +166,34 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        dispatch({ type: "RESET_USER" });
+      }
+    };
+  },
+
+  getId: () => {
+    return async (dispatch, getState) => {
+      try {
+        let response = await axios.get(
+          "http://localhost:4000/api/user/id",
+
+          {
+            headers: {
+              Authorization:
+                "Bearer " + JSON.parse(localStorage.getItem("token")),
+            },
+          }
+        );
+        return response.data.id;
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Session timed out",
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+        localStorage.removeItem("token");
         dispatch({ type: "RESET_USER" });
       }
     };
@@ -171,20 +201,26 @@ const usersActions = {
 
   resetUser: () => {
     return (dispatch) => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       dispatch({ type: "RESET_USER" });
     };
   },
 
   validateToken: () => {
     return async (dispatch, getState) => {
-      const { token } = getState().users.user;
       try {
-        await axios.get(
+        let response = await axios.get(
           "http://localhost:4000/api/user/token",
 
-          { headers: { Authorization: "Bearer " + token } }
+          {
+            headers: {
+              Authorization:
+                "Bearer " + JSON.parse(localStorage.getItem("token")),
+            },
+          }
         );
+        response.data.success &&
+          dispatch({ type: "LOGGED_IN", payload: response.data.user });
       } catch (err) {
         Swal.fire({
           icon: "error",
@@ -192,7 +228,7 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
         dispatch({ type: "RESET_USER" });
       }
     };

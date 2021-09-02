@@ -38,7 +38,7 @@ const validator = (req, res, next) => {
       "string.empty": "You must select a country",
       "any.invalid": "You must select a country",
     }),
-    google: joi.boolean().required(),
+    google: joi.boolean().default(false),
   });
   const validation = schema.validate(req.body, { abortEarly: false });
   if (!validation.error) {

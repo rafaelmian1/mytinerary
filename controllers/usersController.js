@@ -14,7 +14,7 @@ const usersControllers = {
     const pw = bcrypt.hashSync(password);
     try {
       if (await User.findOne({ email: email })) {
-        throw new Error("Email already in use, try another one");
+        throw new Error("You're already signed up with that Google Account");
       }
       const newUser = new User({
         first_name,
@@ -39,7 +39,9 @@ const usersControllers = {
         },
       });
     } catch (err) {
-      myError(res, err);
+      err.message.includes("Google")
+        ? res.json({ error: [{ message: err.message }] })
+        : myError(res, err);
     }
   },
 
@@ -90,9 +92,8 @@ const usersControllers = {
         user: {
           first_name: user.first_name,
           img: user.img,
-          id: user._id,
-          token,
         },
+        token,
       });
     } catch (err) {
       myError(res, err);
@@ -100,7 +101,14 @@ const usersControllers = {
   },
 
   verifyToken: async (req, res) => {
-    res.json({ success: true, user: req.user });
+    res.json({
+      success: true,
+      user: { first_name: req.user.first_name, img: req.user.img },
+    });
+  },
+
+  getId: async (req, res) => {
+    res.json({ success: true, id: req.user._id });
   },
 
   like: async (req, res) => {
@@ -128,19 +136,42 @@ const usersControllers = {
   },
 
   comment: async (req, res) => {
-    const { comment, id } = req.body;
-    try {
-      await Itinerary.findOneAndUpdate(
-        { _id: id },
-        {
+    const { id, action, comment, newComment } = req.body;
+    let operation;
+    switch (action) {
+      case "post":
+        operation = {
           $push: { comments: { user: req.user._id, comment: comment } },
-        },
-        { new: true }
+        };
+        break;
+      case "update":
+        operation = {
+          $set: {
+            "comments.$.comment": newComment,
+          },
+        };
+        break;
+      case "delete":
+        operation = {
+          $pull: { comments: { comment: comment } },
+        };
+        break;
+      default:
+        throw new Error();
+    }
+    try {
+      response = await Itinerary.findOneAndUpdate(
+        action === "post" ? { _id: id } : { "comments.comment": comment },
+        operation,
+        {
+          new: true,
+        }
       );
       res.json({
         success: true,
       });
     } catch (err) {
+      console.log("hola");
       myError(res, err);
     }
   },

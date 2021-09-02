@@ -4,3 +4,22 @@ UPDATEAR BASE DE DATOS CON FOTOS HOSTEADAS
 LIMPIAR CONTROLLERS
 DETONAR ESTILOS
 VIDEOWEB
+
+
+MARTES:
+
+CODIGO PRO: ROLES->ADMIN-> CRUD -> CITIES
+                                -> ITINERARIES
+                 ->USER -> LIKE
+                        -> COMMENT
+
+ACTIVITIES EN STORE FETCH ONCE
+VALIDAR CAMPOS DEL SIGN UP LOGIN VACIOS FRONT
+PANEL DE ADMIN-> CRUD-> VALIDATE JOI
+
+----------------------FEATURES-------------------------
+
+CAROUSEL SORT DESDE EL CONTROLLER
+
+
+                                    

@@ -1,11 +1,11 @@
-import Avatar from "./Avatar";
-import Collapse from "./Collapse";
-import LikesAndComments from "./LikesAndComments";
-import MainContent from "./MainContent";
-import PriceAndDuration from "./PriceAndDuration";
-import ItineraryContainer from "./ItineraryContainer";
-import Activities from "./Activities";
-import Comments from "./Comments";
+import Avatar from "./Main/Avatar";
+import Collapse from "./Collapse/Collapse";
+import LikesAndComments from "./Main/LikesAndComments";
+import MainContent from "./Main/MainContent";
+import PriceAndDuration from "./Main/PriceAndDuration";
+import ItineraryContainer from "./Main/ItineraryContainer";
+import Activities from "./Collapse/Activities";
+import Comments from "./Collapse/Comments";
 
 const Itinerary = ({ itinerary, index, ...props }) => {
   return (

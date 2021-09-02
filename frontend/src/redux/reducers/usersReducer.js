@@ -1,7 +1,8 @@
 const usersReducer = (
   state = {
     countries: [],
-    user: JSON.parse(localStorage.getItem("user")),
+    user: null,
+    token: JSON.parse(localStorage.getItem("token")),
   },
   action
 ) => {
@@ -29,7 +30,7 @@ const usersReducer = (
     case "RESET_USER":
       return {
         ...state,
-        user: JSON.parse(localStorage.getItem("user")),
+        user: null,
       };
     default:
       return state;

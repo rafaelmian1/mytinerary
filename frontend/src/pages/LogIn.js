@@ -13,6 +13,7 @@ const LogIn = (props) => {
     google: false,
   });
   const responseGoogle = async (response) => {
+    if (response.error) return false;
     let googleUser = {
       email: response.profileObj.email,
       password: response.profileObj.googleId,

@@ -15,68 +15,24 @@ router.route("/carousel").get(citiesControllers.readCarouselSlides); //Read
 
 router
   .route("/cities") //ALL CITIES
-  .post(citiesControllers.createCities) //Create
-  .get(citiesControllers.readCities) //Read
-  .put(citiesControllers.updateCities) //Update
-  .delete(citiesControllers.deleteCities); //Delete
+  .get(citiesControllers.readCities); //Read
 router
   .route("/city/:id") //SPECIFIC CITY
-  .post(citiesControllers.createCity) //Create
-  .get(citiesControllers.readCity) //Read
-  .put(citiesControllers.updateCity) //Update
-  .delete(citiesControllers.deleteCity); //Delete
+  .get(citiesControllers.readCity); //Read
 
 // ITINERARIES ROUTES
 
 router
-  .route("/itineraries") //TOTAL ITINERARIES
-  .post(itinerariesControllers.createAllItineraries) //Create
-  .get(itinerariesControllers.readAllItineraies) //Update
-  .put(itinerariesControllers.updateAllItineraries) //Read
-  .delete(itinerariesControllers.deleteAllItineraries); //Delete
-router
   .route("/itineraries/:id") //ITINERARIES BY CITY
-  .post(itinerariesControllers.createItineraries) //Create
-  .get(itinerariesControllers.readItineraries) //Read
-  .put(itinerariesControllers.updateItineraries) //Update
-  .delete(itinerariesControllers.deleteItineraries); //Delete
-
-router
-  .route("/itinerary/:id") //SPECIFIC ITINERARY
-  .post(itinerariesControllers.createItinerary) //Create
-  .get(itinerariesControllers.readItinerary) //Read
-  .put(itinerariesControllers.updateItinerary) //Update
-  .delete(itinerariesControllers.deleteItinerary); //Delete
+  .get(itinerariesControllers.readItineraries); //Read
 
 // ACTIVITIES ROUTES
 
 router
-  .route("/activities") //TOTAL ACTIVITIES
-  .post(activitiesControllers.createAllActivities) //Create
-  .get(activitiesControllers.readAllActivities) //Update
-  .put(activitiesControllers.updateAllActivities) //Read
-  .delete(activitiesControllers.deleteAllActivities); //Delete
-router
   .route("/activities/:id") //ACTIVITIES BY ITINERARY
-  .post(activitiesControllers.createActivities) //Create
-  .get(activitiesControllers.readActivities) //Read
-  .put(activitiesControllers.updateActivities) //Update
-  .delete(activitiesControllers.deleteActivities); //Delete
-
-router
-  .route("/activity/:id") //SPECIFIC ACTIVITY
-  .post(activitiesControllers.createActivity) //Create
-  .get(activitiesControllers.readActivity) //Read
-  .put(activitiesControllers.updateActivity) //Update
-  .delete(activitiesControllers.deleteActivity); //Delete
+  .get(activitiesControllers.readActivities); //Read
 
 // USERS ROUTES
-
-router
-  .route("/users") //ALL USERS
-  .get(usersControllers.getUsers) //Read
-  .put(usersControllers.updateUser) //Update
-  .delete(usersControllers.deleteUser); //Delete
 
 // POST: SIGN UP AND LOGIN
 
@@ -89,6 +45,15 @@ router
   .get(
     passport.authenticate("jwt", { session: false }),
     usersControllers.verifyToken
+  );
+
+//GET ID
+
+router
+  .route("/user/id")
+  .get(
+    passport.authenticate("jwt", { session: false }),
+    usersControllers.getId
   );
 // LIKE
 router

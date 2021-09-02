@@ -30,7 +30,7 @@ const Carousel = (props) => {
       title={"Popular MyTineraries"}
     >
       <CarouselIndicators number={3} />
-      <div className="carousel-inner flex-grow-1">
+      <div className="carousel-inner">
         {props.slides.map((slide, index) => (
           <CarouselItem home={true} index={index} key={index}>
             {slide.map((city) => {

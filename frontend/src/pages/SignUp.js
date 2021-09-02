@@ -28,6 +28,7 @@ const SignUp = (props) => {
   };
 
   const responseGoogle = async (response) => {
+    if (response.error) return false;
     let googleUser = {
       first_name: response.profileObj.givenName,
       last_name: response.profileObj.familyName,

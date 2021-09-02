@@ -73,8 +73,8 @@ const itinerariesControllers = {
     try {
       let itineraries = await Itinerary.find({ city: req.params.id }).populate({
         path: "comments",
-        populate: { path: "user", model: "user", select: "first_name img" },
-      }); //select: "city"
+        populate: { path: "user", model: "user", select: "first_name img _id" },
+      });
       res.json({ success: true, response: itineraries });
     } catch (err) {
       myError(res, err);
@@ -128,9 +128,6 @@ const itinerariesControllers = {
   readItinerary: async (req, res) => {
     try {
       let itinerary = await Itinerary.findOne({ _id: req.params.id });
-      // .populate(
-      //   "city"
-      // );
       if (itinerary) {
         res.json({ success: true, response: itinerary });
       } else {

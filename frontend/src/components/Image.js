@@ -21,7 +21,7 @@ const Image = ({ image, card, carousel, act, children }) => {
         id={image.city}
         style={{
           backgroundImage: `url(${image.img})`,
-          height: "40vh",
+          height: "50vh",
         }}
       >
         <div className="description">
