@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import usersActions from "../../../redux/actions/usersActions";
 import EditDeleteButtons from "./EditDeleteButtons";
 
-const Comment = ({ comm, id, ...props }) => {
+const Comment = ({ comm, id, userId, ...props }) => {
   const [com, setCom] = useState(comm.comment);
   const [comment, setComment] = useState(comm.comment);
   const [editConfirm, setEditConfirm] = useState(false);
@@ -27,7 +27,7 @@ const Comment = ({ comm, id, ...props }) => {
   };
 
   return (
-    <div ref={componentRef}>
+    <div ref={componentRef} className="my-2">
       {comm && (
         <div className="avatar d-flex">
           <div
@@ -35,17 +35,21 @@ const Comment = ({ comm, id, ...props }) => {
             style={{
               backgroundImage: `url(${comm.user.img})`,
               backgroundSize: "contain",
-              height: "50px",
-              width: "50px",
+              height: "30px",
+              width: "30px",
             }}
           ></div>
-          <span className="px-2 fs-5 fw-bold">{comm.user.first_name}</span>
+          <span className="px-2 fs-5 fw-bold">
+            {comm.user.first_name + " " + comm.user.last_name}
+          </span>
         </div>
       )}
       <div className="w-100 d-flex justify-content-between">
         <input
           type="text"
-          className="input text-start"
+          className={`${
+            userId === comm.user._id ? "inputUser" : "input"
+          } text-start my-2 px-2`}
           disabled
           ref={commentRef}
           style={{
@@ -65,7 +69,7 @@ const Comment = ({ comm, id, ...props }) => {
           }}
         />
         <EditDeleteButtons
-          userId={comm.user._id}
+          authorized={comm.user._id === userId}
           functions={[editConfirmButton, deleteComment]}
         />
       </div>

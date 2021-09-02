@@ -2,7 +2,7 @@ const usersReducer = (
   state = {
     countries: [],
     user: null,
-    token: JSON.parse(localStorage.getItem("token")),
+    token: JSON.parse(localStorage.getItem("tokenMyTinerary")),
   },
   action
 ) => {
@@ -22,12 +22,18 @@ const usersReducer = (
           .filter((country) => country.name.length < 25),
       };
     case "LOGGED_IN":
+      !state.token &&
+        localStorage.setItem(
+          "tokenMyTinerary",
+          JSON.stringify(action.payload.token)
+        );
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
       };
 
     case "RESET_USER":
+      localStorage.removeItem("tokenMyTinerary");
       return {
         ...state,
         user: null,

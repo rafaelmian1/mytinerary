@@ -32,11 +32,11 @@ const usersControllers = {
       res.json({
         success: true,
         user: {
-          first_name: newUser.first_name,
-          img: newUser.img,
-          id: newUser._id,
-          token,
+          first_name: first_name,
+          last_name: last_name,
+          img: img,
         },
+        token,
       });
     } catch (err) {
       err.message.includes("Google")
@@ -91,6 +91,7 @@ const usersControllers = {
         success: true,
         user: {
           first_name: user.first_name,
+          last_name: user.last_name,
           img: user.img,
         },
         token,
@@ -103,7 +104,11 @@ const usersControllers = {
   verifyToken: async (req, res) => {
     res.json({
       success: true,
-      user: { first_name: req.user.first_name, img: req.user.img },
+      user: {
+        first_name: req.user.first_name,
+        last_name: req.user.last_name,
+        img: req.user.img,
+      },
     });
   },
 

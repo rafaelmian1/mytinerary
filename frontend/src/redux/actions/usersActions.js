@@ -32,6 +32,7 @@ const usersActions = {
           "http://localhost:4000/api/user/signup",
           data
         );
+        console.log(response.data);
         if (response.data.success) {
           Swal.fire({
             position: "top-end",
@@ -40,8 +41,7 @@ const usersActions = {
             showConfirmButton: true,
             timer: 1000,
           });
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          dispatch({ type: "LOGGED_IN", payload: response.data.user });
+          dispatch({ type: "LOGGED_IN", payload: response.data });
         } else {
           response.data.error.forEach((err) => {
             toast.error(err.message, {
@@ -85,8 +85,7 @@ const usersActions = {
             showConfirmButton: false,
             timer: 1500,
           });
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          dispatch({ type: "LOGGED_IN", payload: response.data.user });
+          dispatch({ type: "LOGGED_IN", payload: response.data });
         } else {
           toast.error(
             response.data.response.includes("Google")
@@ -127,7 +126,7 @@ const usersActions = {
           {
             headers: {
               Authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("token")),
+                "Bearer " + JSON.parse(localStorage.getItem("tokenMyTinerary")),
             },
           }
         );
@@ -139,7 +138,7 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("token");
+
         dispatch({ type: "RESET_USER" });
       }
     };
@@ -154,7 +153,7 @@ const usersActions = {
           {
             headers: {
               Authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("token")),
+                "Bearer " + JSON.parse(localStorage.getItem("tokenMyTinerary")),
             },
           }
         );
@@ -166,7 +165,7 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("token");
+
         dispatch({ type: "RESET_USER" });
       }
     };
@@ -181,7 +180,7 @@ const usersActions = {
           {
             headers: {
               Authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("token")),
+                "Bearer " + JSON.parse(localStorage.getItem("tokenMyTinerary")),
             },
           }
         );
@@ -193,7 +192,6 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("token");
         dispatch({ type: "RESET_USER" });
       }
     };
@@ -201,7 +199,6 @@ const usersActions = {
 
   resetUser: () => {
     return (dispatch) => {
-      localStorage.removeItem("token");
       dispatch({ type: "RESET_USER" });
     };
   },
@@ -209,18 +206,14 @@ const usersActions = {
   validateToken: () => {
     return async (dispatch, getState) => {
       try {
-        let response = await axios.get(
-          "http://localhost:4000/api/user/token",
-
-          {
-            headers: {
-              Authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("token")),
-            },
-          }
-        );
+        let response = await axios.get("http://localhost:4000/api/user/token", {
+          headers: {
+            Authorization:
+              "Bearer " + JSON.parse(localStorage.getItem("tokenMyTinerary")),
+          },
+        });
         response.data.success &&
-          dispatch({ type: "LOGGED_IN", payload: response.data.user });
+          dispatch({ type: "LOGGED_IN", payload: response.data });
       } catch (err) {
         Swal.fire({
           icon: "error",
@@ -228,7 +221,6 @@ const usersActions = {
           text: "Session timed out",
           footer: '<a href="">Why do I have this issue?</a>',
         });
-        localStorage.removeItem("token");
         dispatch({ type: "RESET_USER" });
       }
     };

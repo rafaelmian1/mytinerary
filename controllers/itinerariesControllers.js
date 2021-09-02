@@ -73,7 +73,11 @@ const itinerariesControllers = {
     try {
       let itineraries = await Itinerary.find({ city: req.params.id }).populate({
         path: "comments",
-        populate: { path: "user", model: "user", select: "first_name img _id" },
+        populate: {
+          path: "user",
+          model: "user",
+          select: "first_name last_name img _id",
+        },
       });
       res.json({ success: true, response: itineraries });
     } catch (err) {

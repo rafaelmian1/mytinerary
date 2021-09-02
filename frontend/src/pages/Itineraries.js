@@ -7,6 +7,7 @@ import Loader from "../components/Hero/Loader";
 import Itinerary from "../components/Itinerary/Itinerary";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 import citiesActions from "../redux/actions/citiesActions";
+import { ToastContainer } from "react-toastify";
 
 const Itineraries = (props) => {
   // window.scrollTo(0, 0);
@@ -59,6 +60,17 @@ const Itineraries = (props) => {
           </Link>
         </button>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

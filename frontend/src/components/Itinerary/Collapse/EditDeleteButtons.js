@@ -1,16 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import usersActions from "../../../redux/actions/usersActions";
-
-const EditDeleteButtons = ({ userId, functions, ...props }) => {
-  const [authorized, setAuthorized] = useState(null);
-  useEffect(() => {
-    props.user && getUserId();
-    // eslint-disable-next-line
-  }, []);
-  const getUserId = async () => {
-    setAuthorized((await props.getId()) === userId);
-  };
+const EditDeleteButtons = ({ authorized, functions }) => {
   return (
     <>
       {authorized && (
@@ -45,13 +33,4 @@ const EditDeleteButtons = ({ userId, functions, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.users.user,
-  };
-};
-const mapDispatchToProps = {
-  getId: usersActions.getId,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditDeleteButtons);
+export default EditDeleteButtons;

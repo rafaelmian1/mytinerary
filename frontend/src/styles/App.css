@@ -207,7 +207,8 @@ label {
   color: #885e44;
   font-size: 6vmin;
 }
-.input {
+.input,
+.inputUser {
   text-align: center;
   font-size: 3vmin;
   padding: 0.5rem 1rem;
@@ -226,6 +227,11 @@ label {
   color: #e6e1dd;
   font-weight: normal;
 }
+
+.inputUser {
+  background-color: #aa6044;
+}
+
 .blurred {
   border: 2px solid red;
 }

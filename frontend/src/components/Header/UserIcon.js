@@ -5,7 +5,8 @@ import usersActions from "../../redux/actions/usersActions";
 
 const UserIcon = (props) => {
   useEffect(() => {
-    JSON.parse(localStorage.getItem("token")) && props.validateToken();
+    JSON.parse(localStorage.getItem("tokenMyTinerary")) &&
+      props.validateToken();
     // eslint-disable-next-line
   }, []);
 

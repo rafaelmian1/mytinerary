@@ -94,13 +94,8 @@ const LogIn = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userLoggedIn: state.users.userLoggedIn,
-  };
-};
 const mapDispatchToProps = {
   logIn: usersActions.logIn,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+export default connect(null, mapDispatchToProps)(LogIn);
