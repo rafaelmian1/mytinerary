@@ -29,7 +29,7 @@ const usersActions = {
     return async (dispatch) => {
       try {
         let response = await axios.post(
-          "https://my-tinerary-mian.herokuapp.com/api/user/signup",
+          "http://localhost:4000/api/user/signup",
           data
         );
         if (response.data.success) {
@@ -74,7 +74,7 @@ const usersActions = {
     return async (dispatch) => {
       try {
         let response = await axios.post(
-          "https://my-tinerary-mian.herokuapp.com/api/user/login",
+          "http://localhost:4000/api/user/login",
           data
         );
         if (response.data.success) {
@@ -121,7 +121,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       try {
         await axios.put(
-          "https://my-tinerary-mian.herokuapp.com/api/user/like/",
+          "http://localhost:4000/api/user/like/",
           { bool, id },
           {
             headers: {
@@ -148,7 +148,7 @@ const usersActions = {
     return async (dispatch) => {
       try {
         await axios.put(
-          "https://my-tinerary-mian.herokuapp.com/api/user/comment/",
+          "http://localhost:4000/api/user/comment/",
           { comment, id, action, newComment },
           {
             headers: {
@@ -175,7 +175,7 @@ const usersActions = {
     return async (dispatch, getState) => {
       try {
         let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/user/id",
+          "http://localhost:4000/api/user/id",
 
           {
             headers: {
@@ -207,14 +207,11 @@ const usersActions = {
     return async (dispatch, getState) => {
       const token = JSON.parse(localStorage.getItem("tokenMyTinerary"));
       try {
-        let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/user/token",
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        let response = await axios.get("http://localhost:4000/api/user/token", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
         response.data.success &&
           dispatch({ type: "LOGGED_IN", payload: { ...response.data, token } });
       } catch (err) {

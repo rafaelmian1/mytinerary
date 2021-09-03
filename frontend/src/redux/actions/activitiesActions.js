@@ -6,7 +6,7 @@ const activitiesActions = {
     return async (dispatch, getState) => {
       try {
         let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/activities/" + id
+          "http://localhost:4000/api/activities/" + id
         );
         response.data.success &&
           dispatch({ type: "GET_ACTIVITIES", payload: response.data.response });

@@ -6,8 +6,7 @@ const itinerariesActions = {
     return async (dispatch) => {
       try {
         let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/itineraries/" +
-            props.match.params.id
+          "http://localhost:4000/api/itineraries/" + props.match.params.id
         );
         if (!response.data.success) {
           throw new Error(response.data.response);
