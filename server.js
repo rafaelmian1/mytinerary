@@ -1,12 +1,11 @@
 const express = require("express");
-const cors = require("cors");
 require("dotenv").config();
+const cors = require("cors");
 require("./config/passport");
-require("./config/database");
-const path = require("path");
-
 const router = require("./routes/index");
 const adminRouter = require("./routes/adminRoutes");
+require("./config/database");
+const path = require("path");
 
 const app = express();
 //Middelwares
