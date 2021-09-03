@@ -59,7 +59,7 @@ const Comments = ({ itinerary, userId, ...props }) => {
           className="navbar-nav-scroll"
           ref={autoScroll}
         >
-          <h2 className="inputComment fs-3">Comments</h2>
+          <h2 className="inputComment fs-3 mt-1">Comments</h2>
           {newComments.map((comm, index) => (
             <Comment comm={comm} id={_id} key={index} userId={userId} />
           ))}
@@ -82,7 +82,7 @@ const Comments = ({ itinerary, userId, ...props }) => {
                 type="text"
                 // disabled={!props.user ? true : false}
                 placeholder="Leave us a comment"
-                className="inputComment m-0"
+                className="inputComment m-1"
                 value={com}
                 onKeyPress={(e) => handleComment(e, true)}
                 onChange={(e) => setCom(e.target.value)}
