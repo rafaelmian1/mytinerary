@@ -1,23 +1,31 @@
 import usersActions from "../../../redux/actions/usersActions";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
+import "../../../styles/itineraries.css";
+import { toast } from "react-toastify";
 
-const LikesAndComments = ({ itinerary, index, ...props }) => {
+const LikesAndComments = ({ itinerary, userId, index, ...props }) => {
   const [stopper, setStopper] = useState(true);
   const [likes, setLikes] = useState(itinerary.likes.likes);
   const [liked, setLiked] = useState(false);
-
   useEffect(() => {
-    JSON.parse(localStorage.getItem("token")) &&
-      setLiked(itinerary.likes.users.includes(setId()));
+    setLiked(itinerary.likes.users.includes(userId));
     // eslint-disable-next-line
-  }, []);
-  const setId = async () => {
-    return await props.getId();
-  };
-
+  }, [userId]);
   const clickHandler = async (bool) => {
     if (!stopper) {
+      return false;
+    }
+    if (!props.user) {
+      toast.error("You must be logged in to like the itineraries", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       return false;
     }
     setStopper(false);
@@ -34,24 +42,34 @@ const LikesAndComments = ({ itinerary, index, ...props }) => {
       setStopper(true);
     }
   };
+
   return (
-    <div style={{ height: "50px", width: "50px" }}>
+    <div>
       {liked ? (
-        <button
-          className="likes"
+        // eslint-disable-next-line
+        <a
+          className="like-button liked"
           onClick={() => stopper && clickHandler(!liked)}
         >
-          {likes} ❤️
-        </button>
+          <span className="like-icon">
+            <div className="heart-animation-1"></div>
+            <div className="heart-animation-2"></div>
+          </span>
+          {likes}
+        </a>
       ) : (
-        <button
-          className="likes"
-          onClick={() => props.user && stopper && clickHandler(!liked)}
+        // eslint-disable-next-line
+        <a
+          className="like-button"
+          onClick={() => stopper && clickHandler(!liked)}
         >
-          {likes} 🤍
-        </button>
+          <span className="like-icon">
+            <div className="heart-animation-1"></div>
+            <div className="heart-animation-2"></div>
+          </span>
+          {likes}
+        </a>
       )}
-      <div>{itinerary.comments.length} &#128172;</div>
     </div>
   );
 };
@@ -64,7 +82,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   like: usersActions.like,
-  getId: usersActions.getId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikesAndComments);

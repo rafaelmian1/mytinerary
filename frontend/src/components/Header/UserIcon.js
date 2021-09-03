@@ -1,15 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import usersActions from "../../redux/actions/usersActions";
 
 const UserIcon = (props) => {
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     JSON.parse(localStorage.getItem("tokenMyTinerary")) &&
       props.validateToken();
+    return () => setClicked(false);
     // eslint-disable-next-line
   }, []);
-
   return (
     <div className="dropdown d-none d-sm-block mx-5">
       {!props.user ? (
@@ -19,14 +21,14 @@ const UserIcon = (props) => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
             type="button"
+            onClick={() => setClicked(!clicked)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="50"
               height="50"
-              style={{ marginRight: "1rem" }}
               fill="currentColor"
-              className="bi bi-person-circle mt-2"
+              className={`bi bi-person-circle ${clicked && "clicked"}`}
               viewBox="0 0 16 16"
             >
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -41,12 +43,18 @@ const UserIcon = (props) => {
             aria-labelledby="button"
           >
             <li>
-              <Link to="/signup" onClick={() => window.scrollTo(0, 0)}>
+              <Link
+                to="/signup"
+                onClick={() => setClicked(!clicked) && window.scrollTo(0, 0)}
+              >
                 <span className="dropdown-item">Sign up</span>
               </Link>
             </li>
             <li>
-              <Link to="/login" onClick={() => window.scrollTo(0, 0)}>
+              <Link
+                to="/login"
+                onClick={() => setClicked(!clicked) && window.scrollTo(0, 0)}
+              >
                 <span className="dropdown-item">Log in</span>
               </Link>
             </li>
@@ -61,7 +69,7 @@ const UserIcon = (props) => {
             type="button"
           >
             <div className="avatar d-none d-sm-flex">
-              <span className="px-2 fs-2 fw-bold">
+              <span className="px-2 fs-2 fw-bold text-light">
                 {"Hi " + props.user.first_name + "!"}
               </span>
               <div
@@ -71,8 +79,8 @@ const UserIcon = (props) => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  width: "80px",
-                  height: "80px",
+                  width: "75px",
+                  height: "75px",
                 }}
               ></div>
             </div>

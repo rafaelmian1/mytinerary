@@ -1,8 +1,8 @@
-const CarouselToggler = ({ children, classList, title }) => {
+const CarouselToggler = ({ children, classList, title, id }) => {
   return (
     <div
-      id="carouselToggler"
-      className={"carousel slide " + classList}
+      id={id}
+      className={"carousel slide carousel-dark " + classList}
       data-bs-ride="carousel"
     >
       {title && <h2 className="pop">{title}</h2>}

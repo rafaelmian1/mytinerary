@@ -2,22 +2,27 @@ import { useRef, useState } from "react";
 import { connect } from "react-redux";
 import activitiesActions from "../../../redux/actions/activitiesActions";
 import itinerariesActions from "../../../redux/actions/itinerariesActions";
+import Loader from "../../Hero/Loader";
 
 const Collapse = ({ index, itinerary, children, ...props }) => {
   const [click, setClick] = useState(true);
+  const [loading, setLoading] = useState(true);
   let fetchOnce = useRef(false);
-  const handleClick = () => {
+  const handleClick = async () => {
     setClick(!click);
-    !fetchOnce.current && props.getActivities(itinerary._id);
-    !fetchOnce.current && props.getItineraries(props);
+    if (!fetchOnce.current) await props.getActivities(itinerary._id);
+    // !fetchOnce.current && props.getItineraries(props);
+    setLoading(false);
     fetchOnce.current = true;
   };
   return (
     <>
-      <div className="collapse w-100 mt-3" id={"collapse" + index}>
-        <div className="card card-body text-dark">
-          {!children ? (
-            <h2>Under Construction</h2>
+      <div className="collapse w-100 mt-3 p-0" id={"collapse" + index}>
+        <div className="card card-body text-dark p-0 p-md-1">
+          {loading ? (
+            <Loader />
+          ) : !children ? (
+            <h2>There's not activities for this itinerary yet! :(</h2>
           ) : (
             <div
               className="row"

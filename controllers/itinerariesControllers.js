@@ -110,7 +110,8 @@ const itinerariesControllers = {
   //SPECIFIC ITINERARY
 
   createItinerary: async (req, res) => {
-    const { img, title, description, hashtags, price, duration } = req.body;
+    const { img, title, description, hashtags, price, duration, user } =
+      req.body;
     try {
       const newItinerary = new Itinerary({
         img,

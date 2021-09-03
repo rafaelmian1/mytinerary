@@ -1,3 +1,4 @@
+import "../styles/home.css";
 import { useEffect } from "react";
 import Carousel from "../components/Carousel/Carousel.js";
 import Hero from "../components/Hero/Hero.js";

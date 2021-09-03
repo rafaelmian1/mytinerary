@@ -1,0 +1,114 @@
+.contenedorCities {
+  background: linear-gradient(
+    #885e44,
+    #e6e1dd,
+    #e6e1dd,
+    #e6e1dd,
+    #b9a698,
+    #b9a698
+  );
+  background-color: #13161a;
+}
+
+.cities {
+  flex-grow: 1;
+  padding: 10vh 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  color: #885e44;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.input {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  margin: 1vh 0 4vh;
+  border: none;
+  border-radius: 20px;
+  width: 350px;
+  background-color: #885e44;
+  outline: none;
+  color: #e6e1dd;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.input::placeholder {
+  color: #e6e1dd;
+  font-weight: normal;
+}
+
+.cityName {
+  text-align: center;
+  color: white;
+  font-size: 5rem;
+  font-weight: bold;
+  text-shadow: 3px 3px 3px black;
+}
+.grid {
+  gap: 5px;
+  width: 80%;
+  min-height: 60vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 35vh;
+}
+.cityCard {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white !important;
+  box-shadow: rgba(0, 0, 0, 0.494) 0px 5px 15px,
+    rgba(0, 0, 0, 0.501) 0px -5px 15px;
+}
+
+.cityCard:hover {
+  background-color: rgba(33, 37, 41, 0.775);
+  transform: scale(1.015);
+  transition: 500ms;
+}
+.itemFiltered {
+  grid-column-start: span 4;
+  grid-row-start: span 2;
+}
+
+.item:nth-child(6n-5) {
+  grid-row-start: span 2;
+  grid-column-start: span 2;
+}
+
+.item:nth-child(6n-4),
+.item:nth-child(6n-3) {
+  grid-column-start: span 2;
+}
+.item:nth-child(6n),
+.item:nth-child(6n-2) {
+  grid-column-start: span 2;
+}
+
+.item:nth-child(6n-1) {
+  grid-row-start: span 2;
+  grid-column-start: span 2;
+}
+
+@media screen and (max-width: 576px) {
+  .item:nth-child(n) {
+    grid-column-start: span 4;
+    grid-row-start: span 1;
+  }
+  .grid {
+    gap: 3px;
+    width: 100%;
+  }
+  .cityName {
+    font-size: 3rem;
+  }
+}

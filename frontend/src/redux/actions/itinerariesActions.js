@@ -14,20 +14,15 @@ const itinerariesActions = {
         dispatch({ type: "GET_ITINERARIES", payload: response.data.response });
         return { success: true };
       } catch (err) {
-        toast.error(
-          err.message.includes("error")
-            ? "Itinerary not found"
-            : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.error("We're doing some maintenance, please try later!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         console.error(err.message);
       }
     };

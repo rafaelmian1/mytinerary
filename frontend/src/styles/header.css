@@ -1,0 +1,58 @@
+header {
+  z-index: 2;
+  background-color: transparent;
+  padding-top: 1rem;
+}
+.dropdown-menu {
+  text-align: center;
+  width: 10rem !important;
+  background-color: #f8f9fa !important;
+  padding: 0 !important;
+}
+
+header * a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+header * a:hover,
+header * a.active {
+  text-decoration: none !important;
+  color: #f8f9fa;
+  transition: 200ms;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #f8f9fa;
+}
+.bi-person-circle {
+  margin-top: 1.2rem;
+  margin-right: 1rem;
+  color: #212529;
+}
+
+.bi-person-circle:hover {
+  color: #f8f9fa;
+  transition: 200ms;
+  transform: scale(1.1);
+}
+
+.clicked {
+  color: #f8f9fa;
+  transform: scale(1.1);
+}
+
+.dropdown-item {
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+  color: #212529 !important;
+  background-color: transparent !important;
+}
+.dropdown-item:hover {
+  cursor: pointer !important;
+  border-bottom: 2px solid #212529;
+  border-top: 2px solid #212529;
+  background-color: #e6e1dd !important;
+}

@@ -1,0 +1,76 @@
+.googleButton {
+  background-color: rgb(255, 255, 255) !important;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px,
+    rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+  border-radius: 2px;
+  font-weight: bold !important;
+  border: 2px solid transparent !important;
+  border-radius: 35px !important;
+  display: flex;
+  align-items: center;
+  /* padding: 0 3px 6px !important; */
+}
+
+.googleButton div {
+  display: none;
+}
+
+.googleButton span {
+  font-weight: bold !important;
+  padding: 5px 10px !important;
+  font-size: 1.5rem !important;
+  color: #212529 !important;
+}
+.inputSignUp {
+  text-align: center;
+  font-size: 15px;
+  padding: 0.3rem 1rem;
+  margin: 1vh 0 4vh;
+  border: 1px solid #212529;
+  border-radius: 20px;
+  min-width: 370px;
+  background-color: white;
+  outline: none;
+  color: #212529;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.inputSignUp::placeholder {
+  color: #212529;
+  font-weight: bold;
+}
+.blurred {
+  border: 2px solid red;
+}
+h4 a {
+  margin-left: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #212529e2;
+}
+
+h4 a:hover {
+  text-decoration: none !important;
+  color: #212529;
+  transition: 200ms;
+}
+
+.form {
+  font-size: 2.4rem;
+  color: #212529;
+}
+.formCont {
+  background-color: #f8f9fa69;
+  flex-grow: 1;
+  padding: 10vh 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.494) 0px 5px 15px,
+    rgba(0, 0, 0, 0.501) 0px -5px 15px;
+}

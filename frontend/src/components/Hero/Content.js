@@ -6,13 +6,13 @@ const Content = () => (
       <h1 className="brand">
         My<span className="tinerary">Tinerary</span>
       </h1>
-      <h2 className="px-4 mb-5" style={{ fontStyle: "italic" }}>
+      <h2 className="px-4 mb-5 sub" style={{ fontStyle: "italic" }}>
         Find your perfect trip, designed by insiders who know and love their
         cities!
       </h2>
       <button type="button" className="px-4 gap-3 go">
         <Link to="/cities">
-          <span className="link">Explore!</span>
+          <span className="callToAction">Explore!</span>
         </Link>
       </button>
     </div>

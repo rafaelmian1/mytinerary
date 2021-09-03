@@ -1,3 +1,4 @@
+import "../styles/cities.css";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
@@ -59,7 +60,7 @@ const Cities = (props) => {
         </div>
         <button type="button" className="px-4 gap-3 mt-5 go">
           <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-            <span className="link">Back to Home</span>
+            <span className="text-dark fs-4">Back to Home</span>
           </Link>
         </button>
       </div>

@@ -19,7 +19,6 @@ const Comment = ({ comm, id, userId, ...props }) => {
     editConfirm && props.comment(id, "update", comment, com);
     setEditConfirm(!editConfirm);
   };
-
   const deleteComment = (e) => {
     commentRef.current.className = "d-none";
     componentRef.current.className = "d-none";
@@ -34,9 +33,10 @@ const Comment = ({ comm, id, userId, ...props }) => {
             className="avatarImg"
             style={{
               backgroundImage: `url(${comm.user.img})`,
-              backgroundSize: "contain",
-              height: "30px",
-              width: "30px",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              height: "45px",
+              width: "45px",
             }}
           ></div>
           <span className="px-2 fs-5 fw-bold">
@@ -44,34 +44,32 @@ const Comment = ({ comm, id, userId, ...props }) => {
           </span>
         </div>
       )}
-      <div className="w-100 d-flex justify-content-between">
-        <input
-          type="text"
-          className={`${
-            userId === comm.user._id ? "inputUser" : "input"
-          } text-start my-2 px-2`}
-          disabled
-          ref={commentRef}
-          style={{
-            width: "80%",
-            padding: "3px",
-            margin: "0",
-            fontSize: "1rem",
-          }}
-          value={com}
-          onChange={() => setCom(commentRef.current.value)}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              e.target.disabled = true;
-              e.target.className = "input text-start";
-              props.comment(id, "update", comment, com);
-            }
-          }}
-        />
-        <EditDeleteButtons
-          authorized={comm.user._id === userId}
-          functions={[editConfirmButton, deleteComment]}
-        />
+      <div className="w-100 d-flex align-items-center">
+        <div className="col-9 col-lg-10">
+          <input
+            type="text"
+            className={`${
+              userId === comm.user._id ? "inputUser" : "inputComment"
+            } text-start my-2 px-2`}
+            disabled
+            ref={commentRef}
+            value={com}
+            onChange={() => setCom(commentRef.current.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                e.target.disabled = true;
+                e.target.className = "input text-start";
+                props.comment(id, "update", comment, com);
+              }
+            }}
+          />
+        </div>
+        <div className="col-3 col-lg-2">
+          <EditDeleteButtons
+            authorized={comm.user._id === userId}
+            functions={[editConfirmButton, deleteComment]}
+          />
+        </div>
       </div>
     </div>
   );

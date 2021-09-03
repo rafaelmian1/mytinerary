@@ -2,7 +2,7 @@ const usersReducer = (
   state = {
     countries: [],
     user: null,
-    token: JSON.parse(localStorage.getItem("tokenMyTinerary")),
+    token: null,
   },
   action
 ) => {

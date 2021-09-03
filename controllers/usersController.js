@@ -109,6 +109,7 @@ const usersControllers = {
         last_name: req.user.last_name,
         img: req.user.img,
       },
+      token: req.body.token,
     });
   },
 

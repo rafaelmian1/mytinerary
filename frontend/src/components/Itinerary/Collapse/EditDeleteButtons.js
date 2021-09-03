@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const EditDeleteButtons = ({ authorized, functions }) => {
   return (
     <>
@@ -9,7 +11,7 @@ const EditDeleteButtons = ({ authorized, functions }) => {
             height="26"
             style={{ cursor: "pointer" }}
             fill="currentColor"
-            className="bi bi-pen-fill"
+            className="bi bi-pen-fill mx-2"
             viewBox="0 0 16 16"
             onClick={functions[0]}
           >
@@ -23,7 +25,19 @@ const EditDeleteButtons = ({ authorized, functions }) => {
             fill="currentColor"
             className="bi bi-trash-fill"
             viewBox="0 0 16 16"
-            onClick={functions[1]}
+            onClick={() =>
+              Swal.fire({
+                title: "Are you sure?",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  functions[1]();
+                }
+              })
+            }
           >
             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
           </svg>

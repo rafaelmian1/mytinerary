@@ -4,10 +4,11 @@ const Banner = ({ img, text }) => {
       <div
         style={{
           backgroundImage: `url(${img})`,
-          height: "67vh",
+          border: "4px solid white",
         }}
-        className="d-flex w-100 my-4 foto"
+        className="d-flex w-100 my-4 foto banner"
       ></div>
+
       {text && <h1 className="welcome">{text.toUpperCase()}</h1>}
     </>
   );

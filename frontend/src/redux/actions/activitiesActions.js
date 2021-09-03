@@ -8,9 +8,9 @@ const activitiesActions = {
         let response = await axios.get(
           "http://localhost:4000/api/activities/" + id
         );
-
         response.data.success &&
           dispatch({ type: "GET_ACTIVITIES", payload: response.data.response });
+        return response.data.success;
       } catch (err) {
         console.error(err);
         toast.error("We're doing some maintenance, please try later!", {

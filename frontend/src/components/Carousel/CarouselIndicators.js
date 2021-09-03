@@ -1,12 +1,12 @@
-const CarouselIndicators = ({ number }) => {
+const CarouselIndicators = ({ number, id }) => {
   return (
-    <div className="carousel-indicators d-none d-lg-flex" key="tuki">
+    <div className="carousel-indicators d-flex" key="tuki">
       {[...Array(number)].map((nro, index) =>
         index === 0 ? (
           <button
-            key={index}
+            key={"indicators" + index}
             type="button"
-            data-bs-target="#carouselToggler"
+            data-bs-target={"#" + id}
             data-bs-slide-to={index}
             className="active"
             aria-current="true"
@@ -14,9 +14,9 @@ const CarouselIndicators = ({ number }) => {
           ></button>
         ) : (
           <button
-            key={index}
+            key={"indicators" + index}
             type="button"
-            data-bs-target="#carouselToggler"
+            data-bs-target={"#" + id}
             data-bs-slide-to={index}
             aria-label={"Slide " + (index + 1)}
           ></button>

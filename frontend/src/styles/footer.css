@@ -1,0 +1,23 @@
+footer {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  height: 22vh;
+}
+
+footer * a {
+  color: #212529;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+footer * a:hover,
+footer * a.active {
+  color: #885e44;
+  border-bottom: 2px solid #885e44;
+}
+
+.redes {
+  color: #885e44 !important;
+  cursor: pointer;
+}

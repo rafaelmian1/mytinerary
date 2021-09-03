@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import "../styles/footer.css";
 import Redes from "./Footer/Redes";
 
 const Footer = () => {

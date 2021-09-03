@@ -24,11 +24,11 @@ const Error = (props) => {
         </span>
         <button
           type="button"
-          className="px-4 gap-3 mt-5 error"
+          className="px-4 gap-3 mt-5 error googleButton"
           onClick={() => window.scrollTo(0, 0)}
         >
           <Link to="/">
-            <span className="link">Go Home</span>
+            <span className="text-dark fs-4">Go Home</span>
           </Link>
         </button>
       </div>

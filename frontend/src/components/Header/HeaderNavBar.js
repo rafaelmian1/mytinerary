@@ -2,7 +2,7 @@ import UserIcon from "./UserIcon";
 
 const HeaderNavBar = ({ children }) => {
   return (
-    <header className="w-100 position-absolute d-flex align-items-center justify-content-between mt-3">
+    <header className="w-100 position-absolute d-flex align-items-center justify-content-between">
       <nav className="navbar navbar-dark navbar-expand-sm">
         <div className="container-fluid">
           <button

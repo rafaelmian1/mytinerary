@@ -33,8 +33,10 @@ const Image = ({ image, card, carousel, act, children }) => {
   } else {
     return (
       <div
-        className={`d-flex align-items-end justify-content-end text-light foto ${
-          card ? `cityCard m-0 p-0` : "carru hover"
+        className={`d-flex foto ${
+          card
+            ? `cityCard m-0 p-0 a align-items-center justify-content-center`
+            : "carru hover justify-content-end align-items-end text-light"
         }`}
         id={image.city}
         onMouseEnter={() => setLoop(true)}
@@ -43,10 +45,9 @@ const Image = ({ image, card, carousel, act, children }) => {
           backgroundImage: `url(${card ? image.img[0] : image.img[index]})`,
         }}
       >
-        {card && loop && (
-          <div className="description d-flex flex-column align-items-start">
-            <h5 className="px-3 fs-1">{image.city}</h5>
-            <h5>{image.description}</h5>
+        {card && !loop && (
+          <div className="d-flex flex-column">
+            <h5 className="cityName">{image.city}</h5>
           </div>
         )}
         {carousel && children}

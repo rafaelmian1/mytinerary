@@ -28,15 +28,19 @@ const Carousel = (props) => {
     <CarouselToggler
       classList={"text-center carouselToggler"}
       title={"Popular MyTineraries"}
+      id={"home"}
     >
-      <CarouselIndicators number={3} />
+      <CarouselIndicators number={3} id={"home"} />
       <div className="carousel-inner">
         {props.slides.map((slide, index) => (
-          <CarouselItem home={true} index={index} key={index}>
+          <CarouselItem home={true} index={index} key={"cities" + index}>
             {slide.map((city) => {
               return (
                 <div className="col-12 col-lg-6 g-4" key={city.city}>
-                  <Link to={`/cities/${city._id}`}>
+                  <Link
+                    to={`/cities/${city._id}`}
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
                     <Image image={city} card={false} carousel={true}>
                       <div className="description">
                         <h5 className="px-3 fs-1">{city.city}</h5>
@@ -49,7 +53,7 @@ const Carousel = (props) => {
           </CarouselItem>
         ))}
       </div>
-      <CarouselButtons />
+      <CarouselButtons key={"cities"} id={"home"} interval={3000} />
     </CarouselToggler>
   );
 };

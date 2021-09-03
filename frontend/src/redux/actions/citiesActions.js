@@ -11,20 +11,15 @@ const citiesActions = {
         }
         dispatch({ type: "GET_CITIES", payload: response.data.response });
       } catch (err) {
-        toast.error(
-          err.message.includes("error")
-            ? "Backend / DataBase error"
-            : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.error("We're doing some maintenance, please try later!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         console.error(err.message);
         props.history.push("/error");
       }
@@ -41,18 +36,15 @@ const citiesActions = {
         }
         dispatch({ type: "GET_CITY", payload: response.data.response });
       } catch (err) {
-        toast.error(
-          err.message.includes("error") ? "City not found" : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.error("We're doing some maintenance, please try later!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         console.error(err.message);
         props.history.push("/error");
       }

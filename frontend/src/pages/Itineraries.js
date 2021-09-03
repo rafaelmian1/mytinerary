@@ -56,7 +56,7 @@ const Itineraries = (props) => {
         )}
         <button type="button" className="px-4 mt-5 gap-3 go">
           <Link to="/cities" onClick={() => window.scrollTo(0, 0)}>
-            <span className="link">Back to Cities</span>
+            <span className="text-dark fs-4">Back to Cities</span>
           </Link>
         </button>
       </div>

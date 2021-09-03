@@ -32,7 +32,6 @@ const usersActions = {
           "http://localhost:4000/api/user/signup",
           data
         );
-        console.log(response.data);
         if (response.data.success) {
           Swal.fire({
             position: "top-end",
@@ -47,13 +46,14 @@ const usersActions = {
             toast.error(err.message, {
               position: "top-right",
               autoClose: 5000,
-              hideProgressBar: true,
+              hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
             });
           });
+          return response.data.error;
         }
       } catch (err) {
         console.error(err);
@@ -205,15 +205,15 @@ const usersActions = {
 
   validateToken: () => {
     return async (dispatch, getState) => {
+      const token = JSON.parse(localStorage.getItem("tokenMyTinerary"));
       try {
         let response = await axios.get("http://localhost:4000/api/user/token", {
           headers: {
-            Authorization:
-              "Bearer " + JSON.parse(localStorage.getItem("tokenMyTinerary")),
+            Authorization: "Bearer " + token,
           },
         });
         response.data.success &&
-          dispatch({ type: "LOGGED_IN", payload: response.data });
+          dispatch({ type: "LOGGED_IN", payload: { ...response.data, token } });
       } catch (err) {
         Swal.fire({
           icon: "error",
