@@ -13,8 +13,8 @@ const Comment = ({ comm, id, userId, ...props }) => {
   const editConfirmButton = (e) => {
     commentRef.current.disabled = editConfirm;
     commentRef.current.className = editConfirm
-      ? "input text-start"
-      : "bg-light";
+      ? "inputUser text-start my-2 px-2"
+      : "inputComment text-start my-2 px-2";
     !editConfirm && setComment(com);
     editConfirm && props.comment(id, "update", comment, com);
     setEditConfirm(!editConfirm);
@@ -58,7 +58,7 @@ const Comment = ({ comm, id, userId, ...props }) => {
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 e.target.disabled = true;
-                e.target.className = "input text-start";
+                e.target.className = "inputUser text-start my-2 px-2";
                 props.comment(id, "update", comment, com);
               }
             }}

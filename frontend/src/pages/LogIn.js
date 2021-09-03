@@ -67,7 +67,7 @@ const LogIn = (props) => {
           </button>
           <p className="my-2 fw-bold">or</p>
           <GoogleLogin
-            clientId="68870784500-lgkji922jlfn0n3rjvfjfo0lu51jbbq5.apps.googleusercontent.com"
+            clientId="82723603056-lk77oj61k8vpqgsasbd74ndpf6b136re.apps.googleusercontent.com"
             buttonText={
               <>
                 <svg

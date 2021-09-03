@@ -10,11 +10,9 @@ const Comments = ({ itinerary, userId, ...props }) => {
   const [com, setCom] = useState("");
   const [newComments, setNewComments] = useState(comments);
   const autoScroll = useRef("");
-  const emoRef = useRef("");
   const [emoji, setEmoji] = useState(true);
 
   const onEmojiClick = (event, emojiObject) => {
-    console.log(emojiObject);
     setCom(com + emojiObject.emoji);
   };
   const emojiOn = (e) => {
@@ -59,7 +57,7 @@ const Comments = ({ itinerary, userId, ...props }) => {
           className="navbar-nav-scroll"
           ref={autoScroll}
         >
-          <h2 className="inputComment fs-3">Comments</h2>
+          <h2 className="inputComment fs-3 mt-1">Comments</h2>
           {newComments.map((comm, index) => (
             <Comment comm={comm} id={_id} key={index} userId={userId} />
           ))}
@@ -82,14 +80,14 @@ const Comments = ({ itinerary, userId, ...props }) => {
                 type="text"
                 // disabled={!props.user ? true : false}
                 placeholder="Leave us a comment"
-                className="inputComment m-0"
+                className="inputComment m-1"
                 value={com}
                 onKeyPress={(e) => handleComment(e, true)}
                 onChange={(e) => setCom(e.target.value)}
               />
             </div>
             <div className="col-3 col-lg-2">
-              <span ref={emoRef}>
+              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"
