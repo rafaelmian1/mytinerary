@@ -26,9 +26,7 @@ const usersControllers = {
         google,
       });
       await newUser.save();
-      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY);
       res.json({
         success: true,
         user: {
@@ -84,9 +82,7 @@ const usersControllers = {
         throw new Error("You must log in with Google");
       let match = user && bcrypt.compareSync(password, user.password);
       if (!user || !match) throw new Error();
-      const token = jwt.sign({ ...user }, process.env.SECRETORKEY, {
-        expiresIn: 3600,
-      });
+      const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
       res.json({
         success: true,
         user: {

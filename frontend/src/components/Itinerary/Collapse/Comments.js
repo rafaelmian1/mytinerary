@@ -10,11 +10,9 @@ const Comments = ({ itinerary, userId, ...props }) => {
   const [com, setCom] = useState("");
   const [newComments, setNewComments] = useState(comments);
   const autoScroll = useRef("");
-  const emoRef = useRef("");
   const [emoji, setEmoji] = useState(true);
 
   const onEmojiClick = (event, emojiObject) => {
-    console.log(emojiObject);
     setCom(com + emojiObject.emoji);
   };
   const emojiOn = (e) => {
@@ -89,7 +87,7 @@ const Comments = ({ itinerary, userId, ...props }) => {
               />
             </div>
             <div className="col-3 col-lg-2">
-              <span ref={emoRef}>
+              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"

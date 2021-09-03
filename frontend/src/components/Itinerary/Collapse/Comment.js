@@ -58,7 +58,7 @@ const Comment = ({ comm, id, userId, ...props }) => {
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 e.target.disabled = true;
-                e.target.className = "input text-start";
+                e.target.className = "inputUser text-start my-2 px-2";
                 props.comment(id, "update", comment, com);
               }
             }}
