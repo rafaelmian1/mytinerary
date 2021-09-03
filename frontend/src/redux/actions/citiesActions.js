@@ -5,9 +5,7 @@ const citiesActions = {
   getCities: (props) => {
     return async (dispatch) => {
       try {
-        let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/cities"
-        );
+        let response = await axios.get("http://localhost:4000/api/cities");
         if (!response.data.success) {
           throw new Error(response.data.response);
         }
@@ -31,8 +29,7 @@ const citiesActions = {
     return async (dispatch) => {
       try {
         let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/city/" +
-            props.match.params.id
+          "http://localhost:4000/api/city/" + props.match.params.id
         );
         if (!response.data.success) {
           throw new Error(response.data.response);

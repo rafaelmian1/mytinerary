@@ -20,6 +20,7 @@ PANEL DE ADMIN-> CRUD-> VALIDATE JOI
 ----------------------FEATURES-------------------------
 
 CAROUSEL SORT DESDE EL CONTROLLER
+Se llegó hasta donde se llegó
 
 
                                     

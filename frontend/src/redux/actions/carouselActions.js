@@ -5,9 +5,7 @@ const carouselActions = {
   getSlides: (props) => {
     return async (dispatch) => {
       try {
-        let response = await axios.get(
-          "https://my-tinerary-mian.herokuapp.com/api/carousel"
-        );
+        let response = await axios.get("http://localhost:4000/api/carousel");
         if (!response.data.success) {
           throw new Error(response.data.response);
         }
