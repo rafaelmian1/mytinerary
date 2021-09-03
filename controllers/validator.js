@@ -5,16 +5,7 @@ const validator = (req, res, next) => {
       .string()
       .trim()
       .min(2)
-      .pattern(
-        new RegExp(
-          "/^[a-zA-Z\u00f1\u00d1]+(s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g"
-        )
-      )
-      // .pattern(
-      //   new RegExp(
-      //     "/^[a-zA-Z\u00f1\u00d1]+(s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g"
-      //   )
-      // )
+      .pattern(new RegExp("^[a-zA-ZÀ-ÿ]*"))
       .required()
       .messages({
         "string.empty": "First name field must be completed",
@@ -24,14 +15,7 @@ const validator = (req, res, next) => {
     last_name: joi
       .string()
       .trim()
-      .min(2)
-      // .pattern(new RegExp("^[a-zA-Z]*$"))
-      .pattern(
-        new RegExp(
-          "/^[a-zA-Z\u00f1\u00d1]+(s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g"
-        )
-      )
-      // .pattern(new RegExp("^[a-zA-ZÀ-ÿ]*$"))
+      .pattern(new RegExp("^[a-zA-ZÀ-ÿ]*"))
       .required()
       .messages({
         "string.empty": "Last name field must be completed",
