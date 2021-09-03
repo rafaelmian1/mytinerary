@@ -199,6 +199,15 @@ const usersActions = {
 
   resetUser: () => {
     return (dispatch) => {
+      toast.info("Hope to see you soon!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch({ type: "RESET_USER" });
     };
   },
