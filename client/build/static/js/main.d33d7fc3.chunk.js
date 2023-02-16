@@ -221,7 +221,10 @@
         w = n.n(y),
         N = localStorage.getItem('token'),
         C = { Authorization: 'Bearer '.concat(N) },
-        k = w.a.create({ baseURL: 'http://34.201.18.25:3002/api', headers: C }),
+        k = w.a.create({
+          baseURL: 'https://mytinerary.rafaelmiandev.com/api',
+          headers: C,
+        }),
         I = n(6),
         S = function () {
           return Object(u.jsxs)('div', {
