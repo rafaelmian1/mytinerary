@@ -8,7 +8,6 @@ const UserIcon = (props) => {
 
   useEffect(() => {
     const tokenLs = localStorage.getItem('token')
-    console.log(tokenLs)
     if (tokenLs) props.validateToken()
     return () => setClicked(false)
     // eslint-disable-next-line

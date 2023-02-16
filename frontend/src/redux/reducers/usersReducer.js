@@ -22,8 +22,10 @@ const usersReducer = (
           .filter((country) => country.name.length < 25),
       }
     case 'LOGGED_IN':
-      !state.token &&
-        localStorage.setItem('token', JSON.stringify(action.payload.token))
+      if (!state.token) {
+        const token = action.payload.token
+        localStorage.setItem('token', token)
+      }
       return {
         ...state,
         user: action.payload.user,
