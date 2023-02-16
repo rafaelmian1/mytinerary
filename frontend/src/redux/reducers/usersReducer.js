@@ -1,3 +1,5 @@
+import apiClient from '../../api/client'
+
 const usersReducer = (
   state = {
     countries: [],
@@ -25,6 +27,7 @@ const usersReducer = (
       if (!state.token) {
         const token = action.payload.token
         localStorage.setItem('token', token)
+        apiClient.defaults.headers['Authorization'] = `Bearer ${token}`
       }
       return {
         ...state,
