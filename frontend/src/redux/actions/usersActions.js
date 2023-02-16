@@ -114,16 +114,7 @@ const usersActions = {
   like: (bool, id) => {
     return async (dispatch, getState) => {
       try {
-        await apiClient.put(
-          '/user/like/',
-          { bool, id },
-          {
-            headers: {
-              Authorization:
-                'Bearer ' + JSON.parse(localStorage.getItem('tokenMyTinerary')),
-            },
-          }
-        )
+        await apiClient.put('/user/like/', { bool, id })
         return { success: true }
       } catch (err) {
         Swal.fire({
@@ -141,16 +132,12 @@ const usersActions = {
   comment: (id, action, comment, newComment) => {
     return async (dispatch) => {
       try {
-        await apiClient.put(
-          '/user/comment/',
-          { comment, id, action, newComment },
-          {
-            headers: {
-              Authorization:
-                'Bearer ' + JSON.parse(localStorage.getItem('tokenMyTinerary')),
-            },
-          }
-        )
+        await apiClient.put('/user/comment/', {
+          comment,
+          id,
+          action,
+          newComment,
+        })
         return { success: true }
       } catch (err) {
         Swal.fire({
@@ -168,16 +155,7 @@ const usersActions = {
   getId: () => {
     return async (dispatch, getState) => {
       try {
-        let response = await apiClient.get(
-          '/user/id',
-
-          {
-            headers: {
-              Authorization:
-                'Bearer ' + JSON.parse(localStorage.getItem('tokenMyTinerary')),
-            },
-          }
-        )
+        let response = await apiClient.get('/user/id')
         return response.data.id
       } catch (err) {
         Swal.fire({
@@ -208,13 +186,9 @@ const usersActions = {
 
   validateToken: () => {
     return async (dispatch, getState) => {
-      const token = JSON.parse(localStorage.getItem('tokenMyTinerary'))
+      const token = localStorage.getItem('token')
       try {
-        let response = await apiClient.get('/user/token', {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        })
+        let response = await apiClient.get('/user/token')
         response.data.success &&
           dispatch({ type: 'LOGGED_IN', payload: { ...response.data, token } })
       } catch (err) {
