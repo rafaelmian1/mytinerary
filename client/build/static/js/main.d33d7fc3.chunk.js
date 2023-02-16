@@ -2771,7 +2771,7 @@
                         }),
                         Object(u.jsx)(Ie.a, {
                           clientId:
-                            '82723603056-lk77oj61k8vpqgsasbd74ndpf6b136re.apps.googleusercontent.com',
+                            '82723603056-o12gv1mu2alua7qnd7igq2rlrj6he3gg.apps.googleusercontent.com',
                           buttonText: Object(u.jsxs)(u.Fragment, {
                             children: [
                               Object(u.jsx)('svg', {
@@ -2924,7 +2924,7 @@
                         }),
                         Object(u.jsx)(Ie.a, {
                           clientId:
-                            '82723603056-lk77oj61k8vpqgsasbd74ndpf6b136re.apps.googleusercontent.com',
+                            '82723603056-o12gv1mu2alua7qnd7igq2rlrj6he3gg.apps.googleusercontent.com',
                           buttonText: Object(u.jsxs)(u.Fragment, {
                             children: [
                               Object(u.jsx)('svg', {
